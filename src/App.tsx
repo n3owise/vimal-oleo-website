@@ -5,6 +5,7 @@ import { Hero } from '@/src/components/Hero';
 import { Products } from '@/src/components/Products';
 import { Reliability } from '@/src/components/Reliability';
 import { Industries } from '@/src/components/Industries';
+import { CertifiedTrust } from '@/src/components/CertifiedTrust';
 import { IndustryConceptsPreview } from '@/src/components/IndustryConceptsPreview';
 import { IndustryStackPreview } from '@/src/components/IndustryStackPreview';
 import { TrustPreview } from '@/src/components/TrustPreview';
@@ -58,6 +59,7 @@ export default function App() {
         <Reliability />
 
         <Industries />
+        <CertifiedTrust />
       </main>
 
       <Footer />

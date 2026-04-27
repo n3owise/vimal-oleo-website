@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 export function Hero() {
   return (
     <section className="relative w-full overflow-hidden bg-surface px-4 pb-14 pt-4 sm:px-8 sm:pb-20 sm:pt-6 lg:px-14">
-      <div className="relative min-h-[calc(100svh-2rem)] overflow-hidden rounded-[2rem] bg-primary shadow-2xl sm:min-h-[calc(100svh-3rem)] sm:rounded-[2.35rem] lg:min-h-[calc(100svh-5rem)]">
+      <div className="relative isolate min-h-[calc(100svh-2rem)] overflow-hidden rounded-[2rem] bg-primary shadow-2xl [clip-path:inset(0_round_2rem)] sm:min-h-[calc(100svh-3rem)] sm:rounded-[2.35rem] sm:[clip-path:inset(0_round_2.35rem)] lg:min-h-[calc(100svh-5rem)]">
         <motion.div
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 2, ease: "easeOut" }}
-          className="absolute inset-0"
+          className="absolute -inset-px overflow-hidden rounded-[inherit] [transform:translateZ(0)]"
         >
           <video
             aria-label="Flowing oleo chemical background"
@@ -18,7 +18,7 @@ export function Hero() {
             loop
             playsInline
             preload="auto"
-            className="absolute inset-0 h-full w-full object-cover object-[82%_center] sm:object-center"
+            className="absolute -inset-1 h-[calc(100%+0.5rem)] w-[calc(100%+0.5rem)] object-cover object-[82%_center] [backface-visibility:hidden] [transform:translateZ(0)] sm:object-center"
           >
             <source src="/hero-flowing-elements.mp4" type="video/mp4" />
           </video>
