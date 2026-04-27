@@ -4,7 +4,6 @@ import { Header } from '@/src/components/Header';
 import { Hero } from '@/src/components/Hero';
 import { Products } from '@/src/components/Products';
 import { Reliability } from '@/src/components/Reliability';
-import { JNPTMap } from '@/src/components/JNPTMap';
 import { Industries } from '@/src/components/Industries';
 import { Footer } from '@/src/components/Footer';
 import gsap from 'gsap';
@@ -41,7 +40,6 @@ export default function App() {
         <Reliability />
 
         <Industries />
-        <JNPTMap />
       </main>
 
       <Footer />
