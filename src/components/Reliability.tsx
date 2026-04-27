@@ -46,12 +46,11 @@ export function Reliability() {
               <div className="mx-auto max-w-4xl text-left lg:mx-0">
                 <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
                   {aboutHighlights.map((item, i) => (
-                    <div key={item.title} className="grid grid-cols-[3.25rem_1fr] border-b border-slate-100 last:border-b-0">
-                      <div className="flex items-center justify-center bg-primary/10 font-display text-2xl font-black tracking-tighter text-primary">
-                        {i + 1}
+                    <div key={item.title} className="grid grid-cols-[3.75rem_1fr] border-b border-slate-100 last:border-b-0">
+                      <div className="flex items-center justify-center bg-primary/10 text-primary">
+                        <item.icon className="shrink-0" size={24} strokeWidth={1.9} />
                       </div>
-                      <div className="flex items-center gap-3 p-4">
-                        <item.icon className="shrink-0 text-primary" size={20} strokeWidth={1.9} />
+                      <div className="flex items-center p-4">
                         <span className="text-xs font-black uppercase leading-snug tracking-tight text-slate-900">{item.title}</span>
                       </div>
                     </div>

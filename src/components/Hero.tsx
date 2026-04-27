@@ -35,18 +35,11 @@ export function Hero() {
             className="max-w-5xl"
           >
             <div className="mb-8 space-y-1">
-              <span className="mb-4 block text-[12px] font-bold uppercase tracking-[0.3em] text-primary">
-                EST. 1980 • LEGACY OF EXCELLENCE
-              </span>
               <h1 className="text-[clamp(2rem,8vw,4.75rem)] font-black uppercase leading-[0.9] tracking-tighter text-slate-900 sm:text-[6vw]">
                 High-Quality Oleo Chemicals.<br />
                 <span className="text-primary italic">Delivered with Reliability.</span>
               </h1>
             </div>
-
-            <p className="mb-10 mt-4 max-w-lg text-base font-medium leading-relaxed text-text-slate sm:text-lg">
-              Your reliable source for high-quality oleo chemicals — delivered with precision, backed by legacy.
-            </p>
 
             <div className="flex flex-col gap-10 md:flex-row md:items-center">
               <a
