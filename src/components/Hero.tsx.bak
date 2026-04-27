@@ -1,0 +1,80 @@
+import { motion } from 'framer-motion';
+import { cn } from '@/src/lib/utils';
+
+export function Hero() {
+  return (
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-surface">
+      <div className="absolute inset-0 bg-dot-pattern opacity-[0.05] pointer-events-none" />
+      
+      {/* Background Macro Image */}
+      <div className="absolute inset-0 z-0">
+        <motion.div
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.3 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          className="h-full w-full"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=2070&auto=format&fit=crop"
+            alt="Stearic Acid Macro"
+            className="w-full h-full object-cover grayscale"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent" />
+        </motion.div>
+      </div >
+
+      {/* Content */}
+      <div className="container mx-auto px-6 relative z-10 pt-28 pb-16 sm:pt-36 sm:pb-24">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-5xl"
+        >
+          <div className="space-y-1 mb-8">
+            <span className="text-[12px] font-bold text-primary uppercase tracking-[0.3em] block mb-4">
+              EST. 1980 • LEGACY OF EXCELLENCE
+            </span>
+            <h1 className="text-[clamp(2.5rem,12vw,6rem)] sm:text-[8vw] font-black leading-[0.85] tracking-tighter text-slate-900 uppercase">
+              High-Quality Oleo Chemicals.<br />
+              <span className="text-primary italic">Delivered with Reliability.</span>
+            </h1>
+          </div>
+          
+          <p className="text-text-slate text-base sm:text-lg max-w-lg font-medium leading-relaxed mt-4 mb-10">
+            Your reliable source for high-quality oleo chemicals — delivered with precision, backed by legacy.
+          </p>
+          
+          <div className="flex flex-col md:flex-row gap-10 md:items-center">
+            <button className="px-10 py-5 bg-black text-white text-[11px] font-bold uppercase tracking-[0.2em] rounded-full hover:scale-105 transition-transform active:scale-95 shadow-2xl w-fit">
+              Explore Products
+            </button>
+            
+            <div className="flex items-center gap-10 border-l border-slate-200 pl-10">
+              <div className="group w-[120px]">
+                <span className="block text-2xl sm:text-3xl font-display font-black text-slate-900 tracking-tighter leading-none mb-2 group-hover:text-primary transition-colors text-center">46+</span>
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-4 h-[1.5px] bg-primary"></div>
+                  <span className="text-[9px] uppercase text-slate-500 font-bold tracking-[0.1em] whitespace-nowrap">Years of Legacy</span>
+                </div>
+              </div>
+              
+              <div className="w-[1px] h-8 bg-slate-200 hidden sm:block"></div>
+
+              <div className="group w-[120px]">
+                <span className="block text-2xl sm:text-3xl font-display font-black text-slate-900 tracking-tighter leading-none mb-2 group-hover:text-primary transition-colors text-center">JNPT</span>
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-4 h-[1.5px] bg-primary"></div>
+                  <span className="text-[9px] uppercase text-slate-500 font-bold tracking-[0.1em] whitespace-nowrap">Port Advantage</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      <div className="absolute bottom-32 left-12 w-24 h-1 bg-primary"></div>
+    </section>
+  );
+}
