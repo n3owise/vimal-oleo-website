@@ -10,6 +10,7 @@ import {
   Pill,
   Sparkles,
 } from 'lucide-react';
+import { sectionEyebrowClass, sectionHeadingClass } from '@/src/lib/section-styles';
 
 type Industry = {
   name: string;
@@ -149,7 +150,6 @@ function IndustryCard({
   const exitEnd = Math.min(arrivalEnd + 0.18, 1);
   const y = useTransform(progress, [arrivalStart, arrivalEnd], [index === 0 ? 0 : 720, index * 30]);
   const scale = useTransform(progress, [arrivalEnd, exitEnd], [1, targetScale]);
-  const opacity = useTransform(progress, [arrivalStart, arrivalEnd], [index === 0 ? 1 : 0.35, 1]);
   const shadowOpacity = useTransform(progress, [arrivalStart, arrivalEnd], [0.16, 0.28]);
   const boxShadow = useTransform(
     shadowOpacity,
@@ -162,7 +162,6 @@ function IndustryCard({
         x: '-50%',
         y,
         scale,
-        opacity,
         boxShadow,
         zIndex: index + 1,
       }}
@@ -233,7 +232,7 @@ export function Industries() {
 
   return (
     <section
-      className="relative border-b border-slate-100 bg-surface text-text-main"
+      className="relative bg-surface text-text-main"
       id="industries"
     >
       <div className="pointer-events-none absolute inset-0">
@@ -251,10 +250,10 @@ export function Industries() {
             viewport={{ once: true, amount: 0.35 }}
             className="mx-auto max-w-5xl px-6 pt-10 text-center sm:pt-12 lg:pt-14"
           >
-            <span className="mb-3 block font-mono text-[10px] font-bold uppercase italic tracking-[0.3em] text-primary sm:mb-4 sm:text-[12px]">
-              [ INDUSTRIES WE SERVE ]
+            <span className={sectionEyebrowClass}>
+              [ APPLICATION SECTORS ]
             </span>
-            <h2 className="mb-4 font-display text-[clamp(2rem,7vw,4.5rem)] font-black uppercase italic leading-[0.85] tracking-tighter text-slate-900 sm:mb-6">
+            <h2 className={`${sectionHeadingClass} mb-4 sm:mb-6`}>
               INDUSTRIES WE<br />
               <span className="text-primary">SERVE.</span>
             </h2>

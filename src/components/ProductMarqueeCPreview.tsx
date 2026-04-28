@@ -1,5 +1,7 @@
 import { useRef, type ReactNode } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { InteractiveHoverButton } from '@/src/components/ui/interactive-hover-button';
+import { sectionEyebrowClass, sectionHeadingClass } from '@/src/lib/section-styles';
 
 interface Product {
   name: string;
@@ -137,23 +139,23 @@ const PalmStIcon = () => (
 );
 
 const allProducts: Product[] = [
-  { name: 'Stearic Acid', grade: 'All Grades', tag: 'High Volume', formula: 'C18H36O2', icon: <ZigZag nodes={9} /> },
-  { name: 'Hydrogenated Technical Oil', grade: 'HTO', tag: 'Technical', formula: 'C18H36O2 sat.', icon: <HydIcon /> },
-  { name: 'Rice Bran Fatty Acid', grade: 'Multiple Variants', tag: 'Bulk', formula: 'Mixed C16-C18', icon: <MixedIcon /> },
-  { name: 'Myristic Acid', grade: '98%+ High Purity', tag: 'Specialty', formula: 'C14H28O2', icon: <ZigZag nodes={7} /> },
+  { name: 'Stearic Acid', grade: 'All Grades', tag: 'Rubber & Plastics', formula: 'C18H36O2', icon: <ZigZag nodes={9} /> },
+  { name: 'Hydrogenated Technical Oil', grade: 'HTO', tag: 'Industrial', formula: 'C18H36O2 sat.', icon: <HydIcon /> },
+  { name: 'Rice Bran Fatty Acid', grade: 'Multiple Variants', tag: 'Soap & Detergent', formula: 'Mixed C16-C18', icon: <MixedIcon /> },
+  { name: 'Myristic Acid', grade: '98%+ High Purity', tag: 'Personal Care', formula: 'C14H28O2', icon: <ZigZag nodes={7} /> },
   { name: 'Palmitic Acid', grade: 'Fractionated & Distilled', tag: 'Cosmetics', formula: 'C16H32O2', icon: <ZigZag nodes={8} /> },
   { name: 'Glycerine', grade: 'IP / BP / USP / CP', tag: 'Food & Pharma', formula: 'C3H8O3', icon: <GlycerolIcon /> },
-  { name: 'Hydrogenated Palm Stearin', grade: 'Fully Saturated', tag: 'Industrial', formula: 'C18H36O2 sat.', icon: <PalmStIcon /> },
+  { name: 'Hydrogenated Palm Stearin', grade: 'Fully Saturated', tag: 'Soap & Candles', formula: 'C18H36O2 sat.', icon: <PalmStIcon /> },
   { name: 'Soap Noodles', grade: 'TFM 60% to 80%', tag: 'Personal Care', formula: 'RCOONa', icon: <SoapIcon /> },
-  { name: 'Palm Fatty Acid', grade: 'Multiple Variants', tag: 'Bulk', formula: 'Mixed C16-C18', icon: <MixedIcon /> },
-  { name: 'Distilled Coconut Fatty Acid', grade: '99% Distilled', tag: 'High Purity', formula: 'C12H24O2', icon: <CocoIcon /> },
-  { name: 'Soya Distilled Fatty Acid', grade: 'Distilled', tag: 'Industrial', formula: 'C18H34O2', icon: <SoyaIcon /> },
-  { name: 'Lauric Acid', grade: '99% Pure / Cosmetic Grade', tag: 'High Purity', formula: 'C12H24O2', icon: <ZigZag nodes={6} /> },
-  { name: 'Oleic Acid', grade: 'Vegetable & Technical', tag: 'Industrial', formula: 'C18H34O2', icon: <OleicIcon /> },
+  { name: 'Palm Fatty Acid', grade: 'Multiple Variants', tag: 'Industrial', formula: 'Mixed C16-C18', icon: <MixedIcon /> },
+  { name: 'Distilled Coconut Fatty Acid', grade: '99% Distilled', tag: 'Personal Care', formula: 'C12H24O2', icon: <CocoIcon /> },
+  { name: 'Soya Distilled Fatty Acid', grade: 'Distilled', tag: 'Paints & Inks', formula: 'C18H34O2', icon: <SoyaIcon /> },
+  { name: 'Lauric Acid', grade: '99% Pure / Cosmetic Grade', tag: 'Surfactants', formula: 'C12H24O2', icon: <ZigZag nodes={6} /> },
+  { name: 'Oleic Acid', grade: 'Vegetable & Technical', tag: 'Textiles', formula: 'C18H34O2', icon: <OleicIcon /> },
 ];
 
 const row1 = allProducts.slice(0, 7);
-const row2 = allProducts.slice(6, 13);
+const row2 = allProducts.slice(7, 13);
 
 const colors = [
   { bg: '#001e38', border: 'none', icon: '#3d7fd4', formula: 'rgba(61,127,212,0.7)', name: 'white', tagBg: 'rgba(255,255,255,0.15)', tagTxt: '#001e38' },
@@ -162,37 +164,41 @@ const colors = [
 ];
 
 function Row({ cards, reverse, offset }: { cards: Product[]; reverse?: boolean; offset: number }) {
-  const triple = [...cards, ...cards, ...cards];
+  const repeatedCards = [...cards, ...cards, ...cards];
 
   return (
-    <div style={{ overflowX: 'hidden', overflowY: 'visible', marginBottom: '14px', paddingTop: '8px', paddingBottom: '8px' }}>
+    <div style={{ overflowX: 'hidden', overflowY: 'visible', marginBottom: '4px', paddingTop: '24px', paddingBottom: '22px' }}>
       <motion.div
         animate={{ x: reverse ? ['-33.33%', '0%'] : ['0%', '-33.33%'] }}
-        transition={{ duration: 44, repeat: Infinity, ease: 'linear' }}
+        transition={{ duration: reverse ? 58 : 64, repeat: Infinity, repeatType: 'loop', ease: 'linear' }}
         style={{ display: 'flex', gap: '14px', width: 'max-content' }}
       >
-        {triple.map((p, i) => {
+        {repeatedCards.map((p, i) => {
           const c = colors[(i + offset) % colors.length];
           return (
             <motion.div
               key={i}
-              whileHover={{ y: -8, scale: 1.04 }}
+              whileHover={{ y: -6, scale: 1.035 }}
               transition={{ duration: 0.2, ease: [0.25, 1, 0.5, 1] }}
               style={{
                 flexShrink: 0,
                 width: '260px',
+                minHeight: '245px',
                 background: c.bg,
                 border: c.border,
                 borderRadius: '18px',
-                padding: '24px 20px',
+                padding: '24px 20px 22px',
                 cursor: 'default',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
               }}
             >
               <div style={{ width: '60px', height: '46px', marginBottom: '16px', color: c.icon }}>{p.icon}</div>
               <p style={{ fontSize: '10px', fontFamily: 'monospace', fontWeight: 600, letterSpacing: '0.04em', marginBottom: '10px', color: c.formula }}>{p.formula}</p>
-              <p style={{ fontSize: '15px', fontWeight: 700, lineHeight: 1.25, marginBottom: '10px', color: c.name }}>{p.name}</p>
-              <p style={{ fontSize: '11px', color: c.name, opacity: 0.55, lineHeight: 1.4, marginBottom: '12px' }}>{p.grade}</p>
-              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', padding: '4px 10px', borderRadius: '100px', color: c.tagTxt, background: c.tagBg }}>{p.tag}</span>
+              <p style={{ fontSize: '18px', fontWeight: 800, lineHeight: 1.12, marginBottom: '10px', color: c.name }}>{p.name}</p>
+              <p style={{ fontSize: '11px', color: c.name, opacity: 0.55, lineHeight: 1.4, marginBottom: '14px', fontWeight: 600 }}>{p.grade}</p>
+              <span style={{ alignSelf: 'flex-start', fontSize: '9px', fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', padding: '6px 12px', borderRadius: '100px', color: c.tagTxt, background: c.tagBg }}>{p.tag}</span>
             </motion.div>
           );
         })}
@@ -207,37 +213,20 @@ function PortfolioHeader() {
 
   return (
     <div ref={ref} style={{ padding: '0 24px 56px', textAlign: 'center' }}>
-      <style>{`
-        .ph-headline { font-size: clamp(32px, 9vw, 48px); }
-        @media (min-width: 768px) {
-          .ph-headline { font-size: clamp(48px, 5.5vw, 72px); }
-        }
-      `}</style>
-
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
-        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '28px' }}
       >
-        <span style={{ fontSize: '13px', fontWeight: 700, color: '#1d5fb8', letterSpacing: '0.1em' }}>[</span>
-        <p style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.32em', textTransform: 'uppercase', color: '#1d5fb8' }}>Products</p>
-        <span style={{ fontSize: '13px', fontWeight: 700, color: '#1d5fb8', letterSpacing: '0.1em' }}>]</span>
+        <span className={sectionEyebrowClass}>[ PRODUCTS ]</span>
       </motion.div>
 
       <motion.h2
-        className="ph-headline"
+        className={sectionHeadingClass}
         initial={{ opacity: 0, y: 24 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
-        style={{
-          fontFamily: 'var(--font-display)',
-          fontWeight: 800,
-          fontStyle: 'italic',
-          lineHeight: 0.95,
-          letterSpacing: '-0.04em',
-          margin: '0 0 32px',
-        }}
+        style={{ margin: '0 0 32px' }}
       >
         <span style={{ display: 'block', color: '#1d5fb8' }}>COMPREHENSIVE</span>
         <span style={{ display: 'block', color: '#001228' }}>OLEO RANGE.</span>
@@ -270,26 +259,18 @@ export function ProductMarqueeCPreview({ sectionId, ctaHref = '#', fullHeight = 
       <Row cards={row2} reverse={true} offset={2} />
 
       <div style={{ textAlign: 'center', paddingTop: '36px' }}>
-        <motion.a
-          href={ctaHref}
+        <motion.div
+          style={{ display: 'inline-flex' }}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            background: '#001e38',
-            color: 'white',
-            fontSize: '13px',
-            fontWeight: 700,
-            letterSpacing: '0.04em',
-            padding: '14px 32px',
-            borderRadius: '100px',
-            textDecoration: 'none',
-          }}
         >
-          See Full Product List <span style={{ fontSize: '16px' }}>-&gt;</span>
-        </motion.a>
+          <InteractiveHoverButton
+          href={ctaHref}
+          className="h-[52px] border-[#001e38] px-8 text-[13px] uppercase text-[#001e38]"
+        >
+          See Full Product List
+          </InteractiveHoverButton>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { BadgeCheck, Factory, Handshake, Warehouse } from 'lucide-react';
+import { sectionEyebrowClass, sectionHeadingClass } from '@/src/lib/section-styles';
 
 const aboutHighlights = [
   {
@@ -24,18 +25,19 @@ export function Reliability() {
   return (
     <section className="py-24 bg-surface text-text-main overflow-hidden border-b border-slate-100" id="about">
       <div className="container mx-auto px-6">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="flex flex-col gap-8 text-center lg:text-left">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
+          <div className="flex h-full flex-col gap-8 text-center lg:text-left">
             <motion.div
               initial={{ y: 32, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
+              className="h-full"
             >
-              <span className="text-[12px] font-bold text-primary uppercase tracking-[0.3em] block mb-4 italic font-mono">
+              <span className={sectionEyebrowClass}>
                 [ ABOUT US ]
               </span>
-              <h2 className="text-[clamp(2rem,8vw,5rem)] sm:text-[6vw] font-display font-black leading-[0.85] tracking-tighter mb-8 italic text-slate-900">
+              <h2 className={`${sectionHeadingClass} mb-8`}>
                 OVER 40 YEARS OF<br />
                 CHEMICAL<br />
                 <span className="text-primary NOT-italic">EXCELLENCE.</span>
@@ -60,18 +62,18 @@ export function Reliability() {
             </motion.div>
           </div>
 
-          <div className="relative">
+          <div className="relative h-full">
             <motion.div
               initial={{ scale: 0.96, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
               viewport={{ once: true }}
-              className="relative mx-auto aspect-square max-w-lg"
+              className="relative mx-auto h-full min-h-[420px] w-full max-w-lg"
             >
               {/* Background accent block */}
               <div className="absolute top-8 right-8 bottom-8 left-8 border-2 border-primary/20 rounded-[40px]" />
 
-              <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative z-10 h-full w-full overflow-hidden rounded-2xl shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"
                   alt="Industrial warehouse"

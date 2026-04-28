@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
+import { sectionEyebrowClass, sectionHeadingClass } from '@/src/lib/section-styles';
 
 const trustMarks = [
   {
@@ -42,7 +43,7 @@ function LogoMarkCard({ mark }: { mark: (typeof trustMarks)[number] }) {
 
 export function CertifiedTrust() {
   return (
-    <section id="certified-trust" className="bg-[#eef3f8] px-5 py-24 text-slate-950">
+    <section id="certified-trust" className="bg-surface px-5 pb-24 pt-8 text-slate-950">
       <div className="mx-auto grid max-w-7xl gap-10 rounded-[2.5rem] border border-slate-200 bg-white p-6 shadow-xl sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <motion.div
           initial={{ y: 28, opacity: 0 }}
@@ -52,10 +53,10 @@ export function CertifiedTrust() {
           className="relative overflow-hidden rounded-[2rem] bg-surface p-7 sm:p-9"
         >
           <Sparkles className="absolute right-6 top-6 text-primary/20" size={68} strokeWidth={1.5} />
-          <span className="mb-4 block font-mono text-[12px] font-bold uppercase italic tracking-[0.3em] text-primary">
+          <span className={sectionEyebrowClass}>
             [ CERTIFIED FOR TRUST ]
           </span>
-          <h2 className="font-display text-[clamp(2.4rem,8vw,5.7rem)] font-black uppercase italic leading-[0.82] tracking-tighter text-slate-900">
+          <h2 className={sectionHeadingClass}>
             CERTIFIED FOR<br />
             <span className="text-primary">TRUST.</span>
           </h2>
