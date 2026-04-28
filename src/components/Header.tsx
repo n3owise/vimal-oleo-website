@@ -22,7 +22,7 @@ export function Header() {
 
         <div className="ml-auto flex items-center justify-end gap-8">
           {/* Navigation */}
-          <nav className="hidden items-center gap-10 md:flex">
+          <nav className="hidden items-center rounded-full border border-white/25 bg-white/15 p-1.5 shadow-xl backdrop-blur-xl md:flex">
             {[
               { label: 'Home', href: '#' },
               { label: 'About Us', href: '#why-us' },
@@ -33,9 +33,8 @@ export function Header() {
                 key={item.label}
                 href={item.href}
                 className={cn(
-                  "text-sm font-display font-bold tracking-normal transition-colors underline-offset-4",
-                  index === 0 && "underline",
-                  "text-white hover:text-white/75"
+                  'rounded-full px-5 py-2.5 font-display text-sm font-bold transition-colors',
+                  index === 0 ? 'bg-white text-primary shadow-sm' : 'text-white hover:bg-white/15'
                 )}
               >
                 {item.label}

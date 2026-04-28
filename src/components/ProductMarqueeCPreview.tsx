@@ -170,7 +170,7 @@ function Row({ cards, reverse, offset }: { cards: Product[]; reverse?: boolean; 
     <div style={{ overflowX: 'hidden', overflowY: 'visible', marginBottom: '4px', paddingTop: '24px', paddingBottom: '22px' }}>
       <motion.div
         animate={{ x: reverse ? ['-33.33%', '0%'] : ['0%', '-33.33%'] }}
-        transition={{ duration: reverse ? 58 : 64, repeat: Infinity, repeatType: 'loop', ease: 'linear' }}
+        transition={{ duration: reverse ? 74 : 82, repeat: Infinity, repeatType: 'loop', ease: 'linear' }}
         style={{ display: 'flex', gap: '14px', width: 'max-content' }}
       >
         {repeatedCards.map((p, i) => {
@@ -187,17 +187,27 @@ function Row({ cards, reverse, offset }: { cards: Product[]; reverse?: boolean; 
                 background: c.bg,
                 border: c.border,
                 borderRadius: '18px',
-                padding: '24px 20px 22px',
+                padding: '26px 22px 22px',
                 cursor: 'default',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
               }}
             >
-              <div style={{ width: '60px', height: '46px', marginBottom: '16px', color: c.icon }}>{p.icon}</div>
-              <p style={{ fontSize: '10px', fontFamily: 'monospace', fontWeight: 600, letterSpacing: '0.04em', marginBottom: '10px', color: c.formula }}>{p.formula}</p>
-              <p style={{ fontSize: '18px', fontWeight: 800, lineHeight: 1.12, marginBottom: '10px', color: c.name }}>{p.name}</p>
-              <p style={{ fontSize: '11px', color: c.name, opacity: 0.55, lineHeight: 1.4, marginBottom: '14px', fontWeight: 600 }}>{p.grade}</p>
+              <div
+                style={{
+                  width: '86px',
+                  height: '64px',
+                  marginBottom: '20px',
+                  color: c.icon,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                {p.icon}
+              </div>
+              <p style={{ fontSize: '18px', fontWeight: 800, lineHeight: 1.12, marginBottom: '14px', color: c.name }}>{p.name}</p>
               <span style={{ alignSelf: 'flex-start', fontSize: '9px', fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', padding: '6px 12px', borderRadius: '100px', color: c.tagTxt, background: c.tagBg }}>{p.tag}</span>
             </motion.div>
           );

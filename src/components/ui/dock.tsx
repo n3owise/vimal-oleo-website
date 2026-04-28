@@ -10,6 +10,7 @@ type DockProps = {
   iconMagnification?: number;
   iconDistance?: number;
   direction?: 'middle' | 'top' | 'bottom';
+  fixedLayout?: boolean;
 };
 
 type DockIconProps = {
@@ -20,6 +21,7 @@ type DockIconProps = {
   size?: number;
   magnification?: number;
   distance?: number;
+  fixedLayout?: boolean;
 };
 
 export function Dock({
@@ -29,6 +31,7 @@ export function Dock({
   iconMagnification = 68,
   iconDistance = 140,
   direction = 'middle',
+  fixedLayout = false,
 }: DockProps) {
   const mouseX = useMotionValue(Number.POSITIVE_INFINITY);
 
@@ -37,7 +40,7 @@ export function Dock({
       onMouseMove={(event) => mouseX.set(event.pageX)}
       onMouseLeave={() => mouseX.set(Number.POSITIVE_INFINITY)}
       className={cn(
-        'mx-auto flex w-fit items-center gap-3 rounded-full border border-slate-200 bg-white/85 px-4 py-3 shadow-xl backdrop-blur',
+        'mx-auto flex w-fit items-center gap-3 overflow-visible rounded-full border border-slate-200 bg-white/85 px-4 py-3 shadow-xl backdrop-blur',
         direction === 'top' && 'items-start',
         direction === 'bottom' && 'items-end',
         className,
@@ -51,6 +54,7 @@ export function Dock({
           size: iconSize,
           magnification: iconMagnification,
           distance: iconDistance,
+          fixedLayout,
         });
       })}
     </motion.div>
@@ -64,6 +68,7 @@ export function DockIcon({
   size = 48,
   magnification = 68,
   distance = 140,
+  fixedLayout = false,
 }: DockIconProps) {
   const ref = useRef<HTMLDivElement>(null);
   const distanceCalc = useTransform(mouseX ?? useMotionValue(Number.POSITIVE_INFINITY), (value) => {
@@ -74,13 +79,15 @@ export function DockIcon({
   });
   const widthSync = useTransform(distanceCalc, [-distance, 0, distance], [size, magnification, size]);
   const width = useSpring(widthSync, { mass: 0.12, stiffness: 180, damping: 14 });
+  const scaleSync = useTransform(distanceCalc, [-distance, 0, distance], [1, magnification / size, 1]);
+  const scale = useSpring(scaleSync, { mass: 0.12, stiffness: 180, damping: 14 });
 
   return (
     <motion.div
       ref={ref}
-      style={{ width, height: width }}
+      style={fixedLayout ? { width: size, height: size, scale } : { width, height: width }}
       className={cn(
-        'flex aspect-square items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition-colors hover:bg-slate-50',
+        'relative flex aspect-square shrink-0 items-center justify-center overflow-visible rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition-colors hover:bg-slate-50',
         className,
       )}
     >

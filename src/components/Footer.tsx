@@ -1,5 +1,85 @@
-import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Instagram, Linkedin, ArrowUp } from 'lucide-react';
+import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
+
+const footerDetails = {
+  company: 'VIMAL OLEO CHEMICALS',
+  address: [
+    'PLOT NO 203A, SHREE RAMDARSHAN BUILDING, OFFICE NO-1, GROUND FLOOR,',
+    'DR BABASAHEB AMBEDKAR ROAD, NEAR UNION BANK OF INDIA,',
+    'SION EAST, MUMBAI - 400022',
+  ],
+  landline: '+91-022-24010660',
+  email: 'vimaloleochemicals@gmail.com',
+  contacts: [
+    { name: 'HEMANG SHAH', phone: '+91-9819415552' },
+    { name: 'KUNAL SHAH', phone: '+91-9819055155' },
+    { name: 'MAHESH SHAH', phone: '+91-9820988222' },
+  ],
+};
+
+function BrandMark() {
+  return (
+    <div className="inline-flex rounded-2xl bg-white px-4 py-3 shadow-xl">
+      <img src="/final-logo.png" alt="Vimal Oleo Chemicals" className="h-14 w-auto object-contain" />
+    </div>
+  );
+}
+
+function AddressBlock() {
+  return (
+    <div className="space-y-5">
+      <div className="flex items-center gap-3">
+        <MapPin className="h-5 w-5 text-primary" />
+        <p className="font-mono text-[11px] font-black uppercase tracking-[0.24em] text-white/50">Address</p>
+      </div>
+      <div>
+        <p className="font-display text-xl font-black uppercase italic tracking-tight text-white">{footerDetails.company}</p>
+        <p className="mt-3 max-w-xl text-sm font-semibold uppercase leading-relaxed text-white/68">
+          {footerDetails.address.map((line) => (
+            <span key={line} className="block">{line}</span>
+          ))}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ContactBlock() {
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center gap-3">
+        <Phone className="h-5 w-5 text-primary" />
+        <p className="font-mono text-[11px] font-black uppercase tracking-[0.24em] text-white/55">Contact Details</p>
+      </div>
+      <a href={`tel:${footerDetails.landline.replace(/-/g, '')}`} className="block text-base font-black text-white transition-colors hover:text-primary">
+        {footerDetails.landline}
+      </a>
+      <a href={`mailto:${footerDetails.email}`} className="block break-all text-base font-black text-white transition-colors hover:text-primary">
+        <Mail className="mr-2 inline h-4 w-4 text-primary" />
+        {footerDetails.email}
+      </a>
+    </div>
+  );
+}
+
+function PeopleList() {
+  return (
+    <div className="space-y-3">
+      {footerDetails.contacts.map((person) => (
+        <a
+          key={person.name}
+          href={`tel:${person.phone.replace(/-/g, '')}`}
+          className="flex items-center justify-between gap-4 border-b border-white/10 py-3 text-white transition-colors hover:bg-white/5"
+        >
+          <span>
+            <span className="block font-mono text-[10px] font-black uppercase tracking-[0.2em] text-white/45">Contact</span>
+            <span className="mt-1 block font-display text-lg font-black uppercase italic leading-none tracking-tight">{person.name}</span>
+          </span>
+          <span className="text-sm font-black text-white/70">{person.phone}</span>
+        </a>
+      ))}
+    </div>
+  );
+}
 
 export function Footer() {
   const scrollToTop = () => {
@@ -7,95 +87,33 @@ export function Footer() {
   };
 
   return (
-    <section className="flex flex-col relative z-20">
-      {/* Pre-footer active status bar from theme */}
-      <div className="h-16 bg-navy-dark text-white flex items-center px-6 md:px-12 justify-between border-b border-white/5">
-        <div className="flex flex-col md:flex-row gap-4 md:gap-12">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400 whitespace-nowrap">Dist. Network: ACTIVE</span>
+    <footer id="contact-footer" className="relative overflow-hidden bg-slate-950 text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:54px_54px]" />
+      <div className="pointer-events-none absolute left-[-12rem] top-10 h-[26rem] w-[26rem] rounded-full bg-primary/20 blur-3xl" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12">
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.75fr_0.9fr]">
+          <div className="space-y-10">
+            <BrandMark />
+            <AddressBlock />
           </div>
-          <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400">
-            ISO 9001:2015 • HALAL • RSPO COMPLIANT
-          </div>
+          <ContactBlock />
+          <PeopleList />
+        </div>
+
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-7 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 Vimal Oleo Chemicals</p>
+          <button
+            onClick={scrollToTop}
+            className="group inline-flex items-center gap-3 text-white/45 transition-colors hover:text-white"
+          >
+            Go Top
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 transition-colors group-hover:bg-primary">
+              <ArrowUp size={14} className="text-white" />
+            </span>
+          </button>
         </div>
       </div>
-
-      <footer className="bg-navy-dark text-white py-24 border-b border-white/5" id="contact">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-            <div>
-              <div className="flex items-center gap-3 mb-10">
-                <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-2xl shadow-xl">
-                  <span>V</span>
-                </div>
-                <div>
-                  <h1 className="text-xl font-display font-black tracking-tighter uppercase">VIMAL OLEO CHEMICALS</h1>
-                  <p className="text-[10px] text-slate-400 uppercase tracking-[0.2em] font-semibold">PREMIUM OLEOCHEMICALS</p>
-                </div>
-              </div>
-              <h2 className="text-4xl font-display font-black tracking-tighter leading-tight mb-6 text-balance max-w-md">
-                LET'S GET<br />IN TOUCH.
-              </h2>
-              <p className="text-slate-400 font-medium mb-12 max-w-sm">
-                We'd love to support your manufacturing goals with the right chemical solutions.
-              </p>
-              <div className="flex gap-4">
-                {[Instagram, Linkedin].map((Icon, i) => (
-                  <a key={i} href="#" className="w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center hover:bg-white hover:text-navy-dark transition-all duration-500">
-                    <Icon size={20} />
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
-              <div>
-                <p className="text-[11px] font-mono font-bold text-primary uppercase tracking-[0.3em] mb-10">[ CONNECT ]</p>
-                <div className="space-y-8">
-                  <div className="flex gap-5">
-                    <Phone className="text-primary" size={20} />
-                    <div className="space-y-1">
-                      <p className="text-[11px] font-black uppercase tracking-widest text-slate-500">Sales HQ</p>
-                      <p className="text-sm font-bold tracking-tight text-slate-200">+91 [Insert Phone]</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-5">
-                    <Mail className="text-primary" size={20} />
-                    <div className="space-y-1">
-                      <p className="text-[11px] font-black uppercase tracking-widest text-slate-500">Direct Inquiry</p>
-                      <p className="text-sm font-bold tracking-tight text-slate-200">vimal_oc@yahoo.com</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div>
-                <p className="text-[11px] font-mono font-bold text-primary uppercase tracking-[0.3em] mb-10">[ AUTHORISED DISTRIBUTORS ]</p>
-                <ul className="grid grid-cols-1 gap-4">
-                  <li className="text-xs font-bold text-slate-400 uppercase tracking-tight">Jocil Ltd.</li>
-                  <li className="text-xs font-bold text-slate-400 uppercase tracking-tight">3F Industries Ltd.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      <div className="h-24 bg-navy-dark text-white flex flex-col md:flex-row items-center px-6 md:px-12 justify-between gap-4 py-6 text-center">
-        <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-500">
-          ©2024 VIMAL OLEO CHEMICALS / Trusted since 1980 / RSPO-Certified Supply
-        </div>
-        <button 
-          onClick={scrollToTop}
-          className="group flex items-center gap-3 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-colors"
-        >
-          GO.TOP
-          <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-primary transition-colors">
-            <ArrowUp size={14} className="text-white" />
-          </div>
-        </button>
-      </div>
-    </section>
+    </footer>
   );
 }

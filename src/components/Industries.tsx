@@ -10,7 +10,7 @@ import {
   Pill,
   Sparkles,
 } from 'lucide-react';
-import { sectionEyebrowClass, sectionHeadingClass } from '@/src/lib/section-styles';
+import { sectionHeadingClass } from '@/src/lib/section-styles';
 
 type Industry = {
   name: string;
@@ -229,30 +229,40 @@ export function Industries() {
     target: container,
     offset: ['start start', 'end end'],
   });
+  const blueGlowX = useTransform(scrollYProgress, [0, 0.35, 0.7, 1], ['-8rem', '20rem', '2rem', '30rem']);
+  const blueGlowY = useTransform(scrollYProgress, [0, 0.35, 0.7, 1], ['-2rem', '10rem', '24rem', '38rem']);
+  const blueGlowScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 0.95]);
+  const blueGlowOpacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.75, 0.95, 0.8, 0.55]);
 
   return (
     <section
-      className="relative bg-surface text-text-main"
+      className="relative bg-[#f4f6f9] text-text-main"
       id="industries"
     >
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-12rem] top-16 h-[34rem] w-[34rem] rounded-full bg-primary/10 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute right-[-10rem] bottom-20 h-[28rem] w-[28rem] rounded-full bg-slate-900/[0.04] blur-3xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.035)_1px,transparent_1px)] bg-[size:54px_54px]" />
       </div>
 
-      <div ref={container} className="relative z-10 pb-28" style={{ height: `calc(${industries.length * 80}vh + 7rem)` }}>
+      <div ref={container} className="relative z-10 pb-36" style={{ height: `calc(${industries.length * 80}vh + 12rem)` }}>
         <div className="sticky top-0 h-screen overflow-visible">
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+            <motion.div
+              style={{
+                x: blueGlowX,
+                y: blueGlowY,
+                scale: blueGlowScale,
+                opacity: blueGlowOpacity,
+              }}
+              className="absolute left-[-12rem] top-6 h-[34rem] w-[34rem] rounded-full bg-primary/10 blur-3xl"
+            />
+          </div>
           <motion.div
             initial={{ y: 28, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true, amount: 0.35 }}
-            className="mx-auto max-w-5xl px-6 pt-10 text-center sm:pt-12 lg:pt-14"
+            className="relative z-10 mx-auto max-w-5xl px-6 pt-10 text-center sm:pt-12 lg:pt-14"
           >
-            <span className={sectionEyebrowClass}>
-              [ APPLICATION SECTORS ]
-            </span>
             <h2 className={`${sectionHeadingClass} mb-4 sm:mb-6`}>
               INDUSTRIES WE<br />
               <span className="text-primary">SERVE.</span>
@@ -279,6 +289,7 @@ export function Industries() {
           })}
         </div>
       </div>
+      <div className="h-28 sm:h-36" aria-hidden="true" />
     </section>
   );
 }
