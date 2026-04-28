@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, type MotionValue, useScroll, useTransform } from 'framer-motion';
 import {
   Beaker,
@@ -137,18 +137,22 @@ function IndustryCard({
   progress,
   total,
   targetScale,
+  isMobile,
 }: {
   industry: Industry;
   index: number;
   progress: MotionValue<number>;
   total: number;
   targetScale: number;
+  isMobile: boolean;
 }) {
   const Icon = industry.icon;
-  const arrivalStart = index === 0 ? 0 : (index - 1) / (total - 1);
-  const arrivalEnd = index === 0 ? 0.02 : index / (total - 1);
+  const arrivalStart = index === 0 ? 0 : (index - 1) / total;
+  const arrivalEnd = index === 0 ? 0.02 : index / total;
   const exitEnd = Math.min(arrivalEnd + 0.18, 1);
-  const y = useTransform(progress, [arrivalStart, arrivalEnd], [index === 0 ? 0 : 720, index * 30]);
+  const stackOffset = isMobile ? 13 : 30;
+  const entryDistance = isMobile ? 520 : 720;
+  const y = useTransform(progress, [arrivalStart, arrivalEnd], [index === 0 ? 0 : entryDistance, index * stackOffset]);
   const scale = useTransform(progress, [arrivalEnd, exitEnd], [1, targetScale]);
   const shadowOpacity = useTransform(progress, [arrivalStart, arrivalEnd], [0.16, 0.28]);
   const boxShadow = useTransform(
@@ -165,7 +169,7 @@ function IndustryCard({
         boxShadow,
         zIndex: index + 1,
       }}
-      className="absolute left-1/2 top-[44vh] flex h-[390px] w-[calc(100%-2rem)] max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-slate-200 bg-white sm:top-[42vh] sm:h-[400px] sm:rounded-[2.5rem] md:flex-row lg:top-[42vh] lg:h-[360px]"
+      className="absolute left-1/2 top-[38vh] flex h-[355px] w-[calc(100%-2rem)] max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-slate-200 bg-white sm:top-[42vh] sm:h-[400px] sm:rounded-[2.5rem] md:flex-row lg:top-[42vh] lg:h-[360px]"
     >
       <div className="relative hidden flex-1 overflow-hidden bg-gradient-to-br from-primary/20 via-slate-100 to-slate-300 md:block">
         <img
@@ -183,18 +187,18 @@ function IndustryCard({
         <div className="absolute inset-0 bg-gradient-to-l from-white via-transparent to-transparent" />
       </div>
 
-      <div className="relative flex flex-1 flex-col justify-center p-8 sm:p-10">
-        <MoleculeMark className="absolute right-5 top-5 h-24 w-36 text-primary/12" />
+      <div className="relative flex flex-1 flex-col justify-center p-6 sm:p-10">
+        <MoleculeMark className="absolute right-5 top-5 h-20 w-32 text-primary/12 sm:h-24 sm:w-36" />
         <div>
-          <div className="mb-4 flex items-center gap-4 sm:mb-6">
+          <div className="mb-3 flex items-center gap-4 sm:mb-6">
             <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
               Industry 0{index + 1}
             </span>
             <div className="h-[1px] w-12 bg-slate-200" />
           </div>
 
-          <div className="mb-4 flex items-start justify-between gap-5 sm:mb-5">
-            <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+          <div className="mb-3 flex items-start justify-between gap-5 sm:mb-5">
+            <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary sm:h-12 sm:w-12">
               <Icon size={21} strokeWidth={1.9} />
             </span>
             <span className="font-display text-5xl font-black italic leading-none tracking-tighter text-slate-100">
@@ -202,11 +206,11 @@ function IndustryCard({
             </span>
           </div>
 
-          <h3 className="mb-4 font-display text-2xl font-black uppercase leading-none tracking-tighter text-slate-900 sm:text-4xl">
+          <h3 className="mb-3 font-display text-xl font-black uppercase leading-none tracking-tighter text-slate-900 sm:mb-4 sm:text-4xl">
             {industry.name}
           </h3>
 
-          <p className="mb-5 max-w-md text-sm font-medium leading-relaxed text-text-slate sm:mb-8 sm:text-base">
+          <p className="mb-4 max-w-md text-sm font-medium leading-relaxed text-text-slate sm:mb-8 sm:text-base">
             {industry.description}
           </p>
 
@@ -225,6 +229,7 @@ function IndustryCard({
 
 export function Industries() {
   const container = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ['start start', 'end end'],
@@ -233,6 +238,15 @@ export function Industries() {
   const blueGlowY = useTransform(scrollYProgress, [0, 0.35, 0.7, 1], ['-2rem', '10rem', '24rem', '38rem']);
   const blueGlowScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 0.95]);
   const blueGlowOpacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.75, 0.95, 0.8, 0.55]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 640px)');
+    const updateMobileState = () => setIsMobile(mediaQuery.matches);
+
+    updateMobileState();
+    mediaQuery.addEventListener('change', updateMobileState);
+    return () => mediaQuery.removeEventListener('change', updateMobileState);
+  }, []);
 
   return (
     <section
@@ -243,7 +257,7 @@ export function Industries() {
         <div className="absolute right-[-10rem] bottom-20 h-[28rem] w-[28rem] rounded-full bg-slate-900/[0.04] blur-3xl" />
       </div>
 
-      <div ref={container} className="relative z-10 pb-36" style={{ height: `calc(${industries.length * 80}vh + 12rem)` }}>
+      <div ref={container} className="relative z-10 pb-16 sm:pb-36" style={{ height: `calc(${industries.length * 80}vh + 12rem)` }}>
         <div className="sticky top-0 h-screen overflow-visible">
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
             <motion.div
@@ -283,13 +297,14 @@ export function Industries() {
                   progress={scrollYProgress}
                   total={industries.length}
                   targetScale={targetScale}
+                  isMobile={isMobile}
                 />
               </div>
             );
           })}
         </div>
       </div>
-      <div className="h-28 sm:h-36" aria-hidden="true" />
+      <div className="h-4 sm:h-36" aria-hidden="true" />
     </section>
   );
 }

@@ -64,6 +64,44 @@
   }
 }
 
+@media (max-width: 640px) {
+  .product-marquee-row {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+  }
+
+  .product-marquee-track {
+    gap: 10px !important;
+  }
+
+  .product-marquee-card {
+    width: 205px !important;
+    min-height: 188px !important;
+    border-radius: 16px !important;
+    padding: 18px 16px 16px !important;
+  }
+
+  .product-marquee-icon {
+    width: 66px !important;
+    height: 48px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .product-marquee-name {
+    font-size: 15px !important;
+    line-height: 1.08 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .product-marquee-tag {
+    max-width: 100% !important;
+    padding: 5px 10px !important;
+    font-size: 7px !important;
+    letter-spacing: 0.08em !important;
+    white-space: nowrap !important;
+  }
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);

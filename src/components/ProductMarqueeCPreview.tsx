@@ -167,10 +167,11 @@ function Row({ cards, reverse, offset }: { cards: Product[]; reverse?: boolean; 
   const repeatedCards = [...cards, ...cards, ...cards];
 
   return (
-    <div style={{ overflowX: 'hidden', overflowY: 'visible', marginBottom: '4px', paddingTop: '24px', paddingBottom: '22px' }}>
+    <div className="product-marquee-row" style={{ overflowX: 'hidden', overflowY: 'visible', marginBottom: '4px', paddingTop: '24px', paddingBottom: '22px' }}>
       <motion.div
         animate={{ x: reverse ? ['-33.33%', '0%'] : ['0%', '-33.33%'] }}
         transition={{ duration: reverse ? 74 : 82, repeat: Infinity, repeatType: 'loop', ease: 'linear' }}
+        className="product-marquee-track"
         style={{ display: 'flex', gap: '14px', width: 'max-content' }}
       >
         {repeatedCards.map((p, i) => {
@@ -180,6 +181,7 @@ function Row({ cards, reverse, offset }: { cards: Product[]; reverse?: boolean; 
               key={i}
               whileHover={{ y: -6, scale: 1.035 }}
               transition={{ duration: 0.2, ease: [0.25, 1, 0.5, 1] }}
+              className="product-marquee-card"
               style={{
                 flexShrink: 0,
                 width: '260px',
@@ -195,6 +197,7 @@ function Row({ cards, reverse, offset }: { cards: Product[]; reverse?: boolean; 
               }}
             >
               <div
+                className="product-marquee-icon"
                 style={{
                   width: '86px',
                   height: '64px',
@@ -207,8 +210,8 @@ function Row({ cards, reverse, offset }: { cards: Product[]; reverse?: boolean; 
               >
                 {p.icon}
               </div>
-              <p style={{ fontSize: '18px', fontWeight: 800, lineHeight: 1.12, marginBottom: '14px', color: c.name }}>{p.name}</p>
-              <span style={{ alignSelf: 'flex-start', fontSize: '9px', fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', padding: '6px 12px', borderRadius: '100px', color: c.tagTxt, background: c.tagBg }}>{p.tag}</span>
+              <p className="product-marquee-name" style={{ fontSize: '18px', fontWeight: 800, lineHeight: 1.12, marginBottom: '14px', color: c.name }}>{p.name}</p>
+              <span className="product-marquee-tag" style={{ alignSelf: 'flex-start', fontSize: '9px', fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase', padding: '6px 12px', borderRadius: '100px', color: c.tagTxt, background: c.tagBg }}>{p.tag}</span>
             </motion.div>
           );
         })}

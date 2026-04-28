@@ -10,6 +10,7 @@ import { Contact } from '@/src/components/Contact';
 import { IndustryConceptsPreview } from '@/src/components/IndustryConceptsPreview';
 import { IndustryStackPreview } from '@/src/components/IndustryStackPreview';
 import { TrustPreview } from '@/src/components/TrustPreview';
+import { TrustMobilePreview } from '@/src/components/TrustMobilePreview';
 import { ContactPreview } from '@/src/components/ContactPreview';
 import { FooterPreview } from '@/src/components/FooterPreview';
 import { HeroNavPreview } from '@/src/components/HeroNavPreview';
@@ -23,6 +24,7 @@ export default function App() {
   const isIndustryPreview = window.location.pathname === '/industry-preview';
   const isIndustryStackPreview = window.location.pathname === '/industry-stack-preview';
   const isTrustPreview = window.location.pathname === '/trust-preview';
+  const isTrustMobilePreview = window.location.pathname === '/trust-mobile-preview';
   const isContactPreview = window.location.pathname === '/contact-preview';
   const isFooterPreview = window.location.pathname === '/footer-preview';
   const isHeroNavPreview = window.location.pathname === '/hero-nav-preview';
@@ -48,6 +50,10 @@ export default function App() {
 
   if (isTrustPreview) {
     return <TrustPreview />;
+  }
+
+  if (isTrustMobilePreview) {
+    return <TrustMobilePreview />;
   }
 
   if (isContactPreview) {
