@@ -241,8 +241,8 @@ export function Industries() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.035)_1px,transparent_1px)] bg-[size:54px_54px]" />
       </div>
 
-      <div ref={container} className="relative z-10" style={{ height: `${industries.length * 80}vh` }}>
-        <div className="sticky top-0 h-screen overflow-hidden">
+      <div ref={container} className="relative z-10 pb-28" style={{ height: `calc(${industries.length * 80}vh + 7rem)` }}>
+        <div className="sticky top-0 h-screen overflow-visible">
           <motion.div
             initial={{ y: 28, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}

@@ -9,6 +9,8 @@ import { CertifiedTrust } from '@/src/components/CertifiedTrust';
 import { IndustryConceptsPreview } from '@/src/components/IndustryConceptsPreview';
 import { IndustryStackPreview } from '@/src/components/IndustryStackPreview';
 import { TrustPreview } from '@/src/components/TrustPreview';
+import { ContactPreview } from '@/src/components/ContactPreview';
+import { FooterPreview } from '@/src/components/FooterPreview';
 import { Footer } from '@/src/components/Footer';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -19,6 +21,8 @@ export default function App() {
   const isIndustryPreview = window.location.pathname === '/industry-preview';
   const isIndustryStackPreview = window.location.pathname === '/industry-stack-preview';
   const isTrustPreview = window.location.pathname === '/trust-preview';
+  const isContactPreview = window.location.pathname === '/contact-preview';
+  const isFooterPreview = window.location.pathname === '/footer-preview';
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -41,6 +45,14 @@ export default function App() {
 
   if (isTrustPreview) {
     return <TrustPreview />;
+  }
+
+  if (isContactPreview) {
+    return <ContactPreview />;
+  }
+
+  if (isFooterPreview) {
+    return <FooterPreview />;
   }
 
   return (
