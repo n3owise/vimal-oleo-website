@@ -3,9 +3,9 @@ import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
 const footerDetails = {
   company: 'VIMAL OLEO CHEMICALS',
   address: [
-    'PLOT NO 203A, SHREE RAMDARSHAN BUILDING, OFFICE NO-1, GROUND FLOOR,',
-    'DR BABASAHEB AMBEDKAR ROAD, NEAR UNION BANK OF INDIA,',
-    'SION EAST, MUMBAI - 400022',
+    'PLOT NO 203A, SHREE RAMDARSHAN BUILDING,',
+    'OFFICE NO-1, GROUND FLOOR, DR BABASAHEB AMBEDKAR ROAD,',
+    'NEAR UNION BANK OF INDIA, SION EAST, MUMBAI - 400022',
   ],
   landline: '+91-022-24010660',
   email: 'vimaloleochemicals@gmail.com',
@@ -33,7 +33,7 @@ function AddressBlock() {
       </div>
       <div>
         <p className="font-display text-xl font-black uppercase italic tracking-tight text-white">{footerDetails.company}</p>
-        <p className="mt-3 max-w-xl text-sm font-semibold uppercase leading-relaxed text-white/68">
+        <p className="mt-3 w-full text-sm font-semibold uppercase leading-relaxed text-white/68 lg:whitespace-nowrap">
           {footerDetails.address.map((line) => (
             <span key={line} className="block">{line}</span>
           ))}
