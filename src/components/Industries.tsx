@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, type MotionValue, useScroll, useTransform } from 'framer-motion';
 import {
   Beaker,
-  Brush,
-  Factory,
+  Paintbrush,
+  Cylinder,
   FlaskConical,
-  Layers,
+  Shirt,
   Leaf,
   Pill,
-  Sparkles,
+  SprayCan,
 } from 'lucide-react';
 import { sectionHeadingClass } from '@/src/lib/section-styles';
 
@@ -39,7 +39,7 @@ const industries: Industry[] = [
     description: 'Reliable inputs for coatings, industrial inks, lamination, and surface finishing.',
     image: 'https://images.unsplash.com/photo-1560067174-c5a3a8f37060?auto=format&fit=crop&q=85&w=1600',
     imagePosition: 'center',
-    icon: Brush,
+    icon: Paintbrush,
   },
   {
     name: 'Intermediates',
@@ -57,7 +57,7 @@ const industries: Industry[] = [
     description: 'Materials supporting PVC pipe, profile, compound, and extrusion applications.',
     image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=85&w=1600',
     imagePosition: 'center',
-    icon: Factory,
+    icon: Cylinder,
   },
   {
     name: 'Textile Auxiliaries',
@@ -66,7 +66,7 @@ const industries: Industry[] = [
     description: 'Processing aids for textile auxiliaries, fabric finishing, and fiber applications.',
     image: 'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&q=85&w=1600',
     imagePosition: 'center',
-    icon: Layers,
+    icon: Shirt,
   },
   {
     name: 'Plant Extract & Master Batches',
@@ -84,7 +84,7 @@ const industries: Industry[] = [
     description: 'High-quality oleo ingredients for skincare, hair care, and personal care products.',
     image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=85&w=1600',
     imagePosition: 'center',
-    icon: Sparkles,
+    icon: SprayCan,
   },
   {
     name: 'Speciality Chemicals',
@@ -177,7 +177,7 @@ function IndustryCard({
         zIndex: index + 1,
         transformOrigin: "top center",
       }}
-      className="absolute left-1/2 top-[30vh] flex h-[355px] w-[calc(100%-2rem)] max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-slate-200 bg-white sm:top-[30vh] sm:h-[400px] sm:rounded-[2.5rem] md:flex-row lg:top-[32vh] lg:h-[360px]"
+      className="absolute left-1/2 top-[34vh] flex h-[355px] w-[calc(100%-2rem)] max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-slate-200 bg-white sm:top-[34vh] sm:h-[400px] sm:rounded-[2.5rem] md:flex-row lg:top-[32vh] lg:h-[360px]"
     >
       <div className="relative hidden flex-1 overflow-hidden bg-gradient-to-br from-primary/20 via-slate-100 to-slate-300 md:block">
         <img
@@ -196,7 +196,6 @@ function IndustryCard({
       </div>
 
       <div className="relative flex flex-1 flex-col justify-center p-6 sm:p-10">
-        <MoleculeMark className="absolute right-5 top-5 h-20 w-32 text-primary/12 sm:h-24 sm:w-36" />
         <div>
           <div className="mb-3 flex items-center gap-4 sm:mb-6">
             <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
@@ -208,9 +207,6 @@ function IndustryCard({
           <div className="mb-3 flex items-start justify-between gap-5 sm:mb-5">
             <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary sm:h-12 sm:w-12">
               <Icon size={21} strokeWidth={1.9} />
-            </span>
-            <span className="font-display text-5xl font-black italic leading-none tracking-tighter text-slate-100">
-              {industry.code}
             </span>
           </div>
 
@@ -263,15 +259,23 @@ export function Industries() {
 
   return (
     <section
-      className="relative bg-[#f4f6f9] text-text-main pb-0 sm:pb-0"
+      className="relative bg-[#f4f6f9] text-text-main pb-24 sm:pb-0"
       id="industries"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute right-[-10rem] bottom-20 h-[28rem] w-[28rem] rounded-full bg-slate-900/[0.04] blur-3xl" />
       </div>
 
-      <div ref={container} className="relative z-10" style={{ height: `calc(${(industries.length - 1) * 60 + 85}vh)` }}>
-        <div className="sticky top-0 h-[85svh] overflow-visible">
+      {/* Use 100svh on mobile to prevent cropping, 85svh on desktop to keep gap tight */}
+      <div 
+        ref={container} 
+        className="relative z-10" 
+        style={{ height: `calc(${(industries.length - 1) * 60 + (isMobile ? 100 : 85)}vh)` }}
+      >
+        <div 
+          className="sticky top-0 overflow-visible"
+          style={{ height: `${isMobile ? 100 : 85}svh` }}
+        >
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
             <motion.div
               style={{
