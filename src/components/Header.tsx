@@ -12,11 +12,16 @@ export function Header() {
     >
       <div className="flex w-full items-center justify-between px-5 sm:px-8 lg:px-10">
         {/* Logo Section */}
-        <a href="#" className="block w-[145px] max-w-[44vw] sm:w-[190px] lg:w-[215px]">
+        <a href="#" className="flex items-center w-[145px] max-w-[44vw] sm:w-[190px] lg:w-[215px]">
           <img
             src="/final-logo.png"
             alt="Vimal Oleo Chemicals"
-            className="block h-auto w-full"
+            className="md:hidden block h-auto w-full"
+          />
+          <img
+            src="/vinal-oleo-logo.svg"
+            alt="Vimal Oleo Chemicals"
+            className="hidden md:block h-auto w-full object-contain"
           />
         </a>
 

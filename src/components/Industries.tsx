@@ -150,14 +150,21 @@ function IndustryCard({
   const arrivalStart = index === 0 ? 0 : (index - 1) / (total - 1);
   const arrivalEnd = index === 0 ? 0.02 : index / (total - 1);
   const exitEnd = Math.min(arrivalEnd + 0.18, 1);
-  const stackOffset = isMobile ? 13 : 30;
-  const entryDistance = isMobile ? 520 : 720;
-  const y = useTransform(progress, [arrivalStart, arrivalEnd], [index === 0 ? 0 : entryDistance, index * stackOffset]);
+  const stackOffset = isMobile ? 12 : 20;
+  const entryDistance = isMobile ? 600 : 800;
+  
+  const yInput = arrivalEnd >= 1 ? [arrivalStart, 1] : [arrivalStart, arrivalEnd, 1];
+  const yOutput = arrivalEnd >= 1 
+    ? [entryDistance, index * stackOffset] 
+    : [index === 0 ? 0 : entryDistance, index * stackOffset, index * stackOffset];
+  const y = useTransform(progress, yInput, yOutput);
+  
   const scale = useTransform(progress, [arrivalEnd, exitEnd], [1, targetScale]);
-  const shadowOpacity = useTransform(progress, [arrivalStart, arrivalEnd], [0.16, 0.28]);
+  
+  const shadowOpacity = useTransform(progress, [arrivalStart, arrivalEnd], [0.03, 0.1]);
   const boxShadow = useTransform(
     shadowOpacity,
-    (value) => `0 32px 90px rgba(15, 23, 42, ${value})`,
+    (value) => `0 15px 35px rgba(15, 23, 42, ${value})`,
   );
 
   return (
@@ -168,8 +175,9 @@ function IndustryCard({
         scale,
         boxShadow,
         zIndex: index + 1,
+        transformOrigin: "top center",
       }}
-      className="absolute left-1/2 top-[38vh] flex h-[355px] w-[calc(100%-2rem)] max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-slate-200 bg-white sm:top-[42vh] sm:h-[400px] sm:rounded-[2.5rem] md:flex-row lg:top-[42vh] lg:h-[360px]"
+      className="absolute left-1/2 top-[30vh] flex h-[355px] w-[calc(100%-2rem)] max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-slate-200 bg-white sm:top-[30vh] sm:h-[400px] sm:rounded-[2.5rem] md:flex-row lg:top-[32vh] lg:h-[360px]"
     >
       <div className="relative hidden flex-1 overflow-hidden bg-gradient-to-br from-primary/20 via-slate-100 to-slate-300 md:block">
         <img
@@ -234,6 +242,11 @@ export function Industries() {
     target: container,
     offset: ['start start', 'end end'],
   });
+  
+  // Finish the card animation early at 85% of the scroll track to create a natural pause
+  // without artificially lengthening the page scroll distance
+  const cardScrollProgress = useTransform(scrollYProgress, [0, 0.85], [0, 1]);
+
   const blueGlowX = useTransform(scrollYProgress, [0, 0.35, 0.7, 1], ['-8rem', '20rem', '2rem', '30rem']);
   const blueGlowY = useTransform(scrollYProgress, [0, 0.35, 0.7, 1], ['-2rem', '10rem', '24rem', '38rem']);
   const blueGlowScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 0.95]);
@@ -250,15 +263,15 @@ export function Industries() {
 
   return (
     <section
-      className="relative bg-[#f4f6f9] text-text-main pb-12 sm:pb-24"
+      className="relative bg-[#f4f6f9] text-text-main pb-0 sm:pb-0"
       id="industries"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute right-[-10rem] bottom-20 h-[28rem] w-[28rem] rounded-full bg-slate-900/[0.04] blur-3xl" />
       </div>
 
-      <div ref={container} className="relative z-10" style={{ height: `calc(${(industries.length - 1) * 60 + 100}vh)` }}>
-        <div className="sticky top-0 h-screen overflow-visible">
+      <div ref={container} className="relative z-10" style={{ height: `calc(${(industries.length - 1) * 60 + 85}vh)` }}>
+        <div className="sticky top-0 h-[85svh] overflow-visible">
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
             <motion.div
               style={{
@@ -287,14 +300,14 @@ export function Industries() {
           </motion.div>
 
           {industries.map((industry, index) => {
-            const targetScale = 1 - (industries.length - index) * 0.04;
+            const targetScale = 1 - (industries.length - 1 - index) * 0.05;
 
             return (
               <div key={industry.name}>
                 <IndustryCard
                   industry={industry}
                   index={index}
-                  progress={scrollYProgress}
+                  progress={cardScrollProgress}
                   total={industries.length}
                   targetScale={targetScale}
                   isMobile={isMobile}
