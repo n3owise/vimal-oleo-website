@@ -88,7 +88,6 @@ export function Footer() {
 
   return (
     <footer id="contact-footer" className="relative overflow-hidden bg-slate-950 text-white">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:54px_54px]" />
       <div className="pointer-events-none absolute left-[-12rem] top-10 h-[26rem] w-[26rem] rounded-full bg-primary/20 blur-3xl" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12">
