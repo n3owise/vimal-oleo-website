@@ -89,7 +89,7 @@ function MobileTrustMarks() {
 
 export function CertifiedTrust() {
   return (
-    <section id="certified-trust" className="bg-surface px-5 pb-24 pt-8 text-slate-950 sm:pt-20">
+    <section id="certified-trust" className="bg-[#f4f6f9] px-5 pb-24 pt-4 text-slate-950 sm:pt-8">
       <div className="mx-auto grid max-w-7xl gap-10 rounded-[2.5rem] border border-slate-200 bg-white p-6 shadow-xl sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <motion.div
           initial={{ y: 28, opacity: 0 }}

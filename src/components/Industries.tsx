@@ -147,8 +147,8 @@ function IndustryCard({
   isMobile: boolean;
 }) {
   const Icon = industry.icon;
-  const arrivalStart = index === 0 ? 0 : (index - 1) / total;
-  const arrivalEnd = index === 0 ? 0.02 : index / total;
+  const arrivalStart = index === 0 ? 0 : (index - 1) / (total - 1);
+  const arrivalEnd = index === 0 ? 0.02 : index / (total - 1);
   const exitEnd = Math.min(arrivalEnd + 0.18, 1);
   const stackOffset = isMobile ? 13 : 30;
   const entryDistance = isMobile ? 520 : 720;
@@ -250,14 +250,14 @@ export function Industries() {
 
   return (
     <section
-      className="relative bg-[#f4f6f9] text-text-main"
+      className="relative bg-[#f4f6f9] text-text-main pb-12 sm:pb-24"
       id="industries"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute right-[-10rem] bottom-20 h-[28rem] w-[28rem] rounded-full bg-slate-900/[0.04] blur-3xl" />
       </div>
 
-      <div ref={container} className="relative z-10 pb-16 sm:pb-36" style={{ height: `calc(${industries.length * 80}vh + 12rem)` }}>
+      <div ref={container} className="relative z-10" style={{ height: `calc(${(industries.length - 1) * 60 + 100}vh)` }}>
         <div className="sticky top-0 h-screen overflow-visible">
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
             <motion.div
@@ -304,7 +304,6 @@ export function Industries() {
           })}
         </div>
       </div>
-      <div className="h-4 sm:h-36" aria-hidden="true" />
     </section>
   );
 }
