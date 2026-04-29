@@ -43,16 +43,17 @@ function BlueDialerIcon() {
 export function Contact() {
   return (
     <section id="contact" className="relative overflow-hidden px-5 py-24 sm:py-32">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden bg-slate-950">
         <img
-          src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=85&w=2000"
-          alt="Industrial Facility"
-          className="h-full w-full object-cover"
+          src="/factory.jpg"
+          alt="Industrial Building and Factory"
+          className="h-full w-full object-cover grayscale opacity-75"
         />
-        <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-surface/60 via-primary/20 to-primary/10" />
+        <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-primary/40 to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl rounded-[2.5rem] border border-slate-200/50 bg-white/95 p-8 text-center shadow-2xl shadow-slate-900/20 backdrop-blur-xl sm:p-12">
+      <div className="relative z-10 mx-auto max-w-7xl rounded-[2.5rem] border border-white/40 bg-white/70 p-8 text-center shadow-2xl shadow-slate-900/10 backdrop-blur-xl sm:p-12">
         <div className="mx-auto max-w-5xl text-center">
           <span className={sectionEyebrowClass}>[ CONTACT US ]</span>
           <h2 className={sectionHeadingClass}>

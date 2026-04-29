@@ -28,7 +28,7 @@ export function Hero() {
           <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-primary/70 via-primary/25 to-transparent" />
         </motion.div>
 
-        <div className="relative z-10 flex min-h-[calc(100svh-2rem)] items-center px-6 pb-16 pt-32 sm:min-h-[calc(100svh-3rem)] sm:px-10 sm:pt-36 lg:min-h-[calc(100svh-5rem)] lg:px-16">
+        <div className="relative z-10 flex min-h-[calc(100svh-2rem)] items-start sm:items-center px-6 pb-16 pt-36 sm:min-h-[calc(100svh-3rem)] sm:px-10 sm:pt-36 lg:min-h-[calc(100svh-5rem)] lg:px-16">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
