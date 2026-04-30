@@ -9,6 +9,7 @@ import { CertifiedTrust } from '@/src/components/CertifiedTrust';
 import { Contact } from '@/src/components/Contact';
 import { Footer } from '@/src/components/Footer';
 import { AboutPage } from '@/src/pages/AboutPage';
+import { NavLinkOptionsPage } from '@/src/pages/NavLinkOptionsPage';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -16,6 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   const isAboutPage = window.location.pathname === '/about';
+  const isNavLinkOptionsPage = window.location.pathname === '/nav-link-options';
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -38,6 +40,10 @@ export default function App() {
         <AboutPage />
       </>
     );
+  }
+
+  if (isNavLinkOptionsPage) {
+    return <NavLinkOptionsPage />;
   }
 
   return (
