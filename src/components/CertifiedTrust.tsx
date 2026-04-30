@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { sectionHeadingClass } from '@/src/lib/section-styles';
 
 const trustMarks = [
@@ -21,9 +20,7 @@ const trustMarks = [
 
 function LogoMarkCard({ mark }: { mark: (typeof trustMarks)[number] }) {
   return (
-    <motion.div
-      whileHover={{ y: -6, scale: 1.02 }}
-      transition={{ duration: 0.25 }}
+    <div
       className="flex min-h-[210px] flex-col items-center rounded-3xl border border-slate-200 bg-white p-5 text-center shadow-sm"
     >
       <p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">
@@ -36,7 +33,7 @@ function LogoMarkCard({ mark }: { mark: (typeof trustMarks)[number] }) {
           className="max-h-24 max-w-[82%] object-contain"
         />
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -45,11 +42,7 @@ function MobileTrustMarks() {
 
   return (
     <div className="grid gap-3 sm:hidden">
-      <motion.div
-        initial={{ y: 24, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.65 }}
+      <div
         className="rounded-[1.75rem] bg-white p-5 text-center shadow-sm ring-1 ring-slate-200"
       >
         <p className="mb-4 text-[10px] font-black uppercase tracking-[0.22em] text-primary">
@@ -60,16 +53,12 @@ function MobileTrustMarks() {
           alt={`${rspo.label} logo`}
           className="mx-auto max-h-24 max-w-[9rem] object-contain"
         />
-      </motion.div>
+      </div>
 
       <div className="grid grid-cols-2 gap-3">
-        {distributors.map((mark, index) => (
-          <motion.div
+        {distributors.map((mark) => (
+          <div
             key={mark.label}
-            initial={{ y: 24, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.65, delay: 0.08 + index * 0.06 }}
             className="rounded-[1.5rem] bg-white p-4 text-center shadow-sm ring-1 ring-slate-200"
           >
             <p className="mb-4 text-[8px] font-black uppercase tracking-[0.14em] text-primary">
@@ -80,7 +69,7 @@ function MobileTrustMarks() {
               alt={`${mark.label} logo`}
               className="mx-auto max-h-16 max-w-[6.5rem] object-contain"
             />
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>
@@ -91,11 +80,7 @@ export function CertifiedTrust() {
   return (
     <section id="certified-trust" className="bg-[#f4f6f9] px-5 pb-24 pt-4 text-slate-950 sm:pt-8">
       <div className="mx-auto grid max-w-7xl gap-10 rounded-[2.5rem] border border-slate-200 bg-white p-6 shadow-xl sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <motion.div
-          initial={{ y: 28, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, amount: 0.35 }}
+        <div
           className="relative overflow-hidden rounded-[2rem] bg-surface p-7 sm:p-9"
         >
           <h2 className={sectionHeadingClass}>
@@ -105,21 +90,15 @@ export function CertifiedTrust() {
           <p className="mt-6 max-w-3xl text-base font-medium leading-relaxed text-text-slate sm:text-lg">
             We ensure consistent quality and compliance through globally recognised standards. RSPO-certified grades available across products.
           </p>
-        </motion.div>
+        </div>
 
         <MobileTrustMarks />
 
         <div className="hidden items-center gap-4 sm:grid sm:grid-cols-3">
-          {trustMarks.map((mark, index) => (
-            <motion.div
-              key={mark.label}
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.75, delay: index * 0.08 }}
-            >
+          {trustMarks.map((mark) => (
+            <div key={mark.label}>
               <LogoMarkCard mark={mark} />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

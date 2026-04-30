@@ -259,22 +259,22 @@ export function Industries() {
 
   return (
     <section
-      className="relative bg-[#f4f6f9] text-text-main pb-24 sm:pb-0"
+      className="relative bg-[#f4f6f9] text-text-main pb-4 sm:pb-8"
       id="industries"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute right-[-10rem] bottom-20 h-[28rem] w-[28rem] rounded-full bg-slate-900/[0.04] blur-3xl" />
       </div>
 
-      {/* Use 100svh on mobile to prevent cropping, 85svh on desktop to keep gap tight */}
+      {/* Keep the sticky stage full-height so the next section does not partially reveal during the stack handoff. */}
       <div 
         ref={container} 
         className="relative z-10" 
-        style={{ height: `calc(${(industries.length - 1) * 60 + (isMobile ? 100 : 85)}vh)` }}
+        style={{ height: `calc(${(industries.length - 1) * 60 + 100}vh)` }}
       >
         <div 
           className="sticky top-0 overflow-visible"
-          style={{ height: `${isMobile ? 100 : 85}svh` }}
+          style={{ height: '100svh' }}
         >
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
             <motion.div
