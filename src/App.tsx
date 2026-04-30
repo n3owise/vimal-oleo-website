@@ -8,12 +8,14 @@ import { Industries } from '@/src/components/Industries';
 import { CertifiedTrust } from '@/src/components/CertifiedTrust';
 import { Contact } from '@/src/components/Contact';
 import { Footer } from '@/src/components/Footer';
+import { AboutPage } from '@/src/pages/AboutPage';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
+  const isAboutPage = window.location.pathname === '/about';
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -25,6 +27,18 @@ export default function App() {
     // Global ScrollTrigger refresh on mount
     ScrollTrigger.refresh();
   }, []);
+
+  if (isAboutPage) {
+    return (
+      <>
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-[2px] bg-teal-500 origin-left z-[100]"
+          style={{ scaleX }}
+        />
+        <AboutPage />
+      </>
+    );
+  }
 
   return (
     <div className="relative min-h-screen bg-surface selection:bg-primary/10">

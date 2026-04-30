@@ -8,6 +8,7 @@ const footerDetails = {
     'NEAR UNION BANK OF INDIA, SION EAST, MUMBAI - 400022',
   ],
   landline: '+91-022-24010660',
+  landlineHref: '+912224010660',
   email: 'vimaloleochemicals@gmail.com',
   contacts: [
     { name: 'HEMANG SHAH', phone: '+91-9819415552' },
@@ -50,7 +51,7 @@ function ContactBlock() {
         <Phone className="h-5 w-5 text-primary" />
         <p className="font-mono text-[11px] font-black uppercase tracking-[0.24em] text-white/55">Contact Details</p>
       </div>
-      <a href={`tel:${footerDetails.landline.replace(/-/g, '')}`} className="block text-base font-black text-white transition-colors hover:text-primary">
+      <a href={`tel:${footerDetails.landlineHref}`} className="block text-base font-black text-white transition-colors hover:text-primary">
         {footerDetails.landline}
       </a>
       <a href={`mailto:${footerDetails.email}`} className="block break-all text-base font-black text-white transition-colors hover:text-primary">
