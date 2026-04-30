@@ -7,52 +7,33 @@ gsap.registerPlugin(ScrollTrigger);
 const timelineData = [
   {
     year: '1980',
-    title: 'Where It All Started',
     description:
-      'The journey began with a focused oleochemical supply practice built on trust, product knowledge, and dependable service.',
-    tagline: 'START SMALL. THINK LONG.',
+      'In 2004, Mr. Hemang Shah joined the company after completing his B.Com from Mumbai University. He expanded operations into imports, exports, and local sourcing of oleochemicals and chemicals, with a primary focus on marketing to manufacturers and end-users while managing both purchases and sales.',
   },
   {
-    year: '1995',
-    title: 'Exploring the Craft',
+    year: '1990',
     description:
-      'Product coverage expanded across fatty acids, glycerine, soap inputs, and materials used by manufacturing-led customers.',
-    tagline: 'LEARN BY SUPPLYING.',
+      'The company began with trading and supplying chemicals and solvents such as Titanium Dioxide, Caustic Soda, Iso Propyl Alcohol, and Toluene. Over time, the portfolio expanded to oleochemicals like Stearic Acid, Refined Glycerine, and Distilled Fatty Acids. In 1990, we strengthened our market presence by becoming an authorized distributor of M/s. Jocil Ltd (now Jayalakshmi Oil & Chemical Industries Ltd)',
   },
   {
-    year: '2005',
-    title: 'Finding Focus',
+    year: '2004',
     description:
-      'A clearer direction emerged around consistent sourcing, authorised distribution, and practical support for industrial buyers.',
-    tagline: 'CLARITY DRIVES PROGRESS.',
+      'In 2004, Mr. Hemang Shah joined the company after completing his B.Com from Mumbai University. He expanded operations into imports, exports, and local sourcing of oleochemicals and chemicals, with a primary focus on marketing to manufacturers and end-users while managing both purchases and sales.',
   },
   {
-    year: '2015',
-    title: 'Building Consistency',
+    year: '2012',
     description:
-      'Dedicated warehousing and stronger supplier relationships helped improve material availability and delivery reliability.',
-    tagline: 'CONSISTENCY BUILDS TRUST.',
+      'In 2012, Mr. Kunal Shah, after completing his B.E. in Computers from Mumbai University, joined the company and expanded the product portfolio to include other oleo chemicals like Lauric Acid, Oleic Acid, Myristic Acid, and more. He also took charge of finance, marketing, and sales, helping drive the company’s growth.',
   },
   {
-    year: '2020',
-    title: 'Solidifying the Core',
+    year: '2016',
     description:
-      'The company strengthened its core categories while continuing to serve personal care, pharma, PVC, coatings, textile, and speciality chemical sectors.',
-    tagline: 'STRONG FOUNDATIONS SCALE.',
+      'In 2016, we took on the authorized distributorship of M/s. 3F Industries Ltd, expanding our product range to include Stearic Acid, Glycerine, DCFA, HTO, and 2016 many other products.',
   },
   {
-    year: '2024',
-    title: 'Gaining Speed',
+    year: '2021',
     description:
-      'Operational focus increased around faster fulfilment, clearer communication, and dependable customer support.',
-    tagline: 'MOMENTUM COMPOUNDS.',
-  },
-  {
-    year: '2026',
-    title: 'Pushing Boundaries',
-    description:
-      'Vimal Oleo Chemicals continues to build reliable oleochemical supply for manufacturers that need practical, long-term partners.',
-    tagline: 'SUPPLY BEYOND EXPECTATIONS.',
+      'In 2021, we launched a new registered partnership firm, M/s. Vimal Oleo Chemicals, which is dedicated exclusively to dealing with oleo chemicals. From our humble beginnings in 1980 till 2021, M/s. Vimal Oleo Chemicals has grown to become one of the leading importers, distributors, and suppliers of the entire range of oleo chemicals.',
   },
 ];
 
@@ -89,22 +70,28 @@ export function AboutTimeline() {
 
           if (activeIndex !== -1 && index <= activeIndex) {
             gsap.to(card, {
-              backgroundColor: '#000000',
+              backgroundColor: '#eaf3ff',
+              borderColor: 'rgba(29, 95, 184, 0.18)',
+              boxShadow: '0 24px 60px rgba(29, 95, 184, 0.10)',
               duration: 0.35,
               ease: 'power2.out',
             });
             gsap.to(dot, {
-              backgroundColor: '#ff4d13',
+              backgroundColor: '#8fc2ff',
+              borderColor: '#ffffff',
               duration: 0.25,
             });
           } else {
             gsap.to(card, {
-              backgroundColor: '#a8a8a8',
+              backgroundColor: '#ffffff',
+              borderColor: 'rgba(226, 232, 240, 0.95)',
+              boxShadow: '0 16px 42px rgba(29, 95, 184, 0.06)',
               duration: 0.35,
               ease: 'power2.out',
             });
             gsap.to(dot, {
               backgroundColor: '#ffffff',
+              borderColor: '#b9d5ff',
               duration: 0.25,
             });
           }
@@ -161,7 +148,7 @@ export function AboutTimeline() {
           gsap.set(dot, {
             autoAlpha: 0,
             backgroundColor: '#ffffff',
-            borderColor: '#ff4d13',
+            borderColor: '#b9d5ff',
           });
         }
 
@@ -237,18 +224,18 @@ export function AboutTimeline() {
 
           <div className="about-timeline-container relative w-full pt-[300px] md:pt-[500px] lg:w-[800px] lg:pt-[700px]">
             <div className="pointer-events-none absolute bottom-[calc(30vh+245px)] left-2 top-0 z-0 w-px">
-              <div ref={bgLineRef} className="invisible absolute inset-0 bg-[#111111]/10 opacity-0" />
-              <div ref={progressLineRef} className="invisible absolute inset-0 origin-top scale-y-0 bg-[#111111] opacity-0" />
+              <div ref={bgLineRef} className="invisible absolute inset-0 bg-[#d8eaff] opacity-0" />
+              <div ref={progressLineRef} className="invisible absolute inset-0 origin-top scale-y-0 bg-[#8fc2ff] opacity-0" />
             </div>
 
             <div className="relative z-10 flex flex-col gap-4 pb-[30vh]">
               {timelineData.map((item, index) => (
-                <div key={item.title} className="relative flex w-full items-start">
+                <div key={item.year} className="relative flex w-full items-start">
                   <div
                     ref={(el) => {
                       dotRefs.current[index] = el;
                     }}
-                    className="absolute left-0 top-10 z-10 h-4 w-4 rounded-full border-[4px] border-[#ff4d13] bg-white"
+                    className="absolute left-0 top-10 z-10 h-4 w-4 rounded-full border-[4px] border-[#b9d5ff] bg-white shadow-lg shadow-[#8fc2ff]/20"
                   />
 
                   <div className="ml-12 mr-2 flex-1 md:ml-32 md:mr-0 lg:w-[672px] lg:flex-none">
@@ -256,24 +243,18 @@ export function AboutTimeline() {
                       ref={(el) => {
                         cardRefs.current[index] = el;
                       }}
-                      className="flex min-h-[285px] flex-col justify-between rounded-[24px] bg-[#a8a8a8] p-6 transition-colors duration-300 md:p-8"
+                      className="flex min-h-[285px] flex-col justify-between rounded-[24px] border border-slate-200/90 bg-white p-6 shadow-xl shadow-[#1d5fb8]/[0.06] backdrop-blur-xl transition-colors duration-300 md:p-8"
                     >
                       <div className="mb-8 flex items-start justify-between gap-4">
-                        <h2 className="font-serif text-[36px] font-normal leading-[1.2] tracking-normal text-[#b0b0b0] md:text-[48px] md:leading-[57.6px]">
-                          {item.title}
-                        </h2>
-                        <span className="mt-2 shrink-0 text-[12px] font-bold tracking-[0.12em] text-[#ff4d13]">
+                        <h2 className="font-serif text-[36px] font-normal leading-[1.2] tracking-normal text-[#1d5fb8] md:text-[48px] md:leading-[57.6px]">
                           {item.year}
-                        </span>
+                        </h2>
                       </div>
 
-                      <div className="flex flex-col items-end justify-between gap-6 text-white md:flex-row">
-                        <p className="max-w-[320px] self-start text-[14px] font-medium leading-[22.4px] text-[#d4d4d4] md:self-end">
+                      <div className="flex">
+                        <p className="max-w-[560px] text-[14px] font-medium leading-[22.4px] text-text-slate">
                           {item.description}
                         </p>
-                        <span className="whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.08em] text-white">
-                          {item.tagline}
-                        </span>
                       </div>
                     </div>
                   </div>

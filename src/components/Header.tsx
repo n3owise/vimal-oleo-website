@@ -88,9 +88,10 @@ export function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed left-4 right-4 top-4 z-50 sm:left-8 sm:right-8 sm:top-6 lg:left-14 lg:right-14"
+      className="fixed left-4 right-4 top-4 z-[1000] sm:left-8 sm:right-8 sm:top-6 lg:left-14 lg:right-14"
     >
-      <div className="relative isolate overflow-hidden rounded-[1.7rem] bg-primary shadow-2xl shadow-primary/15 ring-1 ring-white/20">
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-0 h-[116px] bg-white sm:h-[132px] lg:h-[152px]" />
+      <div className="relative z-10 isolate overflow-hidden rounded-[1.7rem] bg-primary shadow-2xl shadow-primary/15 ring-1 ring-white/20">
         <video
           aria-hidden="true"
           autoPlay
@@ -157,7 +158,7 @@ export function Header() {
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute right-5 top-[calc(100%+0.75rem)] z-50 flex w-48 flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/90 p-2 shadow-2xl backdrop-blur-xl md:hidden"
+          className="absolute right-5 top-[calc(100%+0.75rem)] z-[1001] flex w-48 flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/90 p-2 shadow-2xl backdrop-blur-xl md:hidden"
         >
           {navItems.map((item) => (
             <a
