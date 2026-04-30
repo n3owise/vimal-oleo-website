@@ -1,4 +1,3 @@
-import { ChevronDown, CircleDot, LayoutGrid, MoveRight } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 
 const navItems = ['Home', 'About Us', 'Products', 'Contact Us'];
@@ -8,154 +7,117 @@ type Variant = {
   name: string;
   description: string;
   frameClass: string;
-  itemClass: string;
-  activeClass: string;
-  inactiveClass: string;
-  decoration?: 'dot' | 'underline' | 'arrow' | 'grid' | 'chevron';
+  videoClass?: string;
+  overlayClass: string;
+  accentClass?: string;
+  contentClass?: string;
+  logoClass?: string;
 };
 
 const variants: Variant[] = [
   {
     id: '01',
-    name: 'Soft Glass Pill',
-    description: 'Closest to the current style, cleaner and more balanced.',
-    frameClass: 'border-white/30 bg-white/14 shadow-xl shadow-[#001e38]/15 backdrop-blur-2xl',
-    itemClass: 'px-5 py-2.5',
-    activeClass: 'bg-white text-[#0d47a1] shadow-sm shadow-white/20',
-    inactiveClass: 'text-white hover:bg-white/14',
+    name: 'Hero Glass Frame',
+    description: 'The current video-backed blue frame, balanced for the site theme.',
+    frameClass: 'rounded-[1.7rem] bg-primary shadow-2xl shadow-primary/15 ring-1 ring-white/20',
+    videoClass: 'opacity-30 mix-blend-screen',
+    overlayClass: 'bg-gradient-to-r from-[#f9fbfc]/20 via-[#0d47a1]/88 to-[#002a45]/92',
+    accentClass: 'inset-x-0 top-0 h-12 bg-white/[0.08]',
   },
   {
     id: '02',
-    name: 'Light Capsule',
-    description: 'Brighter glass bar with high readability.',
-    frameClass: 'border-white/45 bg-white/82 shadow-2xl shadow-[#001e38]/12 backdrop-blur-xl',
-    itemClass: 'px-5 py-2.5',
-    activeClass: 'bg-[#eaf3ff] text-[#1d5fb8] shadow-sm',
-    inactiveClass: 'text-[#001e38] hover:bg-[#f4f6f9]',
+    name: 'Soft Product Blue',
+    description: 'A lighter blue banner using the product-section color family.',
+    frameClass: 'rounded-[1.7rem] bg-[#eaf3ff] shadow-2xl shadow-[#1d5fb8]/12 ring-1 ring-[#b9d5ff]/70',
+    videoClass: 'opacity-18 mix-blend-multiply',
+    overlayClass: 'bg-gradient-to-r from-white/82 via-[#eaf3ff]/72 to-[#b9d5ff]/80',
+    accentClass: 'inset-x-0 top-0 h-12 bg-white/35',
+    logoClass: 'brightness-0 saturate-100',
   },
   {
     id: '03',
-    name: 'Blue Tint Frost',
-    description: 'Light blue glass matching the product section.',
-    frameClass: 'border-[#b9d5ff]/60 bg-[#eaf3ff]/72 shadow-xl shadow-[#1d5fb8]/10 backdrop-blur-2xl',
-    itemClass: 'px-5 py-2.5',
-    activeClass: 'bg-white text-[#1d5fb8] shadow-sm',
-    inactiveClass: 'text-[#0d47a1] hover:bg-white/55',
+    name: 'White Glass Banner',
+    description: 'Clean white logo side with a blue nav-side wash for contrast.',
+    frameClass: 'rounded-[1.7rem] bg-white shadow-2xl shadow-[#1d5fb8]/10 ring-1 ring-slate-200',
+    videoClass: 'opacity-16 mix-blend-multiply',
+    overlayClass: 'bg-gradient-to-r from-white/94 via-[#eaf3ff]/82 to-[#0d47a1]/88',
+    accentClass: 'inset-x-0 bottom-0 h-px bg-[#b9d5ff]',
+    logoClass: 'brightness-0 saturate-100',
   },
   {
     id: '04',
-    name: 'Underline Glass',
-    description: 'Simple labels with a precise active underline.',
-    frameClass: 'border-white/25 bg-white/12 shadow-xl shadow-[#001e38]/10 backdrop-blur-xl',
-    itemClass: 'px-5 py-3',
-    activeClass: 'text-white',
-    inactiveClass: 'text-white/72 hover:text-white',
-    decoration: 'underline',
+    name: 'Tall Air Frame',
+    description: 'More vertical breathing room while preserving the current nav pill.',
+    frameClass: 'rounded-[2rem] bg-primary shadow-2xl shadow-primary/15 ring-1 ring-white/20',
+    videoClass: 'opacity-28 mix-blend-screen',
+    overlayClass: 'bg-gradient-to-r from-[#f9fbfc]/18 via-[#0d47a1]/82 to-[#00385f]/90',
+    accentClass: 'inset-x-0 top-0 h-16 bg-white/[0.075]',
+    contentClass: 'min-h-[124px] lg:min-h-[132px]',
   },
   {
     id: '05',
-    name: 'Dot Indicator',
-    description: 'Compact link bar with subtle active dot.',
-    frameClass: 'border-white/30 bg-white/16 shadow-xl shadow-[#001e38]/12 backdrop-blur-2xl',
-    itemClass: 'px-5 py-2.5',
-    activeClass: 'bg-white/18 text-white',
-    inactiveClass: 'text-white/76 hover:bg-white/10 hover:text-white',
-    decoration: 'dot',
+    name: 'Slim Banner',
+    description: 'Lower height and tighter frame for a more compact topbar.',
+    frameClass: 'rounded-[1.35rem] bg-primary shadow-xl shadow-primary/12 ring-1 ring-white/20',
+    videoClass: 'opacity-26 mix-blend-screen',
+    overlayClass: 'bg-gradient-to-r from-[#f9fbfc]/16 via-[#0d47a1]/86 to-[#002a45]/90',
+    accentClass: 'inset-x-0 top-0 h-9 bg-white/[0.07]',
+    contentClass: 'min-h-[78px] lg:min-h-[84px]',
   },
   {
     id: '06',
-    name: 'Inset Active',
-    description: 'More premium, with a soft inner active surface.',
-    frameClass: 'border-white/35 bg-white/20 shadow-2xl shadow-[#001e38]/15 backdrop-blur-2xl ring-1 ring-white/10',
-    itemClass: 'px-5 py-2.5',
-    activeClass: 'bg-white/92 text-[#0d47a1] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_8px_22px_rgba(0,30,56,0.12)]',
-    inactiveClass: 'text-white hover:bg-white/12',
+    name: 'Inset White Rim',
+    description: 'Blue video frame with a brighter internal border.',
+    frameClass: 'rounded-[1.9rem] bg-primary shadow-2xl shadow-primary/15 ring-1 ring-white/25',
+    videoClass: 'opacity-32 mix-blend-screen',
+    overlayClass: 'bg-gradient-to-r from-[#f9fbfc]/18 via-[#0d47a1]/86 to-[#002a45]/90',
+    accentClass: 'inset-3 rounded-[1.45rem] border border-white/18',
   },
   {
     id: '07',
-    name: 'Separated Pills',
-    description: 'Each link has its own light glass boundary.',
-    frameClass: 'border-white/20 bg-white/8 shadow-xl shadow-[#001e38]/10 backdrop-blur-xl',
-    itemClass: 'mx-0.5 border border-white/18 px-4 py-2.5',
-    activeClass: 'border-white bg-white text-[#0d47a1] shadow-sm',
-    inactiveClass: 'text-white hover:border-white/35 hover:bg-white/12',
+    name: 'Floating Frost',
+    description: 'Less saturated, glassier banner with a pale industrial feel.',
+    frameClass: 'rounded-[1.7rem] bg-[#f4f6f9] shadow-2xl shadow-[#1d5fb8]/10 ring-1 ring-white',
+    videoClass: 'opacity-22 mix-blend-multiply',
+    overlayClass: 'bg-gradient-to-r from-white/78 via-[#ddecff]/72 to-[#1d5fb8]/84',
+    accentClass: 'inset-x-8 top-0 h-px bg-white/80',
+    logoClass: 'brightness-0 saturate-100',
   },
   {
     id: '08',
-    name: 'Product Blue',
-    description: 'Uses the product marquee blue as the active surface.',
-    frameClass: 'border-white/40 bg-white/86 shadow-xl shadow-[#1d5fb8]/12 backdrop-blur-xl',
-    itemClass: 'px-5 py-2.5',
-    activeClass: 'bg-[#1d5fb8] text-white shadow-sm shadow-[#1d5fb8]/20',
-    inactiveClass: 'text-[#001e38] hover:bg-[#eaf3ff] hover:text-[#1d5fb8]',
+    name: 'Deep Edge Light',
+    description: 'Keeps the brand-blue frame but adds a softer white edge glow.',
+    frameClass: 'rounded-[1.7rem] bg-primary shadow-[0_24px_70px_rgba(13,71,161,0.18)] ring-1 ring-white/25',
+    videoClass: 'opacity-34 mix-blend-screen',
+    overlayClass: 'bg-gradient-to-r from-white/22 via-[#0d47a1]/82 to-[#004a82]/88',
+    accentClass: 'inset-x-0 top-0 h-full bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.28),transparent_34%)]',
   },
   {
     id: '09',
-    name: 'Utility Glass',
-    description: 'Operational and sharp while staying rounded.',
-    frameClass: 'border-white/35 bg-white/14 shadow-xl shadow-[#001e38]/12 backdrop-blur-2xl',
-    itemClass: 'px-4 py-2.5',
-    activeClass: 'bg-white text-[#0d47a1] shadow-sm',
-    inactiveClass: 'text-white/78 hover:bg-white/12 hover:text-white',
-    decoration: 'grid',
+    name: 'Split Glow Frame',
+    description: 'Light on the logo side, stronger blue behind the nav side.',
+    frameClass: 'rounded-[1.7rem] bg-primary shadow-2xl shadow-primary/15 ring-1 ring-white/20',
+    videoClass: 'opacity-28 mix-blend-screen',
+    overlayClass: 'bg-gradient-to-r from-[#f9fbfc]/46 via-[#6ea8f3]/38 to-[#002a45]/92',
+    accentClass: 'inset-y-0 left-0 w-1/2 bg-gradient-to-r from-white/18 to-transparent',
   },
   {
     id: '10',
-    name: 'Arrow Active',
-    description: 'Clear active state with a small directional cue.',
-    frameClass: 'border-white/35 bg-white/18 shadow-2xl shadow-[#001e38]/14 backdrop-blur-2xl',
-    itemClass: 'px-5 py-2.5',
-    activeClass: 'bg-white text-[#0d47a1] shadow-sm',
-    inactiveClass: 'text-white hover:bg-white/12',
-    decoration: 'arrow',
-  },
-  {
-    id: '11',
-    name: 'Minimal White',
-    description: 'Clean white navigation for stronger contrast on the video frame.',
-    frameClass: 'border-white/55 bg-white/92 shadow-2xl shadow-[#001e38]/14 backdrop-blur-xl',
-    itemClass: 'px-5 py-2.5',
-    activeClass: 'bg-[#eaf3ff] text-[#1d5fb8]',
-    inactiveClass: 'text-[#001e38] hover:bg-slate-50',
-    decoration: 'chevron',
-  },
-  {
-    id: '12',
-    name: 'Floating Line',
-    description: 'Lightest visual weight, best if the banner should dominate.',
-    frameClass: 'border-white/20 bg-white/10 shadow-lg shadow-[#001e38]/8 backdrop-blur-xl',
-    itemClass: 'px-5 py-2.5',
-    activeClass: 'text-white',
-    inactiveClass: 'text-white/70 hover:text-white',
-    decoration: 'underline',
+    name: 'Clean Corporate',
+    description: 'Restrained white/blue header for non-home pages with strong readability.',
+    frameClass: 'rounded-[1.7rem] bg-white shadow-2xl shadow-[#1d5fb8]/10 ring-1 ring-slate-200',
+    videoClass: 'opacity-10 mix-blend-multiply',
+    overlayClass: 'bg-gradient-to-r from-white via-[#f4f6f9]/92 to-[#0d47a1]/88',
+    accentClass: 'inset-y-0 right-0 w-1/2 bg-gradient-to-l from-[#0d47a1]/60 to-transparent',
+    logoClass: 'brightness-0 saturate-100',
   },
 ];
 
-function Decoration({ type, active }: { type?: Variant['decoration']; active: boolean }) {
-  if (!active) return null;
-
-  if (type === 'dot') {
-    return <CircleDot size={12} className="ml-2 text-white" />;
-  }
-
-  if (type === 'arrow') {
-    return <MoveRight size={14} className="ml-2" />;
-  }
-
-  if (type === 'grid') {
-    return <LayoutGrid size={13} className="mr-2" />;
-  }
-
-  if (type === 'chevron') {
-    return <ChevronDown size={14} className="ml-2" />;
-  }
-
-  return null;
-}
-
 function NavBarPreview({ variant }: { variant: Variant }) {
+  const darkLogo = variant.logoClass?.includes('brightness-0 saturate-100');
+
   return (
-    <div className="relative isolate overflow-hidden rounded-[1.7rem] bg-primary p-5 shadow-2xl shadow-primary/15 ring-1 ring-white/20 sm:p-6">
+    <div className={cn('relative isolate overflow-hidden p-5 sm:p-6', variant.frameClass)}>
       <video
         aria-hidden="true"
         autoPlay
@@ -164,41 +126,35 @@ function NavBarPreview({ variant }: { variant: Variant }) {
         loop
         playsInline
         preload="auto"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30 mix-blend-screen"
+        className={cn('pointer-events-none absolute inset-0 h-full w-full object-cover', variant.videoClass)}
       >
         <source src="/hero-flowing-elements.mp4" type="video/mp4" />
       </video>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#f9fbfc]/20 via-[#0d47a1]/88 to-[#002a45]/92" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-12 bg-white/[0.08]" />
+      <div className={cn('pointer-events-none absolute inset-0', variant.overlayClass)} />
+      {variant.accentClass && <div className={cn('pointer-events-none absolute', variant.accentClass)} />}
 
-      <div className="relative z-10 flex min-h-[86px] items-center justify-between gap-6">
+      <div className={cn('relative z-10 flex min-h-[96px] items-center justify-between gap-6', variant.contentClass)}>
         <a href="/" className="flex w-[172px] shrink-0 items-center">
-          <img src="/vinal-oleo-logo.svg" alt="Vimal Oleo Chemicals" className="block h-auto w-full brightness-0 invert" />
+          <img
+            src="/vinal-oleo-logo.svg"
+            alt="Vimal Oleo Chemicals"
+            className={cn('block h-auto w-full', darkLogo ? 'brightness-0 saturate-100' : 'brightness-0 invert')}
+          />
         </a>
 
-        <nav className={cn('hidden items-center rounded-full p-1.5 md:flex', variant.frameClass)}>
-          {navItems.map((item, index) => {
-            const active = index === 1;
-
-            return (
-              <a
-                key={item}
-                href="#"
-                className={cn(
-                  'relative inline-flex items-center justify-center rounded-full font-display text-sm font-bold transition-all duration-200',
-                  variant.itemClass,
-                  active ? variant.activeClass : variant.inactiveClass
-                )}
-              >
-                <Decoration type={variant.decoration} active={active && variant.decoration === 'grid'} />
-                {item}
-                <Decoration type={variant.decoration} active={active && variant.decoration !== 'grid' && variant.decoration !== 'underline'} />
-                {active && variant.decoration === 'underline' && (
-                  <span className="absolute bottom-1.5 left-5 right-5 h-0.5 rounded-full bg-current" />
-                )}
-              </a>
-            );
-          })}
+        <nav className="hidden items-center rounded-full border border-white/25 bg-white/14 p-1.5 shadow-lg shadow-black/10 backdrop-blur-xl md:flex">
+          {navItems.map((item, index) => (
+            <a
+              key={item}
+              href="#"
+              className={cn(
+                'rounded-full px-5 py-2.5 font-display text-sm font-bold transition-colors',
+                index === 1 ? 'bg-white text-primary shadow-sm' : 'text-white hover:bg-white/15'
+              )}
+            >
+              {item}
+            </a>
+          ))}
         </nav>
       </div>
     </div>
@@ -210,11 +166,14 @@ export function NavLinkOptionsPage() {
     <div className="min-h-screen bg-[#f4f6f9] px-4 py-8 text-slate-950 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8">
-          <p className="font-display text-xs font-black uppercase tracking-[0.35em] text-[#1d5fb8]">Navigation Link Bar</p>
+          <p className="font-display text-xs font-black uppercase tracking-[0.35em] text-[#1d5fb8]">Header Banner</p>
           <h1 className="mt-3 font-display text-[clamp(2.5rem,6vw,5rem)] font-black uppercase leading-[0.9] tracking-tighter text-slate-950">
-            Link Bar<br />
+            Banner<br />
             <span className="italic text-[#1d5fb8]">Variations.</span>
           </h1>
+          <p className="mt-5 max-w-2xl text-base font-medium leading-relaxed text-text-slate">
+            The navigation links stay in the same glass pill style. Only the surrounding header banner changes.
+          </p>
         </div>
 
         <div className="grid gap-6">
