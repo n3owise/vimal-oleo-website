@@ -317,7 +317,7 @@ function SplitGlassHero() {
 function FullImageHero() {
   return (
     <section className="relative w-full overflow-hidden bg-surface px-4 pb-14 pt-4 sm:px-8 sm:pb-20 sm:pt-6 lg:px-14">
-      <div className="relative isolate min-h-[calc(100svh-2rem)] overflow-hidden rounded-[2rem] bg-primary shadow-2xl [clip-path:inset(0_round_2rem)] [contain:paint] sm:min-h-[calc(100svh-3rem)] sm:rounded-[2.35rem] sm:[clip-path:inset(0_round_2.35rem)] lg:min-h-[calc(100svh-5rem)]">
+      <div className="relative isolate min-h-[calc(100svh-2rem)] overflow-hidden rounded-[2rem] bg-white ring-1 ring-slate-200/70 shadow-[0_30px_80px_rgba(15,23,42,0.18)] [clip-path:inset(0_round_2rem)] [contain:paint] sm:min-h-[calc(100svh-3rem)] sm:rounded-[2.35rem] sm:[clip-path:inset(0_round_2.35rem)] lg:min-h-[calc(100svh-5rem)]">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
