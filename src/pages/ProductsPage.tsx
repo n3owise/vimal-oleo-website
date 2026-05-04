@@ -330,20 +330,14 @@ function FullImageHero() {
             className="absolute inset-0 h-full w-full object-cover object-[82%_center] [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform] sm:object-center"
           />
 
-            {/* Left-only radial darkening — keeps the very top-left corner bright for the logo and preserves right side */}
+            {/* Soft left-focused gradient — full-width, smooth falloff, preserves top-left brightness */}
             <div
-              className="absolute inset-y-0 left-0 w-1/2 pointer-events-none mix-blend-multiply"
+              className="absolute inset-0 pointer-events-none mix-blend-multiply"
               style={{
                 background:
-                  'radial-gradient(ellipse at 12% 12%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.28) 18%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.75) 65%)',
+                  'radial-gradient(700px 500px at 10% 14%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.32) 20%, rgba(0,0,0,0.54) 45%, rgba(0,0,0,0.7) 70%), linear-gradient(90deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.18) 40%, rgba(0,0,0,0.06) 60%, rgba(0,0,0,0) 100%)',
               }}
             />
-
-            {/* Left-only linear multiply gradient for smoother falloff */}
-            <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-black/50 to-transparent mix-blend-multiply pointer-events-none" />
-
-            {/* Soft left tint only (reduced overall tint so right side stays bright) */}
-            <div className="absolute inset-y-0 left-0 w-1/2 bg-black/[0.06] pointer-events-none" />
 
             {/* Top overlay remains full-width to keep top text contrast */}
             <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-black/40 via-black/24 to-transparent" />
