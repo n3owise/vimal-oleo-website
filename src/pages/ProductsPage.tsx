@@ -351,9 +351,9 @@ function FullImageHero() {
             className="max-w-5xl"
           >
             <div className="mb-8 space-y-1">
-              <Eyebrow className="text-white/78" />
-              <h1 className="font-display text-[clamp(2.7rem,8vw,6rem)] font-black uppercase italic leading-[0.84] tracking-tighter text-white">
-                {heroCopy.title}
+              {/* eyebrow removed per request */}
+              <h1 className="font-display text-[clamp(2.7rem,8vw,6rem)] font-black uppercase leading-[0.84] tracking-tighter text-white">
+                Building industries with <span className="italic text-primary">sustainable</span> and <span className="italic text-primary">reliable</span> solutions.
               </h1>
             </div>
 
