@@ -350,7 +350,9 @@ function FullImageHero() {
               </h1>
             </div>
 
-            <p className="mt-7 max-w-3xl text-lg font-medium leading-relaxed text-slate-800">{heroCopy.description}</p>
+            <div className="mt-6 max-w-[34rem] rounded-2xl bg-white/70 px-4 py-3 text-base font-medium leading-relaxed text-slate-700 shadow-sm shadow-slate-900/10 backdrop-blur-sm">
+              {heroCopy.description}
+            </div>
           </motion.div>
         </div>
       </div>
