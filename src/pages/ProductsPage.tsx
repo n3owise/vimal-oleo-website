@@ -351,9 +351,6 @@ function FullImageHero() {
               </h1>
             </div>
 
-            <div className="mt-6 max-w-[34rem] rounded-2xl bg-white/70 px-4 py-3 text-base font-medium leading-relaxed text-slate-700 shadow-sm shadow-slate-900/10 backdrop-blur-sm">
-              {heroCopy.description}
-            </div>
           </motion.div>
         </div>
       </div>
