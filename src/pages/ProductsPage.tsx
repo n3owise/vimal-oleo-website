@@ -352,16 +352,12 @@ function FullImageHero() {
           >
             <div className="mb-8 space-y-1">
               {/* eyebrow removed per request */}
-              <h1 className="text-[clamp(1.8rem,6.6vw,4rem)] font-black uppercase leading-[0.92] tracking-tighter text-white sm:text-[5vw]">
+              <h1 className="text-[clamp(1.6rem,6vw,3.6rem)] font-black uppercase leading-[0.92] tracking-tighter text-slate-900 sm:text-[4.6vw]">
                 Building industries with <span className="italic text-primary">sustainable</span> and <span className="italic text-primary">reliable</span> solutions.
               </h1>
             </div>
 
-            <p className="mt-7 max-w-3xl text-lg font-medium leading-relaxed text-white/82">{heroCopy.description}</p>
-
-            <div className="mt-9">
-              <ProductSignalRow light />
-            </div>
+            <p className="mt-7 max-w-3xl text-lg font-medium leading-relaxed text-slate-800">{heroCopy.description}</p>
           </motion.div>
         </div>
       </div>
