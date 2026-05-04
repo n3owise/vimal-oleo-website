@@ -330,17 +330,10 @@ function FullImageHero() {
             className="absolute inset-0 h-full w-full object-cover object-[82%_center] [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform] sm:object-center"
           />
 
-            {/* Soft left-focused gradient — lower intensity, no multiply blending */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  'radial-gradient(700px 500px at 10% 14%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 20%, rgba(0,0,0,0.36) 45%, rgba(0,0,0,0.5) 70%), linear-gradient(90deg, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.12) 40%, rgba(0,0,0,0.04) 60%, rgba(0,0,0,0) 100%)',
-              }}
-            />
-
-            {/* Top overlay remains full-width to keep top text contrast (reduced) */}
-            <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-black/20 via-black/12 to-transparent" />
+            {/* Left-side white gradient like the Home hero */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/60 to-transparent" />
+            <div className="absolute inset-0 bg-white/[0.06]" />
+            <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-white/70 via-white/25 to-transparent" />
         </motion.div>
 
         <div className="relative z-10 flex min-h-[calc(100svh-2rem)] items-start sm:items-center px-6 pb-16 pt-36 sm:min-h-[calc(100svh-3rem)] sm:px-10 sm:pt-36 lg:min-h-[calc(100svh-5rem)] lg:px-16">
