@@ -330,8 +330,14 @@ function FullImageHero() {
             className="absolute inset-0 h-full w-full object-cover object-[82%_center] [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform] sm:object-center"
           />
 
-            {/* Left-side dark gradient for improved contrast */}
-            <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black/60 via-black/30 to-transparent mix-blend-multiply pointer-events-none" />
+            {/* Top-left radial darkening — keeps the very top-left corner bright for the logo */}
+            <div
+              className="absolute inset-0 pointer-events-none mix-blend-multiply"
+              style={{
+                background:
+                  'radial-gradient(ellipse at 8% 8%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.28) 18%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.75) 65%)',
+              }}
+            />
 
             {/* Darken bright image: subtle multiply gradient + soft black tint */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/24 to-transparent mix-blend-multiply" />
