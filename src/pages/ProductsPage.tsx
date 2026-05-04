@@ -325,7 +325,7 @@ function FullImageHero() {
           className="absolute inset-0 overflow-hidden rounded-[inherit] [backface-visibility:hidden] [transform:translateZ(0)]"
         >
           <img
-            src="/shift_everything_to_little_right_202605050050.jpeg"
+            src="/enhacne_and_upscale_it,_like_202605050113.jpeg"
             alt="Oleochemical products"
             className="absolute inset-0 h-full w-full object-cover object-[82%_center] [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform] sm:object-center"
           />
