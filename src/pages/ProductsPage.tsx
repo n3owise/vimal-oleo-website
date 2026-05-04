@@ -316,21 +316,45 @@ function SplitGlassHero() {
 
 function FullImageHero() {
   return (
-    <section className="bg-white px-6 pb-20 pt-[148px] sm:px-8 sm:pt-[164px] lg:px-14 lg:pt-[184px]">
-      <div className="relative isolate mx-auto min-h-[calc(100svh-12rem)] max-w-7xl overflow-hidden rounded-[2.5rem] px-6 py-16 text-white shadow-2xl shadow-[#1d5fb8]/15 sm:px-10 lg:px-14">
-        <img src="/products-hero.avif" alt="Oleochemical products" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#001e38]/92 via-[#0d47a1]/58 to-[#001e38]/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#001e38]/72 via-transparent to-transparent" />
-        <div className="relative z-10 flex min-h-[560px] max-w-4xl flex-col justify-end">
-          <Eyebrow className="text-white/78" />
-          <h1 className="font-display text-[clamp(2.7rem,8vw,6rem)] font-black uppercase italic leading-[0.84] tracking-tighter text-white">
-            Products for<br />
-            <span className="text-white/72">Industry.</span>
-          </h1>
-          <p className="mt-7 max-w-3xl text-lg font-medium leading-relaxed text-white/82">{heroCopy.description}</p>
-          <div className="mt-9">
-            <ProductSignalRow light />
-          </div>
+    <section className="relative w-full overflow-hidden bg-surface px-4 pb-14 pt-4 sm:px-8 sm:pb-20 sm:pt-6 lg:px-14">
+      <div className="relative isolate min-h-[calc(100svh-2rem)] overflow-hidden rounded-[2rem] bg-primary shadow-2xl [clip-path:inset(0_round_2rem)] [contain:paint] sm:min-h-[calc(100svh-3rem)] sm:rounded-[2.35rem] sm:[clip-path:inset(0_round_2.35rem)] lg:min-h-[calc(100svh-5rem)]">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          className="absolute inset-0 overflow-hidden rounded-[inherit] [backface-visibility:hidden] [transform:translateZ(0)]"
+        >
+          <img
+            src="/products-hero.avif"
+            alt="Oleochemical products"
+            className="absolute inset-0 h-full w-full object-cover object-[82%_center] [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform] sm:object-center"
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-r from-surface/85 via-surface/60 to-transparent" />
+          <div className="absolute inset-0 bg-white/[0.06]" />
+          <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-primary/70 via-primary/25 to-transparent" />
+        </motion.div>
+
+        <div className="relative z-10 flex min-h-[calc(100svh-2rem)] items-start sm:items-center px-6 pb-16 pt-36 sm:min-h-[calc(100svh-3rem)] sm:px-10 sm:pt-36 lg:min-h-[calc(100svh-5rem)] lg:px-16">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-5xl"
+          >
+            <div className="mb-8 space-y-1">
+              <Eyebrow className="text-white/78" />
+              <h1 className="font-display text-[clamp(2.7rem,8vw,6rem)] font-black uppercase italic leading-[0.84] tracking-tighter text-white">
+                {heroCopy.title}
+              </h1>
+            </div>
+
+            <p className="mt-7 max-w-3xl text-lg font-medium leading-relaxed text-white/82">{heroCopy.description}</p>
+
+            <div className="mt-9">
+              <ProductSignalRow light />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
