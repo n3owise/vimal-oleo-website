@@ -249,7 +249,7 @@ function PortfolioHeader() {
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.6, delay: 0.5 }}
-        style={{ fontSize: '15px', fontWeight: 500, color: '#3d5a73', lineHeight: 1.7, maxWidth: '560px', margin: '0 auto' }}
+        className="mx-auto max-w-3xl text-sm font-medium leading-relaxed text-text-slate sm:text-base lg:text-lg"
       >
         Thirteen core oleochemical products across food, pharma, personal care, cosmetics, and industrial applications.
       </motion.p>
