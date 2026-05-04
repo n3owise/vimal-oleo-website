@@ -6,7 +6,7 @@ import { useState } from 'react';
 const navItems = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
-  { label: 'Products', href: '/#products' },
+  { label: 'Products', href: '/products' },
   { label: 'Contact Us', href: '/#contact' },
 ];
 
@@ -14,6 +14,94 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const currentPath = window.location.pathname;
   const isHomePage = currentPath === '/';
+  const isAboutPage = currentPath === '/about';
+
+  if (isAboutPage) {
+    return (
+      <>
+        {/* Absolute header background for Logo (scrolls away) */}
+        <motion.header
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute left-4 right-4 top-4 z-[1000] pointer-events-none sm:left-8 sm:right-8 sm:top-6 lg:left-14 lg:right-14"
+        >
+          <div className="relative z-10 flex min-h-[76px] w-full items-center justify-between px-5 py-3 sm:min-h-[88px] sm:px-8 lg:min-h-[104px] lg:px-10">
+            <a href="/" className="pointer-events-auto flex w-[154px] max-w-[52vw] items-center sm:w-[190px] lg:w-[215px]">
+              <img
+                src="/vinal-oleo-logo.svg"
+                alt="Vimal Oleo Chemicals"
+                className="block h-auto w-full"
+              />
+            </a>
+          </div>
+        </motion.header>
+
+        {/* Fixed header container for Navigation (stays on scroll) */}
+        <motion.div
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed left-4 right-4 top-4 z-[1000] pointer-events-none sm:left-8 sm:right-8 sm:top-6 lg:left-14 lg:right-14"
+        >
+          <div className="relative z-10 flex min-h-[76px] w-full items-center justify-between px-5 py-3 sm:min-h-[88px] sm:px-8 lg:min-h-[104px] lg:px-10">
+            {/* Invisible spacer to maintain flex layout matching the logo */}
+            <div className="w-[154px] max-w-[52vw] sm:w-[190px] lg:w-[215px]" />
+
+            <div className="pointer-events-auto ml-auto flex items-center justify-end gap-8">
+              {/* Navigation */}
+              <nav className="hidden items-center rounded-full border border-black/5 bg-gradient-to-r from-blue-50/80 via-white/80 to-blue-50/80 p-1.5 shadow-xl backdrop-blur-xl md:flex">
+                {navItems.map((item, index) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className={cn(
+                      'rounded-full px-5 py-2.5 font-display text-sm font-bold transition-colors',
+                      currentPath === item.href
+                        ? 'bg-primary text-white shadow-md'
+                        : 'text-primary hover:bg-white/50'
+                    )}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+
+              <button
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded={isMenuOpen}
+                onClick={() => setIsMenuOpen((open) => !open)}
+                className="rounded-full bg-primary/5 p-2 text-primary shadow-lg backdrop-blur-xl transition-colors hover:bg-primary/10 md:hidden"
+              >
+                <Menu size={20} />
+              </button>
+            </div>
+          </div>
+
+          {isMenuOpen && (
+            <motion.nav
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="pointer-events-auto absolute right-5 top-[calc(100%+0.75rem)] z-[1001] flex w-48 flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/90 p-2 shadow-2xl backdrop-blur-xl md:hidden"
+            >
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="rounded-xl px-4 py-3 font-display text-sm font-bold text-slate-900 transition-colors hover:bg-primary hover:text-white"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </motion.nav>
+          )}
+        </motion.div>
+      </>
+    );
+  }
 
   if (isHomePage) {
     return (

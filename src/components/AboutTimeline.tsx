@@ -202,8 +202,8 @@ export function AboutTimeline() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about-timeline" className="w-full bg-white px-4 pb-[64px] pt-[148px] sm:px-6 sm:pt-[164px] lg:px-8 lg:pt-[184px]">
-      <div className="mx-auto max-w-[1280px]">
+    <section ref={sectionRef} id="about-timeline" className="w-full bg-white px-6 pb-[64px] pt-[148px] sm:px-8 sm:pt-[164px] lg:px-14 lg:pt-[184px]">
+      <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-0 lg:flex-row lg:gap-20">
           <div className="relative mb-12 w-full lg:mb-0 lg:w-[400px]">
             <div ref={leftContentRef} className="self-start lg:sticky lg:top-[164px]">
@@ -238,7 +238,7 @@ export function AboutTimeline() {
                     className="absolute left-0 top-10 z-10 h-4 w-4 rounded-full border-[4px] border-[#b9d5ff] bg-white shadow-lg shadow-[#8fc2ff]/20"
                   />
 
-                  <div className="ml-12 mr-2 flex-1 md:ml-32 md:mr-0 lg:w-[672px] lg:flex-none">
+                  <div className="ml-12 flex-1 md:ml-32 lg:w-[672px] lg:flex-none">
                     <div
                       ref={(el) => {
                         cardRefs.current[index] = el;
@@ -246,13 +246,13 @@ export function AboutTimeline() {
                       className="flex min-h-[285px] flex-col justify-between rounded-[24px] border border-slate-200/90 bg-white p-6 shadow-xl shadow-[#1d5fb8]/[0.06] backdrop-blur-xl transition-colors duration-300 md:p-8"
                     >
                       <div className="mb-8 flex items-start justify-between gap-4">
-                        <h2 className="font-serif text-[36px] font-normal leading-[1.2] tracking-normal text-[#1d5fb8] md:text-[48px] md:leading-[57.6px]">
+                        <h2 className="font-display text-[36px] font-black uppercase tracking-tight text-primary md:text-[48px] md:leading-[57.6px]">
                           {item.year}
                         </h2>
                       </div>
 
                       <div className="flex">
-                        <p className="max-w-[560px] text-[14px] font-medium leading-[22.4px] text-text-slate">
+                        <p className="max-w-[560px] text-base font-medium leading-relaxed text-text-slate">
                           {item.description}
                         </p>
                       </div>
