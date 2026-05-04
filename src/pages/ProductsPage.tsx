@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Box, Droplets, Factory, FlaskConical, Leaf, PackageCheck, Sparkles } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
+import { sectionHeadingClass } from '@/src/lib/section-styles';
 import { Header } from '@/src/components/Header';
 import { Footer } from '@/src/components/Footer';
 
@@ -583,18 +584,13 @@ function ProductStoryDeck3D() {
   return (
     <section className="relative overflow-hidden bg-[#f4f6f9] px-6 py-24 sm:px-8 lg:px-14">
       <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="mb-14 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <div>
-            <span className="mb-5 block font-mono text-[12px] font-bold uppercase italic tracking-[0.3em] text-primary">
-              [ PRODUCT DECK ]
-            </span>
-            <h2 className="font-display text-[clamp(2.5rem,7vw,5.4rem)] font-black uppercase italic leading-[0.84] tracking-tighter text-slate-950">
-              FORMULATION<br />
-              <span className="text-primary">STACK.</span>
-            </h2>
-          </div>
-          <p className="max-w-2xl text-lg font-medium leading-relaxed text-text-slate">
-            A comprehensive product deck treating every material like a technical card in a formulation system.
+        <div className="mb-14 text-center">
+          <h2 className={`${sectionHeadingClass} mb-4 sm:mb-6`}>
+            PRODUCT<br />
+            <span className="text-primary">DECK.</span>
+          </h2>
+          <p className="mx-auto max-w-3xl text-sm font-medium leading-relaxed text-text-slate sm:text-base lg:text-lg">
+            {heroCopy.description}
           </p>
         </div>
 
