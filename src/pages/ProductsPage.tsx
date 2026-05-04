@@ -330,10 +330,13 @@ function FullImageHero() {
             className="absolute inset-0 h-full w-full object-cover object-[82%_center] [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform] sm:object-center"
           />
 
-          {/* Darken bright image: subtle multiply gradient + soft black tint */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/24 to-transparent mix-blend-multiply" />
-          <div className="absolute inset-0 bg-black/[0.12]" />
-          <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-black/40 via-black/24 to-transparent" />
+            {/* Left-side dark gradient for improved contrast */}
+            <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black/60 via-black/30 to-transparent mix-blend-multiply pointer-events-none" />
+
+            {/* Darken bright image: subtle multiply gradient + soft black tint */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/24 to-transparent mix-blend-multiply" />
+            <div className="absolute inset-0 bg-black/[0.12]" />
+            <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-black/40 via-black/24 to-transparent" />
         </motion.div>
 
         <div className="relative z-10 flex min-h-[calc(100svh-2rem)] items-start sm:items-center px-6 pb-16 pt-36 sm:min-h-[calc(100svh-3rem)] sm:px-10 sm:pt-36 lg:min-h-[calc(100svh-5rem)] lg:px-16">
