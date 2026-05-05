@@ -128,6 +128,8 @@ export function AboutTimeline() {
         },
       });
 
+      const navStop = window.innerWidth >= 1024 ? 140 : window.innerWidth >= 640 ? 128 : 112;
+
       cardRefs.current.forEach((card, index) => {
         if (!card) return;
 
@@ -152,31 +154,58 @@ export function AboutTimeline() {
           });
         }
 
-        gsap.to(card, {
-          autoAlpha: 1,
-          x: 0,
-          y: 0,
-          rotateY: 0,
-          rotateX: 0,
-          scale: 1,
+        const cardTimeline = gsap.timeline({
           scrollTrigger: {
             trigger: card,
             start: 'top 95%',
-            end: 'top 65%',
+            end: () => `top ${navStop}px`,
             scrub: 0.8,
           },
         });
 
-        if (dot) {
-          gsap.to(dot, {
+        cardTimeline
+          .to(card, {
             autoAlpha: 1,
+            x: 0,
+            y: 0,
+            rotateY: 0,
+            rotateX: 0,
+            scale: 1,
+            duration: 0.6,
+            ease: 'power2.out',
+          })
+          .to(card, {
+            autoAlpha: 0,
+            x: -70,
+            y: -80,
+            rotateY: 10,
+            rotateX: -3,
+            scale: 0.96,
+            duration: 0.4,
+            ease: 'power2.in',
+          });
+
+        if (dot) {
+          const dotTimeline = gsap.timeline({
             scrollTrigger: {
               trigger: card,
               start: 'top 95%',
-              end: 'top 65%',
+              end: () => `top ${navStop}px`,
               scrub: 0.8,
             },
           });
+
+          dotTimeline
+            .to(dot, {
+              autoAlpha: 1,
+              duration: 0.6,
+              ease: 'power2.out',
+            })
+            .to(dot, {
+              autoAlpha: 0,
+              duration: 0.4,
+              ease: 'power2.in',
+            });
         }
 
         ScrollTrigger.create({
