@@ -13,6 +13,8 @@ import { NavLinkOptionsPage } from '@/src/pages/NavLinkOptionsPage';
 import { PhilosophyOptionsPage } from '@/src/pages/PhilosophyOptionsPage';
 import { SustainabilityOptionsPage } from '@/src/pages/SustainabilityOptionsPage';
 import { ProductsPage } from '@/src/pages/ProductsPage';
+import { ContactOptionsPage } from '@/src/pages/contact-variants/ContactOptionsPage';
+import ContactVariantViewer from '@/src/pages/contact-variants/ContactVariantViewer';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -23,6 +25,8 @@ export default function App() {
   const isNavLinkOptionsPage = window.location.pathname === '/nav-link-options';
   const isPhilosophyOptionsPage = window.location.pathname === '/philosophy-options';
   const isSustainabilityOptionsPage = window.location.pathname === '/sustainability-options';
+  const isContactOptionsPage = window.location.pathname === '/contact-options';
+  const isContactVariant = window.location.pathname.startsWith('/contact-variants/');
   const isProductsPage = window.location.pathname === '/products';
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -58,6 +62,14 @@ export default function App() {
 
   if (isSustainabilityOptionsPage) {
     return <SustainabilityOptionsPage />;
+  }
+
+  if (isContactOptionsPage) {
+    return <ContactOptionsPage />;
+  }
+
+  if (isContactVariant) {
+    return <ContactVariantViewer />;
   }
 
   if (isProductsPage) {
