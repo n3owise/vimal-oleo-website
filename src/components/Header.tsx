@@ -12,7 +12,7 @@ const navItems = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
   { label: 'Products', href: '/products' },
-  { label: 'Contact Us', href: '/#contact' },
+  { label: 'Contact Us', href: '/contact-variants/01' },
 ];
 
 // Mobile Menu Capsule Toggle Component
