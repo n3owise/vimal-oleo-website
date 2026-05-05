@@ -30,7 +30,7 @@ function MobileMenuCapsule({ isOpen, onClick }: { isOpen: boolean; onClick: () =
       aria-label="Toggle navigation menu"
       aria-expanded={isOpen}
       onClick={onClick}
-      className="flex items-center justify-center rounded-full border border-white/30 bg-white/30 px-4 py-3 text-primary shadow-[0_8px_16px_0_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.9)] backdrop-blur-sm backdrop-saturate-[1.15] transition-all hover:bg-primary/10 md:hidden"
+      className="flex items-center justify-center rounded-full bg-white/30 px-4 py-3 text-primary shadow-[0_8px_16px_0_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.9)] backdrop-blur-sm backdrop-saturate-[1.15] transition-all hover:bg-primary/10 md:hidden"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
