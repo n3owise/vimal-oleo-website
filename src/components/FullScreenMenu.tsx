@@ -97,7 +97,7 @@ export default function FullScreenMenu({
                   }`}
                 >
                   <div className="relative z-10 flex items-center gap-4">
-                    <span className={`text-xl sm:text-2xl font-bold transition-opacity ${isActive ? 'opacity-80' : 'opacity-30 group-hover:opacity-80'}`}>
+                    <span className={`hidden sm:block text-xl sm:text-2xl font-bold transition-opacity ${isActive ? 'opacity-80' : 'opacity-30 group-hover:opacity-80'}`}>
                       0{i + 1}
                     </span>
                     <span>{item.label}</span>
