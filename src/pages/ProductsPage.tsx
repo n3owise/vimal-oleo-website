@@ -189,6 +189,36 @@ const productStory = [
   },
 ];
 
+const productDeckColors = [
+  {
+    bg: '#001e38',
+    border: 'none',
+    name: '#ffffff',
+    body: 'rgba(255,255,255,0.78)',
+    tagBg: 'rgba(255,255,255,0.15)',
+    tagTxt: '#ffffff',
+    icon: '#3d7fd4',
+  },
+  {
+    bg: '#ffffff',
+    border: '1px solid rgba(0,30,56,0.10)',
+    name: '#001228',
+    body: '#4b5f7a',
+    tagBg: '#1d5fb8',
+    tagTxt: '#ffffff',
+    icon: '#1d5fb8',
+  },
+  {
+    bg: '#1d5fb8',
+    border: 'none',
+    name: '#ffffff',
+    body: 'rgba(255,255,255,0.82)',
+    tagBg: '#ffffff',
+    tagTxt: '#1d5fb8',
+    icon: 'rgba(255,255,255,0.85)',
+  },
+];
+
 const heroOptions = [
   { id: '01', label: 'Split Glass' },
   { id: '02', label: 'Full Image' },
@@ -600,6 +630,7 @@ function ProductStoryDeck3D() {
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {productStory.map((product, index) => {
             const Icon = index % 5 === 0 ? () => <ZigZag nodes={5} /> : index % 5 === 1 ? GlycerolIcon : index % 5 === 2 ? SoapIcon : index % 5 === 3 ? OleicIcon : HydIcon;
+            const palette = productDeckColors[index % productDeckColors.length];
 
             return (
               <motion.article
@@ -610,22 +641,29 @@ function ProductStoryDeck3D() {
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
-                  'group relative min-h-[350px] overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-xl shadow-[#1d5fb8]/[0.06]'
+                  'group relative min-h-[350px] overflow-hidden rounded-[1.75rem] p-7 shadow-xl shadow-[#1d5fb8]/[0.06]'
                 )}
+                style={{ background: palette.bg, border: palette.border }}
               >
                 <div className="relative z-10 flex h-full flex-col">
                   <div className="mb-8 flex items-center justify-between gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center text-primary">
+                    <div className="flex h-12 w-12 items-center justify-center" style={{ color: palette.icon }}>
                       <Icon />
                     </div>
                   </div>
-                  <h3 className="font-display text-[clamp(1.5rem,2.4vw,2.25rem)] font-black uppercase italic leading-[0.9] tracking-tight text-slate-950">
+                  <h3
+                    className="font-display text-[clamp(1.5rem,2.4vw,2.25rem)] font-black uppercase italic leading-[0.9] tracking-tight"
+                    style={{ color: palette.name }}
+                  >
                     {product.name}
                   </h3>
-                  <p className="mt-3 font-display text-[10px] font-black uppercase tracking-[0.14em] text-[#1d5fb8]">
+                  <span
+                    className="mt-3 inline-flex w-fit rounded-full px-3 py-1.5 font-display text-[10px] font-black uppercase tracking-[0.14em]"
+                    style={{ background: palette.tagBg, color: palette.tagTxt }}
+                  >
                     {product.tag}
-                  </p>
-                  <p className="mt-6 text-base font-medium leading-relaxed text-text-slate">
+                  </span>
+                  <p className="mt-6 text-base font-medium leading-relaxed" style={{ color: palette.body }}>
                     {product.description}
                   </p>
                 </div>

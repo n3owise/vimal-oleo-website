@@ -24,16 +24,15 @@ export function SustainabilityChapter() {
         </div>
 
         <div className="rounded-[2.5rem] bg-[#eaf3ff] px-6 py-12 sm:px-10 lg:px-14">
-          <div className="grid gap-5 lg:grid-cols-4">
-            {pillars.map((pillar, index) => (
+          <p className="mx-auto max-w-4xl text-center text-lg font-medium leading-relaxed text-text-slate">{sustainabilityText}</p>
+          <div className="mt-10 grid gap-5 lg:grid-cols-4">
+            {pillars.map((pillar) => (
               <article key={pillar.title} className="rounded-[1.75rem] border border-white/70 bg-white/76 p-6 shadow-xl shadow-[#1d5fb8]/10 backdrop-blur-xl">
-                <p className="font-display text-xs font-black uppercase tracking-[0.28em] text-primary">{String(index + 1).padStart(2, '0')}</p>
-                <pillar.icon className="mb-16 mt-8 text-primary" size={30} strokeWidth={1.7} />
+                <pillar.icon className="mb-10 mt-6 text-primary" size={30} strokeWidth={1.7} />
                 <h4 className="font-display text-xl font-black uppercase tracking-tight text-slate-950">{pillar.title}</h4>
               </article>
             ))}
           </div>
-          <p className="mx-auto mt-10 max-w-4xl text-center text-lg font-medium leading-relaxed text-text-slate">{sustainabilityText}</p>
         </div>
       </div>
     </section>
