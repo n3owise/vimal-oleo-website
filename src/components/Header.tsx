@@ -30,11 +30,11 @@ function MobileMenuCapsule({ isOpen, onClick }: { isOpen: boolean; onClick: () =
       aria-label="Toggle navigation menu"
       aria-expanded={isOpen}
       onClick={onClick}
-      className="flex items-center justify-center rounded-full bg-white/30 px-4 py-3 text-primary shadow-[0_8px_16px_0_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.9)] backdrop-blur-sm backdrop-saturate-[1.15] transition-all hover:bg-primary/10 md:hidden"
+      className="inline-flex items-center justify-center p-2 text-primary bg-transparent shadow-none md:hidden"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
-      <div className="relative h-5 w-5">
+      <div className="relative h-5 w-6">
         {[0, 1, 2].map((index) => (
           <motion.div
             key={index}
@@ -42,8 +42,8 @@ function MobileMenuCapsule({ isOpen, onClick }: { isOpen: boolean; onClick: () =
             custom={index}
             animate={isOpen ? 'open' : 'closed'}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute left-0 h-0.5 w-5 origin-center bg-current"
-            style={{ top: '50%', marginTop: '-1px' }}
+            className="absolute left-0 top-1/2 h-0.5 w-6 origin-center bg-current"
+            style={{ transform: 'translateY(-50%)' }}
           />
         ))}
       </div>
