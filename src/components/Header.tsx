@@ -117,14 +117,17 @@ export function Header() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="pointer-events-auto absolute right-5 top-[calc(100%+0.75rem)] z-[1001] flex w-48 flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/90 p-2 shadow-2xl backdrop-blur-xl md:hidden"
+              className="pointer-events-auto absolute right-5 top-[calc(100%+0.5rem)] z-[1001] flex w-44 flex-col gap-2 items-start overflow-hidden rounded-full border border-white/30 bg-white/30 p-2 backdrop-blur-sm backdrop-saturate-[1.15] md:hidden"
             >
               {navItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="rounded-xl px-4 py-3 font-display text-sm font-bold text-slate-900 transition-colors hover:bg-primary hover:text-white"
+                  className={cn(
+                    'block w-full rounded-full px-5 py-2.5 text-left font-display text-sm font-bold transition-colors',
+                    currentPath === item.href ? 'bg-primary text-white shadow-md' : 'text-primary hover:bg-white/50'
+                  )}
                 >
                   {item.label}
                 </a>
@@ -192,14 +195,17 @@ export function Header() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="pointer-events-auto absolute right-5 top-[5.5rem] z-50 flex w-48 flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/90 p-2 shadow-2xl backdrop-blur-xl md:hidden"
+              className="pointer-events-auto absolute right-5 top-[5.5rem] z-50 flex w-44 flex-col gap-2 items-start overflow-hidden rounded-full border border-white/30 bg-white/30 p-2 backdrop-blur-sm backdrop-saturate-[1.15] md:hidden"
             >
               {navItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="rounded-xl px-4 py-3 font-display text-sm font-bold text-slate-900 transition-colors hover:bg-primary hover:text-white"
+                  className={cn(
+                    'block w-full rounded-full px-5 py-2.5 text-left font-display text-sm font-bold transition-colors',
+                    currentPath === item.href ? 'bg-primary text-white shadow-md' : 'text-primary hover:bg-white/50'
+                  )}
                 >
                   {item.label}
                 </a>
@@ -268,14 +274,17 @@ export function Header() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="pointer-events-auto absolute right-5 top-[calc(100%+0.75rem)] z-[1001] flex w-48 flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/90 p-2 shadow-2xl backdrop-blur-xl md:hidden"
+            className="pointer-events-auto absolute right-5 top-[calc(100%+0.5rem)] z-[1001] flex w-44 flex-col gap-2 items-start overflow-hidden rounded-full border border-white/30 bg-white/30 p-2 backdrop-blur-sm backdrop-saturate-[1.15] md:hidden"
           >
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="rounded-xl px-4 py-3 font-display text-sm font-bold text-slate-900 transition-colors hover:bg-primary hover:text-white"
+                className={cn(
+                  'block w-full rounded-full px-5 py-2.5 text-left font-display text-sm font-bold transition-colors',
+                  currentPath === item.href ? 'bg-primary text-white shadow-md' : 'text-primary hover:bg-white/50'
+                )}
               >
                 {item.label}
               </a>
