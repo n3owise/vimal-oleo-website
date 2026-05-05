@@ -1,6 +1,7 @@
 import { Header } from '@/src/components/Header';
 import { Footer } from '@/src/components/Footer';
 import { AboutTimeline } from '@/src/components/AboutTimeline';
+import { SustainabilityChapter } from '@/src/components/SustainabilityChapter';
 import { OurPhilosophy } from '@/src/components/OurPhilosophy';
 
 export function AboutPage() {
@@ -10,6 +11,7 @@ export function AboutPage() {
 
       <main>
         <AboutTimeline />
+        <SustainabilityChapter />
         <OurPhilosophy />
       </main>
 
