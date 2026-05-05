@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { cn } from '@/src/lib/utils';
-import { Menu } from 'lucide-react';
 import { useState } from 'react';
 
 const navItems = [
@@ -9,6 +8,48 @@ const navItems = [
   { label: 'Products', href: '/products' },
   { label: 'Contact Us', href: '/#contact' },
 ];
+
+// Mobile Menu Capsule Toggle Component
+function MobileMenuCapsule({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) {
+  const lineVariants = {
+    closed: (index: number) => ({
+      y: index === 0 ? -6 : index === 2 ? 6 : 0,
+      rotate: 0,
+      opacity: 1,
+    }),
+    open: (index: number) => ({
+      y: 0,
+      rotate: index === 0 ? 45 : index === 2 ? -45 : 0,
+      opacity: index === 1 ? 0 : 1,
+    }),
+  };
+
+  return (
+    <motion.button
+      type="button"
+      aria-label="Toggle navigation menu"
+      aria-expanded={isOpen}
+      onClick={onClick}
+      className="flex items-center justify-center rounded-full border border-white/30 bg-white/30 px-4 py-3 text-primary shadow-[0_8px_16px_0_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.9)] backdrop-blur-sm backdrop-saturate-[1.15] transition-all hover:bg-primary/10 md:hidden"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <div className="relative h-5 w-5">
+        {[0, 1, 2].map((index) => (
+          <motion.div
+            key={index}
+            variants={lineVariants}
+            custom={index}
+            animate={isOpen ? 'open' : 'closed'}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute left-0 h-0.5 w-5 origin-center bg-current"
+            style={{ top: '50%', marginTop: '-1px' }}
+          />
+        ))}
+      </div>
+    </motion.button>
+  );
+}
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -67,15 +108,7 @@ export function Header() {
                 ))}
               </nav>
 
-              <button
-                type="button"
-                aria-label="Open navigation menu"
-                aria-expanded={isMenuOpen}
-                onClick={() => setIsMenuOpen((open) => !open)}
-                className="rounded-full border border-white/30 bg-white/30 p-2 text-primary shadow-[0_8px_16px_0_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.9)] backdrop-blur-sm backdrop-saturate-[1.15] transition-colors hover:bg-primary/10 md:hidden"
-              >
-                <Menu size={20} />
-              </button>
+              <MobileMenuCapsule isOpen={isMenuOpen} onClick={() => setIsMenuOpen((open) => !open)} />
             </div>
           </div>
 
@@ -150,15 +183,7 @@ export function Header() {
                 ))}
               </nav>
 
-              <button
-                type="button"
-                aria-label="Open navigation menu"
-                aria-expanded={isMenuOpen}
-                onClick={() => setIsMenuOpen((open) => !open)}
-                className="rounded-full border border-white/30 bg-white/30 p-2 text-primary shadow-[0_8px_16px_0_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.9)] backdrop-blur-sm backdrop-saturate-[1.15] transition-colors hover:bg-primary/10 md:hidden"
-              >
-                <Menu size={20} />
-              </button>
+              <MobileMenuCapsule isOpen={isMenuOpen} onClick={() => setIsMenuOpen((open) => !open)} />
             </div>
           </div>
 
@@ -234,15 +259,7 @@ export function Header() {
               ))}
             </nav>
 
-            <button
-              type="button"
-              aria-label="Open navigation menu"
-              aria-expanded={isMenuOpen}
-              onClick={() => setIsMenuOpen((open) => !open)}
-              className="rounded-full border border-white/30 bg-white/30 p-2 text-primary shadow-[0_8px_16px_0_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.9)] backdrop-blur-sm backdrop-saturate-[1.15] transition-colors hover:bg-primary/10 md:hidden"
-            >
-              <Menu size={20} />
-            </button>
+            <MobileMenuCapsule isOpen={isMenuOpen} onClick={() => setIsMenuOpen((open) => !open)} />
           </div>
         </div>
 
