@@ -347,11 +347,13 @@ function FullImageHero() {
             <div className="mb-8 space-y-1">
               {/* eyebrow removed per request */}
               <h1 className="text-[clamp(1.6rem,6vw,3.6rem)] font-black uppercase leading-[0.92] tracking-tighter text-slate-900 sm:text-[4.6vw]">
-                BUILDING INDUSTRIES WITH
+                BUILDING INDUSTRIES
                 <br />
-                <span className="italic text-primary">SUSTAINABLE AND</span>
+                WITH <span className="italic text-primary">SUSTAINABLE</span>
                 <br />
-                <span className="italic text-primary">RELIABLE SOLUTIONS.</span>
+                AND <span className="italic text-primary">RELIABLE</span>
+                <br />
+                SOLUTION,
               </h1>
             </div>
 
