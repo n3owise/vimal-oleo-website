@@ -14,6 +14,7 @@ import { PhilosophyOptionsPage } from '@/src/pages/PhilosophyOptionsPage';
 import { SustainabilityOptionsPage } from '@/src/pages/SustainabilityOptionsPage';
 import { ProductsPage } from '@/src/pages/ProductsPage';
 import { MobileMenuOptionsPage } from '@/src/pages/MobileMenuOptionsPage';
+import { MobileMenuViewer } from '@/src/pages/MobileMenuViewer';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -25,6 +26,7 @@ export default function App() {
   const isPhilosophyOptionsPage = window.location.pathname === '/philosophy-options';
   const isSustainabilityOptionsPage = window.location.pathname === '/sustainability-options';
   const isMobileMenuOptionsPage = window.location.pathname === '/mobile-menu-options';
+  const isMobileMenuVariant = window.location.pathname.startsWith('/mobile-menu/') && window.location.pathname !== '/mobile-menu-options';
   const isProductsPage = window.location.pathname === '/products';
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -64,6 +66,10 @@ export default function App() {
 
   if (isMobileMenuOptionsPage) {
     return <MobileMenuOptionsPage />;
+  }
+
+  if (isMobileMenuVariant) {
+    return <MobileMenuViewer />;
   }
 
   if (isProductsPage) {
