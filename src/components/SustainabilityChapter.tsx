@@ -15,15 +15,12 @@ export function SustainabilityChapter() {
   return (
     <section className="bg-white px-6 py-16 sm:px-10 lg:px-14">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <div>
-            <span className={sectionEyebrowClass}>[ SUSTAINABILITY ]</span>
-            <h3 className={sectionHeadingClass}>
-              THE NEXT<br />
-              <span className="text-primary">CHAPTER.</span>
-            </h3>
-          </div>
-          <p className="max-w-2xl text-lg font-medium leading-relaxed text-text-slate">{sustainabilityText}</p>
+        <div className="mb-12 text-center">
+          <span className={sectionEyebrowClass}>[ SUSTAINABILITY ]</span>
+          <h3 className={sectionHeadingClass}>
+            THE NEXT<br />
+            <span className="text-primary">CHAPTER.</span>
+          </h3>
         </div>
 
         <div className="rounded-[2.5rem] bg-[#eaf3ff] px-6 py-12 sm:px-10 lg:px-14">
