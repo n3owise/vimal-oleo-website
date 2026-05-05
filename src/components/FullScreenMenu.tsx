@@ -93,7 +93,7 @@ export default function FullScreenMenu({
                   onClick={onClose}
                   variants={itemVariants}
                   className={`group relative font-display text-5xl sm:text-7xl font-black uppercase tracking-tighter overflow-hidden transition-colors duration-300 ${
-                    isActive ? 'text-[#2563eb]' : 'text-black hover:text-[#2563eb]'
+                    isActive ? 'text-[#0D47A2]' : 'text-black hover:text-[#0D47A2]'
                   }`}
                 >
                   <div className="relative z-10 flex items-center gap-4">
