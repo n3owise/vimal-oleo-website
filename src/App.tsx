@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Header } from '@/src/components/Header';
 import { Hero } from '@/src/components/Hero';
@@ -9,11 +9,7 @@ import { CertifiedTrust } from '@/src/components/CertifiedTrust';
 import { Contact } from '@/src/components/Contact';
 import { Footer } from '@/src/components/Footer';
 import { AboutPage } from '@/src/pages/AboutPage';
-import { NavLinkOptionsPage } from '@/src/pages/NavLinkOptionsPage';
-import { PhilosophyOptionsPage } from '@/src/pages/PhilosophyOptionsPage';
-import { SustainabilityOptionsPage } from '@/src/pages/SustainabilityOptionsPage';
 import { ProductsPage } from '@/src/pages/ProductsPage';
-import { ContactOptionsPage } from '@/src/pages/contact-variants/ContactOptionsPage';
 import ContactVariantViewer from '@/src/pages/contact-variants/ContactVariantViewer';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -22,10 +18,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   const isAboutPage = window.location.pathname === '/about';
-  const isNavLinkOptionsPage = window.location.pathname === '/nav-link-options';
-  const isPhilosophyOptionsPage = window.location.pathname === '/philosophy-options';
-  const isSustainabilityOptionsPage = window.location.pathname === '/sustainability-options';
-  const isContactOptionsPage = window.location.pathname === '/contact-options';
   const isContactVariant = window.location.pathname.startsWith('/contact-variants/');
   const isProductsPage = window.location.pathname === '/products';
   const { scrollYProgress } = useScroll();
@@ -50,22 +42,6 @@ export default function App() {
         <AboutPage />
       </>
     );
-  }
-
-  if (isNavLinkOptionsPage) {
-    return <NavLinkOptionsPage />;
-  }
-
-  if (isPhilosophyOptionsPage) {
-    return <PhilosophyOptionsPage />;
-  }
-
-  if (isSustainabilityOptionsPage) {
-    return <SustainabilityOptionsPage />;
-  }
-
-  if (isContactOptionsPage) {
-    return <ContactOptionsPage />;
   }
 
   if (isContactVariant) {

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { cn } from '@/src/lib/utils';
 import { useState } from 'react';
 import FullScreenMenu from './FullScreenMenu';
@@ -67,6 +67,13 @@ function MobileMenuCapsule({ isOpen, onClick }: { isOpen: boolean; onClick: () =
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const currentPath = window.location.pathname;
+  const { scrollY } = useScroll();
+  const navScrollOffset = useTransform(scrollY, [0, 900], [0, 18]);
+  const navFloatY = useSpring(navScrollOffset, {
+    stiffness: 90,
+    damping: 24,
+    mass: 0.45,
+  });
 
   return (
     <>
@@ -85,26 +92,32 @@ export function Header() {
             />
           </a>
 
-          <div className="pointer-events-auto ml-auto flex items-center justify-end gap-8">
-            <nav className="hidden items-center rounded-full border border-white/30 bg-white/30 p-1.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.9),inset_0_-1px_2px_rgba(255,255,255,0.4)] backdrop-blur-sm backdrop-saturate-[1.15] md:flex">
-              {navItems.map((item, index) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className={cn(
-                    'rounded-full px-5 py-2.5 font-display text-sm font-bold transition-colors',
-                    currentPath === item.href || (index === 0 && currentPath === '/')
-                      ? 'bg-primary text-white shadow-md'
-                      : 'text-primary hover:bg-white/50'
-                  )}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-          </div>
+          <div className="pointer-events-auto ml-auto flex items-center justify-end gap-8" />
         </div>
       </motion.header>
+
+      <motion.nav
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        style={{ y: navFloatY }}
+        className="pointer-events-auto fixed right-10 top-[42px] z-[1100] hidden items-center rounded-full border border-white/30 bg-white/30 p-1.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.9),inset_0_-1px_2px_rgba(255,255,255,0.4)] backdrop-blur-sm backdrop-saturate-[1.15] md:flex lg:right-24 lg:top-[47px]"
+      >
+        {navItems.map((item, index) => (
+          <a
+            key={item.label}
+            href={item.href}
+            className={cn(
+              'rounded-full px-5 py-2.5 font-display text-sm font-bold transition-colors',
+              currentPath === item.href || (index === 0 && currentPath === '/')
+                ? 'bg-primary text-white shadow-md'
+                : 'text-primary hover:bg-white/50'
+            )}
+          >
+            {item.label}
+          </a>
+        ))}
+      </motion.nav>
 
       {/* Menu Icon container using backdrop-filter on the child lines instead of mix-blend-difference */}
       <div className="fixed left-4 right-4 top-4 z-[1000] pointer-events-none sm:left-8 sm:right-8 sm:top-6 lg:left-14 lg:right-14">

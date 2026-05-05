@@ -171,18 +171,28 @@ export function AboutTimeline() {
             rotateY: 0,
             rotateX: 0,
             scale: 1,
-            duration: 0.6,
+            duration: 0.58,
             ease: 'power2.out',
           })
           .to(card, {
+            autoAlpha: 1,
+            x: 0,
+            y: 0,
+            rotateY: 0,
+            rotateX: 0,
+            scale: 1,
+            duration: 0.58,
+            ease: 'none',
+          })
+          .to(card, {
             autoAlpha: 0,
-            x: -70,
-            y: -80,
-            rotateY: 10,
-            rotateX: -3,
-            scale: 0.96,
-            duration: 0.4,
-            ease: 'power2.in',
+            x: -28,
+            y: -42,
+            rotateY: 4,
+            rotateX: -1,
+            scale: 0.985,
+            duration: 0.24,
+            ease: 'power1.inOut',
           });
 
         if (dot) {
@@ -198,13 +208,18 @@ export function AboutTimeline() {
           dotTimeline
             .to(dot, {
               autoAlpha: 1,
-              duration: 0.6,
+              duration: 0.58,
               ease: 'power2.out',
             })
             .to(dot, {
+              autoAlpha: 1,
+              duration: 0.58,
+              ease: 'none',
+            })
+            .to(dot, {
               autoAlpha: 0,
-              duration: 0.4,
-              ease: 'power2.in',
+              duration: 0.24,
+              ease: 'power1.inOut',
             });
         }
 

@@ -333,7 +333,7 @@ function SplitGlassHero() {
         </div>
 
         <div className="relative min-h-[460px] overflow-hidden rounded-[2rem] bg-white shadow-xl shadow-[#1d5fb8]/10">
-          <img src="/products-hero.avif" alt="Oleochemical product materials" className="absolute inset-0 h-full w-full object-cover" />
+          <img src="/Upscan-Enhance-Photo-May-4-2026.jpeg" alt="Oleochemical product materials" className="absolute inset-0 h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#001e38]/58 via-transparent to-transparent" />
           <div className="absolute bottom-6 left-6 right-6 rounded-[1.5rem] border border-white/35 bg-white/18 p-5 text-white backdrop-blur-xl">
             <p className="font-display text-3xl font-black uppercase italic leading-none">Consistency</p>
@@ -356,7 +356,7 @@ function FullImageHero() {
           className="absolute inset-0 overflow-hidden rounded-[inherit] [backface-visibility:hidden] [transform:translateZ(0)]"
         >
           <img
-            src="/enhacne_and_upscale_it,_like_202605050113.jpeg"
+            src="/Upscan-Enhance-Photo-May-4-2026.jpeg"
             alt="Oleochemical products"
             className="absolute inset-0 h-full w-full object-cover object-[82%_center] [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform] sm:object-center"
           />
@@ -376,7 +376,7 @@ function FullImageHero() {
           >
             <div className="mb-8 space-y-1">
               {/* eyebrow removed per request */}
-              <h1 className="text-[clamp(1.6rem,6vw,3.6rem)] font-black uppercase leading-[0.92] tracking-tighter text-slate-900 sm:text-[4.6vw]">
+              <h1 className="text-[clamp(1.8rem,6.6vw,4rem)] font-black uppercase leading-[0.92] tracking-tighter text-slate-900 sm:text-[5vw]">
                 BUILDING INDUSTRIES
                 <br />
                 WITH <span className="italic text-primary">SUSTAINABLE</span>
@@ -411,7 +411,7 @@ function EditorialHero() {
 
         <div className="mt-12 grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] shadow-2xl shadow-[#1d5fb8]/10">
-            <img src="/products-hero.avif" alt="Oleochemical products" className="absolute inset-0 h-full w-full object-cover" />
+            <img src="/Upscan-Enhance-Photo-May-4-2026.jpeg" alt="Oleochemical products" className="absolute inset-0 h-full w-full object-cover" />
           </div>
           <div className="grid gap-5">
             {productSignals.map((item) => (
@@ -445,7 +445,7 @@ function ProductCardsHero() {
             <article key={item.label} className="group overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-[#1d5fb8]/[0.06]">
               <div className="relative h-52 overflow-hidden">
                 <img
-                  src="/products-hero.avif"
+                  src="/Upscan-Enhance-Photo-May-4-2026.jpeg"
                   alt=""
                   className={cn(
                     'h-full w-full object-cover transition-transform duration-700 group-hover:scale-105',
@@ -492,7 +492,7 @@ function BlueprintHero() {
           <div className="relative min-h-[480px]">
             <div className="absolute inset-8 rounded-[2rem] border-2 border-primary/20" />
             <div className="relative h-full min-h-[480px] overflow-hidden rounded-[2rem] shadow-xl shadow-[#1d5fb8]/10">
-              <img src="/products-hero.avif" alt="Oleochemical products" className="h-full w-full object-cover" />
+              <img src="/Upscan-Enhance-Photo-May-4-2026.jpeg" alt="Oleochemical products" className="h-full w-full object-cover" />
               <div className="absolute right-6 top-6 rounded-full border border-white/40 bg-white/22 px-4 py-2 font-display text-xs font-black uppercase tracking-[0.16em] text-white backdrop-blur-xl">
                 Sustainable Supply
               </div>
@@ -969,7 +969,7 @@ function ProductStoryImageCatalog() {
     <section className="bg-white px-6 py-24 sm:px-8 lg:px-14">
       <div className="mx-auto max-w-7xl">
         <div className="relative isolate mb-8 overflow-hidden rounded-[2.5rem] px-6 py-16 text-white shadow-2xl shadow-[#1d5fb8]/12 sm:px-10 lg:px-14">
-          <img src="/products-hero.avif" alt="" className="absolute inset-0 h-full w-full object-cover" />
+                <img src="/Upscan-Enhance-Photo-May-4-2026.jpeg" alt="" className="absolute inset-0 h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#001e38]/92 via-[#0d47a1]/58 to-transparent" />
           <div className="relative z-10 max-w-3xl">
             <span className="mb-5 block font-mono text-[12px] font-bold uppercase italic tracking-[0.3em] text-white/75">
@@ -995,7 +995,7 @@ function ProductStoryImageCatalog() {
             >
               <div className="relative min-h-[170px]">
                 <img
-                  src="/products-hero.avif"
+                  src="/Upscan-Enhance-Photo-May-4-2026.jpeg"
                   alt=""
                   className={cn(
                     'absolute inset-0 h-full w-full object-cover',

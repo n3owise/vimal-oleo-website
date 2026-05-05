@@ -1,6 +1,41 @@
+import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { contactDetails } from '@/src/lib/contact-data';
 import { sectionHeadingClass } from '@/src/lib/section-styles';
-import { Mail, MapPin, Phone, Building2 } from 'lucide-react';
+import { ArrowRight, Check, Mail, MapPin, Phone, Building2 } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+
+type ContactFieldName = 'firstName' | 'lastName' | 'companyName' | 'mobileNumber' | 'email' | 'message';
+
+const contactInputClass =
+  'w-full rounded-2xl border bg-white px-5 py-4 font-medium outline-none transition-all placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/10';
+
+function getContactFieldError(name: ContactFieldName, value: string) {
+  const trimmedValue = value.trim();
+
+  if (!trimmedValue) {
+    return 'This field is required.';
+  }
+
+  if (name === 'mobileNumber' && !/^\d{10}$/.test(trimmedValue)) {
+    return 'Enter a 10-digit mobile number.';
+  }
+
+  if (name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedValue)) {
+    return 'Use a valid email address like name@company.com.';
+  }
+
+  return '';
+}
+
+function FieldError({ message }: { message?: string }) {
+  if (!message) return null;
+
+  return (
+    <div className="mt-2 rounded-2xl border border-primary/15 bg-[#eaf3ff] px-4 py-2 font-display text-[11px] font-black uppercase leading-relaxed tracking-[0.08em] text-primary shadow-sm">
+      {message}
+    </div>
+  );
+}
 
 export function Variant06() {
   return (
@@ -299,7 +334,39 @@ export function Variant08() {
 }
 
 export function Variant09() {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formErrors, setFormErrors] = useState<Partial<Record<ContactFieldName, string>>>({});
   const shortIntro = contactDetails.intro.split(' ').slice(0, 28).join(' ') + '...';
+  const inputClass = (fieldName: ContactFieldName) =>
+    `${contactInputClass} ${formErrors[fieldName] ? 'border-primary bg-[#f9fbfc] ring-2 ring-primary/10' : 'border-slate-200'}`;
+  const handleFieldChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setIsSubmitted(false);
+
+    const fieldName = event.currentTarget.name as ContactFieldName;
+    if (!formErrors[fieldName]) return;
+
+    const error = getContactFieldError(fieldName, event.currentTarget.value);
+    setFormErrors((currentErrors) => ({
+      ...currentErrors,
+      [fieldName]: error || undefined,
+    }));
+  };
+  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const nextErrors = (['firstName', 'lastName', 'companyName', 'mobileNumber', 'email', 'message'] as ContactFieldName[]).reduce<Partial<Record<ContactFieldName, string>>>(
+      (errors, fieldName) => {
+        const error = getContactFieldError(fieldName, String(formData.get(fieldName) || ''));
+        if (error) errors[fieldName] = error;
+        return errors;
+      },
+      {},
+    );
+
+    setFormErrors(nextErrors);
+    setIsSubmitted(Object.keys(nextErrors).length === 0);
+  };
 
   return (
     <section className="bg-[#fafafa] pt-32 pb-24 sm:pt-36 sm:pb-32">
@@ -319,16 +386,99 @@ export function Variant09() {
             
             <div className="md:col-span-3 bg-slate-50 rounded-2xl p-8 sm:p-16 flex flex-col justify-center">
                <h3 className="font-display text-2xl font-black uppercase text-slate-900 mb-10">Send us an email</h3>
-               <form className="space-y-8">
-                 <div className="grid sm:grid-cols-2 gap-8">
-                    <input type="text" placeholder="First Name" className="bg-white border-b-2 border-slate-200 px-4 py-4 outline-none focus:border-primary font-medium transition-colors" />
-                    <input type="text" placeholder="Last Name" className="bg-white border-b-2 border-slate-200 px-4 py-4 outline-none focus:border-primary font-medium transition-colors" />
+               <form
+                 noValidate
+                 className="space-y-6"
+                 onSubmit={handleFormSubmit}
+               >
+                 <div className="grid gap-6 sm:grid-cols-2">
+                    <div>
+                      <input name="firstName" type="text" placeholder="First Name" required onChange={handleFieldChange} className={inputClass('firstName')} />
+                      <FieldError message={formErrors.firstName} />
+                    </div>
+                    <div>
+                      <input name="lastName" type="text" placeholder="Last Name" required onChange={handleFieldChange} className={inputClass('lastName')} />
+                      <FieldError message={formErrors.lastName} />
+                    </div>
+                    <div>
+                      <input name="companyName" type="text" placeholder="Company Name" required onChange={handleFieldChange} className={inputClass('companyName')} />
+                      <FieldError message={formErrors.companyName} />
+                    </div>
+                    <div>
+                      <input name="mobileNumber" type="tel" inputMode="numeric" placeholder="Mobile Number" required onChange={handleFieldChange} className={inputClass('mobileNumber')} />
+                      <FieldError message={formErrors.mobileNumber} />
+                    </div>
                  </div>
-                 <input type="email" placeholder="Email Address" className="w-full bg-white border-b-2 border-slate-200 px-4 py-4 outline-none focus:border-primary font-medium transition-colors" />
-                 <textarea rows={5} placeholder="Your Message" className="w-full bg-white border-b-2 border-slate-200 px-4 py-4 outline-none focus:border-primary font-medium transition-colors resize-none" />
-                 <button type="button" className="bg-slate-900 text-white px-8 py-4 font-display font-bold uppercase tracking-widest text-sm hover:bg-primary transition-colors">
-                   Send Message
+                 <div>
+                   <input name="email" type="email" placeholder="Email Address" required onChange={handleFieldChange} className={inputClass('email')} />
+                   <FieldError message={formErrors.email} />
+                 </div>
+                 <div>
+                   <textarea name="message" rows={5} placeholder="Your Message" required onChange={handleFieldChange} className={`${inputClass('message')} resize-none`} />
+                   <FieldError message={formErrors.message} />
+                 </div>
+                 <button
+                   type="submit"
+                   className={`group relative inline-flex h-12 min-w-44 cursor-pointer items-center justify-center overflow-hidden rounded-full border px-7 py-2 text-center text-sm font-bold uppercase tracking-[0.08em] transition-all duration-500 ease-out ${
+                     isSubmitted
+                       ? 'border-primary bg-primary text-white shadow-[0_16px_34px_rgba(13,71,161,0.24)]'
+                       : 'border-slate-950 bg-white text-slate-950'
+                   }`}
+                 >
+                   <AnimatePresence mode="wait" initial={false}>
+                     {isSubmitted ? (
+                       <motion.span
+                         key="submitted"
+                         initial={{ opacity: 0, y: 10, scale: 0.96 }}
+                         animate={{ opacity: 1, y: 0, scale: 1 }}
+                         exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                         transition={{ duration: 0.36, ease: [0.16, 1, 0.3, 1] }}
+                         className="relative z-10 flex items-center gap-2"
+                       >
+                         <motion.span
+                           initial={{ scale: 0, rotate: -24 }}
+                           animate={{ scale: 1, rotate: 0 }}
+                           transition={{ type: 'spring', stiffness: 360, damping: 18, delay: 0.08 }}
+                           className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-primary"
+                         >
+                           <Check size={15} strokeWidth={3} />
+                         </motion.span>
+                         Form Submitted
+                       </motion.span>
+                     ) : (
+                       <motion.span
+                         key="idle"
+                         initial={{ opacity: 0, y: 8 }}
+                         animate={{ opacity: 1, y: 0 }}
+                         exit={{ opacity: 0, y: -8 }}
+                         transition={{ duration: 0.24 }}
+                         className="absolute inset-0"
+                       >
+                         <span className="absolute inset-0 origin-left scale-x-0 rounded-full bg-primary transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+                         <span className="relative z-10 inline-flex h-full translate-x-0 items-center justify-center transition-all duration-300 ease-out group-hover:translate-x-10 group-hover:opacity-0">
+                           Send Message
+                         </span>
+                         <span className="absolute inset-0 z-10 flex translate-x-10 items-center justify-center gap-2 text-white opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100">
+                           Send Message
+                           <ArrowRight size={16} strokeWidth={2.2} />
+                         </span>
+                       </motion.span>
+                     )}
+                   </AnimatePresence>
                  </button>
+                 <AnimatePresence>
+                   {isSubmitted && (
+                     <motion.p
+                       initial={{ opacity: 0, y: 8 }}
+                       animate={{ opacity: 1, y: 0 }}
+                       exit={{ opacity: 0, y: -6 }}
+                       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                       className="font-display text-xs font-black uppercase tracking-[0.18em] text-primary"
+                     >
+                       Your inquiry is ready. Email delivery will be connected next.
+                     </motion.p>
+                   )}
+                 </AnimatePresence>
                </form>
             </div>
 
@@ -478,4 +628,3 @@ export function Variant10() {
     </section>
   );
 }
-

@@ -14,10 +14,14 @@ const philosophyItems = [
   },
   {
     title: 'Value',
+    mobileTitle: 'Values',
     icon: BadgeCheck,
     text: 'We are guided by our values of quality, customer focus, innovation, reliability, and sustainability, which shape every decision and action.',
   },
 ];
+
+const mobileAccentColor = '#0D47A1';
+const mobileIconBackground = '#ddecff';
 
 export function OurPhilosophy() {
   return (
@@ -40,7 +44,28 @@ export function OurPhilosophy() {
           </h3>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-3">
+        <div className="grid gap-5 lg:hidden">
+          {philosophyItems.map((item) => (
+            <article key={item.title} className="rounded-[1.5rem] border border-white/60 bg-white/85 p-5 shadow-xl shadow-slate-900/5 backdrop-blur-xl">
+              <div className="mb-4 flex items-center gap-3">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style={{ background: mobileIconBackground, color: mobileAccentColor }} aria-hidden="true">
+                  <item.icon size={20} strokeWidth={1.85} />
+                </span>
+                <h4 className="font-display text-[1.25rem] font-black uppercase leading-none tracking-tight text-slate-950">
+                  {item.mobileTitle ?? item.title}
+                </h4>
+              </div>
+
+              <div className="pt-1">
+                <p className="text-[0.94rem] font-medium leading-relaxed text-text-slate">
+                  {item.text}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="hidden gap-5 lg:grid lg:grid-cols-3">
           {philosophyItems.map((item) => (
             <article key={item.title} className="min-h-[285px] rounded-[1.75rem] border border-white/60 bg-white/60 p-7 shadow-xl shadow-slate-900/5 backdrop-blur-xl">
               <div className="mb-10 flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-primary shadow-sm">
