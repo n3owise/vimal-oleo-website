@@ -23,9 +23,9 @@ export function Hero() {
           >
             <source src="/hero-flowing-elements.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-surface/85 via-surface/60 to-transparent" />
-          <div className="absolute inset-0 bg-white/[0.06]" />
-          <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-primary/70 via-primary/25 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/82 via-slate-950/54 to-slate-950/8" />
+          <div className="absolute inset-0 bg-primary/10" />
+          <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-slate-950/58 via-slate-950/24 to-transparent" />
         </motion.div>
 
         <div className="relative z-10 flex min-h-[calc(100svh-2rem)] items-start sm:items-center px-6 pb-16 pt-36 sm:min-h-[calc(100svh-3rem)] sm:px-10 sm:pt-36 lg:min-h-[calc(100svh-5rem)] lg:px-16">
@@ -36,10 +36,10 @@ export function Hero() {
             className="max-w-5xl"
           >
             <div className="mb-8 space-y-1">
-              <h1 className="text-[clamp(1.8rem,6.6vw,4rem)] font-black uppercase leading-[0.92] tracking-tighter text-slate-900 sm:text-[5vw]">
+              <h1 className="text-[clamp(1.8rem,6.6vw,4rem)] font-black uppercase leading-[0.92] tracking-tighter text-white drop-shadow-[0_12px_32px_rgba(0,0,0,0.28)] sm:text-[5vw]">
                 High-Quality<br />
                 Oleo Chemicals.<br />
-                <span className="text-primary italic">Delivered with<br />
+                <span className="text-[#8fc2ff] italic">Delivered with<br />
                 Reliability.</span>
               </h1>
             </div>
