@@ -364,10 +364,9 @@ function FullImageHero() {
             className="absolute inset-0 h-full w-full object-cover object-[82%_center] [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform] sm:object-center"
           />
 
-            {/* Left-side white gradient like the Home hero (reduced so image stays visible) */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/62 via-white/36 to-transparent" />
-            <div className="absolute inset-0 bg-white/[0.03]" />
-            <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-white/45 via-white/18 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/82 via-slate-950/54 to-slate-950/8" />
+            <div className="absolute inset-0 bg-primary/10" />
+            <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-slate-950/58 via-slate-950/24 to-transparent" />
         </motion.div>
 
         <div className="relative z-10 flex min-h-[calc(100svh-2rem)] items-start sm:items-center px-6 pb-16 pt-36 sm:min-h-[calc(100svh-3rem)] sm:px-10 sm:pt-36 lg:min-h-[calc(100svh-5rem)] lg:px-16">
@@ -379,12 +378,12 @@ function FullImageHero() {
           >
             <div className="mb-8 space-y-1">
               {/* eyebrow removed per request */}
-              <h1 className="text-[clamp(1.8rem,6.6vw,4rem)] font-black uppercase leading-[0.92] tracking-tighter text-slate-900 sm:text-[5vw]">
+              <h1 className="text-[clamp(1.8rem,6.6vw,4rem)] font-black uppercase leading-[0.92] tracking-tighter text-white drop-shadow-[0_12px_32px_rgba(0,0,0,0.28)] sm:text-[5vw]">
                 BUILDING INDUSTRIES
                 <br />
-                WITH <span className="italic text-primary">SUSTAINABLE</span>
+                WITH <span className="italic text-[#8fc2ff]">SUSTAINABLE</span>
                 <br />
-                AND <span className="italic text-primary">RELIABLE</span>
+                AND <span className="italic text-[#8fc2ff]">RELIABLE</span>
                 <br />
                 SOLUTION,
               </h1>

@@ -5,7 +5,7 @@
 3. Done: Deleted `public/.DS_Store`.
 4. Done: Deleted unused `public/hero-flowing-elements.mov`.
 5. Done: Deleted confirmed unused large JPEGs from `public`.
-6. Compress `public/hero-flowing-elements.mp4`.
+6. Done: Compressed `public/hero-flowing-elements.mp4` from about `2.4 MB` to about `580 KB`.
 7. Change the hero video loading strategy from `preload="auto"` to a lighter production-safe option.
 8. Compress or resize `public/factory.jpg`.
 9. Compress or replace `public/Upscan-Enhance-Photo-May-4-2026.jpeg`.
