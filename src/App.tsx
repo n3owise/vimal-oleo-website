@@ -18,7 +18,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   const isAboutPage = window.location.pathname === '/about';
-  const isContactVariant = window.location.pathname.startsWith('/contact-variants/');
+  const isContactPage = window.location.pathname === '/contact-us' || window.location.pathname.startsWith('/contact-variants/');
   const isProductsPage = window.location.pathname === '/products';
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -44,7 +44,7 @@ export default function App() {
     );
   }
 
-  if (isContactVariant) {
+  if (isContactPage) {
     return <ContactVariantViewer />;
   }
 

@@ -1,9 +1,7 @@
 import { Dock, DockIcon } from '@/src/components/ui/dock';
 import { sectionEyebrowClass, sectionHeadingClass } from '@/src/lib/section-styles';
 
-const addressQuery = encodeURIComponent(
-  'Vimal Oleo Chemicals, Plot No 203A, Shree Ramdarshan Building, Dr Babasaheb Ambedkar Road, Sion East, Mumbai 400022',
-);
+const googleMapsUrl = 'https://maps.app.goo.gl/eBGWu1ZG15sSV1Gt6';
 
 const contactActions = [
   {
@@ -23,7 +21,7 @@ const contactActions = [
   },
   {
     label: 'Directions',
-    href: `https://www.google.com/maps/search/?api=1&query=${addressQuery}`,
+    href: googleMapsUrl,
     iconSrc: 'https://api.iconify.design/logos:google-maps.svg',
   },
 ];

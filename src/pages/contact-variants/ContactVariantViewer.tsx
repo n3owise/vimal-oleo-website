@@ -6,7 +6,7 @@ import { Footer } from '@/src/components/Footer';
 export default function ContactVariantViewer() {
   const path = window.location.pathname;
   const match = path.match(/\/contact-variants\/(\d+)/);
-  const variantId = match ? match[1] : null;
+  const variantId = match ? match[1] : '09';
 
   let VariantComponent = Variant01;
 
@@ -21,7 +21,7 @@ export default function ContactVariantViewer() {
     case '08': VariantComponent = Variant08; break;
     case '09': VariantComponent = Variant09; break;
     case '10': VariantComponent = Variant10; break;
-    default: VariantComponent = Variant01; break;
+    default: VariantComponent = Variant09; break;
   }
 
   return (

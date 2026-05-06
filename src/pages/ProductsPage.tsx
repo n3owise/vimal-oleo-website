@@ -5,6 +5,7 @@ import { cn } from '@/src/lib/utils';
 import { sectionHeadingClass } from '@/src/lib/section-styles';
 import { Header } from '@/src/components/Header';
 import { Footer } from '@/src/components/Footer';
+import { InteractiveHoverButton } from '@/src/components/ui/interactive-hover-button';
 
 const ZigZag = ({ nodes }: { nodes: number }) => (
   <svg viewBox="0 0 64 48" fill="none" style={{ width: '48px', height: '48px' }}>
@@ -218,6 +219,8 @@ const productDeckColors = [
     icon: 'rgba(255,255,255,0.85)',
   },
 ];
+
+const brochureHref = '/vimal-oleo-chemicals-brochure.pdf';
 
 const heroOptions = [
   { id: '01', label: 'Split Glass' },
@@ -670,6 +673,39 @@ function ProductStoryDeck3D() {
               </motion.article>
             );
           })}
+          <motion.article
+            initial={{ opacity: 0, y: 48 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -6 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
+            className="relative min-h-[300px] overflow-hidden rounded-[1.75rem] border border-primary/10 bg-white p-7 text-slate-950 shadow-xl shadow-[#1d5fb8]/[0.06] sm:col-span-2"
+          >
+            <div className="pointer-events-none absolute right-[-5rem] top-[-5rem] h-56 w-56 rounded-full bg-white/80 blur-2xl" />
+            <div className="relative z-10 flex h-full flex-col justify-center">
+              <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
+                <img
+                  src="/untitled folder/RSPO.avif"
+                  alt="RSPO logo"
+                  className="h-16 w-auto object-contain sm:h-20"
+                />
+                <h3 className="max-w-3xl font-display text-[clamp(1.55rem,2.7vw,2.45rem)] font-black leading-[0.98] tracking-tight text-slate-950">
+                  We Can Also Provide RSPO Grades For Above Products
+                </h3>
+              </div>
+            </div>
+          </motion.article>
+        </div>
+        <div className="pt-10 text-center">
+          <motion.div className="inline-flex" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+            <InteractiveHoverButton
+              href={brochureHref}
+              download
+              className="h-[52px] border-[#001e38] px-8 text-[13px] uppercase text-[#001e38]"
+            >
+              Download Brochure
+            </InteractiveHoverButton>
+          </motion.div>
         </div>
       </div>
     </section>

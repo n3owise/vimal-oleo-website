@@ -51,10 +51,10 @@ export function Hero() {
                 whileTap={{ scale: 0.97 }}
               >
                 <InteractiveHoverButton
-                href="/about"
+                href="/contact-us"
                 className="h-[52px] border-[#001e38] px-8 text-[13px] uppercase text-[#001e38]"
               >
-                About Us
+                Contact Us
                 </InteractiveHoverButton>
               </motion.div>
             </div>

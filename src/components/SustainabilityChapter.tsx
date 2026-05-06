@@ -16,10 +16,8 @@ export function SustainabilityChapter() {
     <section className="bg-white px-6 py-16 sm:px-10 lg:px-14">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 text-center">
-          <span className={sectionEyebrowClass}>[ SUSTAINABILITY ]</span>
           <h3 className={sectionHeadingClass}>
-            THE NEXT<br />
-            <span className="text-primary">CHAPTER.</span>
+            <span className="text-primary">SUSTAINABILITY.</span>
           </h3>
         </div>
 

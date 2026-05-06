@@ -8,7 +8,7 @@ const timelineData = [
   {
     year: '1980',
     description:
-      'In 2004, Mr. Hemang Shah joined the company after completing his B.Com from Mumbai University. He expanded operations into imports, exports, and local sourcing of oleochemicals and chemicals, with a primary focus on marketing to manufacturers and end-users while managing both purchases and sales.',
+      'M/s. Vimal International was founded by Mr. Mahesh Shah with a vision to build a trusted source for chemicals and solvents. The company began by supplying products like Titanium Dioxide, Caustic Soda, Iso Propyl Alcohol, and Toluene, later expanding into oleo chemicals.',
   },
   {
     year: '1990',
@@ -28,7 +28,7 @@ const timelineData = [
   {
     year: '2016',
     description:
-      'In 2016, we took on the authorized distributorship of M/s. 3F Industries Ltd, expanding our product range to include Stearic Acid, Glycerine, DCFA, HTO, and 2016 many other products.',
+      'In 2016, we took on the authorized distributorship of M/s. 3F Industries Ltd, expanding our product range to include Stearic Acid, Glycerine, DCFA, HTO, and many other products.',
   },
   {
     year: '2021',

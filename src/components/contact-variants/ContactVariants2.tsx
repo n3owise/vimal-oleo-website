@@ -4,6 +4,8 @@ import { sectionHeadingClass } from '@/src/lib/section-styles';
 import { ArrowRight, Check, Mail, MapPin, Phone, Building2 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
+const googleMapsUrl = 'https://maps.app.goo.gl/eBGWu1ZG15sSV1Gt6';
+
 type ContactFieldName = 'firstName' | 'lastName' | 'companyName' | 'mobileNumber' | 'email' | 'message';
 
 const contactInputClass =
@@ -454,7 +456,7 @@ export function Variant09() {
                          transition={{ duration: 0.24 }}
                          className="absolute inset-0"
                        >
-                         <span className="absolute inset-0 origin-left scale-x-0 rounded-full bg-primary transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+                          <span className="absolute inset-0 origin-left scale-x-0 rounded-full bg-slate-950 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
                          <span className="relative z-10 inline-flex h-full translate-x-0 items-center justify-center transition-all duration-300 ease-out group-hover:translate-x-10 group-hover:opacity-0">
                            Send Message
                          </span>
@@ -501,7 +503,7 @@ export function Variant09() {
                     ))}
                   </div>
                   <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactDetails.address.join(', '))}`}
+                    href={googleMapsUrl}
                     target="_blank"
                     rel="noreferrer noopener"
                     className="mt-3 inline-block text-sm font-bold underline text-white/90"
