@@ -177,7 +177,7 @@ function IndustryCard({
         zIndex: index + 1,
         transformOrigin: "top center",
       }}
-      className="absolute left-1/2 top-[34vh] flex h-[355px] w-[calc(100%-2rem)] max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-slate-200 bg-white sm:top-[34vh] sm:h-[400px] sm:rounded-[2.5rem] md:flex-row lg:top-[32vh] lg:h-[360px]"
+      className="absolute left-1/2 top-0 flex h-[355px] w-[calc(100%-2rem)] max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-slate-200 bg-white sm:h-[400px] sm:rounded-[2.5rem] md:flex-row lg:h-[360px]"
     >
       <div className="relative hidden flex-1 overflow-hidden bg-gradient-to-br from-primary/20 via-slate-100 to-slate-300 md:block">
         <img
@@ -303,22 +303,24 @@ export function Industries() {
             </p>
           </motion.div>
 
-          {industries.map((industry, index) => {
-            const targetScale = 1 - (industries.length - 1 - index) * 0.05;
+          <div className="relative z-10 mt-[clamp(5rem,11svh,8rem)]">
+            {industries.map((industry, index) => {
+              const targetScale = 1 - (industries.length - 1 - index) * 0.05;
 
-            return (
-              <div key={industry.name}>
-                <IndustryCard
-                  industry={industry}
-                  index={index}
-                  progress={cardScrollProgress}
-                  total={industries.length}
-                  targetScale={targetScale}
-                  isMobile={isMobile}
-                />
-              </div>
-            );
-          })}
+              return (
+                <div key={industry.name}>
+                  <IndustryCard
+                    industry={industry}
+                    index={index}
+                    progress={cardScrollProgress}
+                    total={industries.length}
+                    targetScale={targetScale}
+                    isMobile={isMobile}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
