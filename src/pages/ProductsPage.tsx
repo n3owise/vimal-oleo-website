@@ -385,7 +385,7 @@ function FullImageHero() {
                 <br />
                 AND <span className="italic text-[#8fc2ff]">RELIABLE</span>
                 <br />
-                SOLUTION,
+                SOLUTIONS.
               </h1>
             </div>
 
