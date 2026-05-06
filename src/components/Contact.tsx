@@ -1,5 +1,6 @@
 import { Dock, DockIcon } from '@/src/components/ui/dock';
 import { sectionEyebrowClass, sectionHeadingClass } from '@/src/lib/section-styles';
+import { Mail, MapPin, MessageCircle } from 'lucide-react';
 
 const googleMapsUrl = 'https://maps.app.goo.gl/eBGWu1ZG15sSV1Gt6';
 
@@ -12,17 +13,17 @@ const contactActions = [
   {
     label: 'WhatsApp',
     href: 'https://wa.me/919819415552',
-    iconSrc: 'https://api.iconify.design/logos:whatsapp-icon.svg',
+    icon: 'whatsapp',
   },
   {
     label: 'Email',
     href: 'mailto:vimaloleochemicals@gmail.com',
-    iconSrc: 'https://api.iconify.design/logos:google-gmail.svg',
+    icon: 'email',
   },
   {
     label: 'Directions',
     href: googleMapsUrl,
-    iconSrc: 'https://api.iconify.design/logos:google-maps.svg',
+    icon: 'map',
   },
 ];
 
@@ -36,6 +37,13 @@ function BlueDialerIcon() {
       />
     </svg>
   );
+}
+
+function ContactActionIcon({ icon }: { icon: string }) {
+  if (icon === 'dialer') return <BlueDialerIcon />;
+  if (icon === 'whatsapp') return <MessageCircle className="h-7 w-7 text-[#25D366]" strokeWidth={2.4} />;
+  if (icon === 'email') return <Mail className="h-7 w-7 text-[#EA4335]" strokeWidth={2.2} />;
+  return <MapPin className="h-7 w-7 text-[#4285F4]" strokeWidth={2.3} />;
 }
 
 export function Contact() {
@@ -79,11 +87,7 @@ export function Contact() {
                       <span className="pointer-events-none absolute -top-11 left-1/2 z-20 -translate-x-1/2 translate-y-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-text-dark opacity-0 shadow-lg shadow-slate-900/10 transition duration-200 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
                         {action.label}
                       </span>
-                      {'icon' in action ? (
-                        <BlueDialerIcon />
-                      ) : (
-                        <img src={action.iconSrc} alt="" className="h-7 w-7 object-contain" />
-                      )}
+                      <ContactActionIcon icon={action.icon} />
                     </a>
                   </DockIcon>
                 );
