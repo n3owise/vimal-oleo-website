@@ -67,6 +67,7 @@ function MobileMenuCapsule({ isOpen, onClick }: { isOpen: boolean; onClick: () =
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const currentPath = window.location.pathname;
+  const logoSrc = currentPath === '/' || currentPath === '/products' ? '/logo for hero and product.png' : '/vinal-oleo-logo.svg';
   const { scrollY } = useScroll();
   const navScrollOffset = useTransform(scrollY, [0, 900], [0, 18]);
   const navFloatY = useSpring(navScrollOffset, {
@@ -86,7 +87,7 @@ export function Header() {
         <div className="relative z-10 flex min-h-[76px] w-full items-center justify-between px-5 py-3 sm:min-h-[88px] sm:px-8 lg:min-h-[104px] lg:px-10">
           <a href="/" className="pointer-events-auto flex w-[154px] max-w-[52vw] items-center sm:w-[190px] lg:w-[215px]">
             <img
-              src="/vinal-oleo-logo.svg"
+              src={logoSrc}
               alt="Vimal Oleo Chemicals"
               className="block h-auto w-full"
             />
