@@ -253,7 +253,7 @@ function Row({
           display: 'flex',
           gap: '14px',
           width: 'max-content',
-          animation: shouldReduceMotion ? 'none' : `product-marquee-scroll ${reverse ? 74 : 82}s linear infinite`,
+          animation: shouldReduceMotion ? 'none' : 'product-marquee-scroll 74s linear infinite',
           animationDirection: reverse ? 'reverse' : 'normal',
         }}
       >

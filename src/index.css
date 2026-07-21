@@ -86,8 +86,7 @@
   }
 }
 
-.product-marquee-row:hover .product-marquee-track,
-.product-marquee-row:focus-within .product-marquee-track {
+.product-marquee-row:hover .product-marquee-track {
   animation-play-state: paused !important;
 }
 
