@@ -40,14 +40,14 @@ export function Reliability() {
               <h2 className={`${sectionHeadingClass} mb-8`}>
                 OVER 40 YEARS OF<br />
                 CHEMICAL<br />
-                <span className="text-primary NOT-italic">EXCELLENCE.</span>
+                <span className="text-primary not-italic">EXCELLENCE.</span>
               </h2>
               <p className="text-lg text-text-slate font-medium leading-relaxed mb-10 max-w-2xl mx-auto lg:mx-0">
                 Since 1980, Vimal Oleo Chemicals has built a trusted reputation in sourcing and distributing top-grade oleo chemicals across industries.
               </p>
               <div className="mx-auto max-w-4xl text-left lg:mx-0">
                 <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-                  {aboutHighlights.map((item, i) => (
+                  {aboutHighlights.map((item) => (
                     <div key={item.title} className="grid grid-cols-[3.75rem_1fr] border-b border-slate-100 last:border-b-0">
                       <div className="flex items-center justify-center bg-primary/10 text-primary">
                         <item.icon className="shrink-0" size={24} strokeWidth={1.9} />
@@ -75,7 +75,7 @@ export function Reliability() {
 
               <div className="relative z-10 h-full w-full overflow-hidden rounded-2xl shadow-2xl">
                 <img
-                  src="/about-section-chemical-plant.png"
+                  src="/about-section-chemical-plant.jpg"
                   alt="Chemical plant quality control workspace"
                   className="w-full h-full object-cover"
                 />

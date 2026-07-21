@@ -1,5 +1,5 @@
 import { Leaf, Recycle, ShieldCheck, Zap } from 'lucide-react';
-import { sectionEyebrowClass, sectionHeadingClass } from '@/src/lib/section-styles';
+import { sectionHeadingClass } from '@/src/lib/section-styles';
 
 const sustainabilityText =
   'At Vimal Oleo Group, we align growth with responsibility. We focus on eco-friendly solutions, responsible sourcing, waste reduction, and energy efficiency. By partnering with like-minded clients and suppliers, we strive to deliver value while protecting the environment for a sustainable future.';

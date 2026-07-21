@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { MapPin, Ship, Anchor, Truck, Globe2 } from 'lucide-react';
-import { cn } from '@/src/lib/utils';
 
 export function JNPTMap() {
   return (
@@ -142,4 +141,3 @@ export function JNPTMap() {
     </section>
   );
 }
-

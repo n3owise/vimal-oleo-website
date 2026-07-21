@@ -1,7 +1,6 @@
 import { contactDetails } from '@/src/lib/contact-data';
 import { sectionHeadingClass } from '@/src/lib/section-styles';
 import { Mail, MapPin, Phone, Send, User } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 export function Variant01() {
   return (
@@ -508,5 +507,4 @@ export function Variant05() {
     </section>
   );
 }
-
 

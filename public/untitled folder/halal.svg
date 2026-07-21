@@ -1,0 +1,11 @@
+<svg width="512" height="320" viewBox="0 0 512 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="320" rx="28" fill="white"/>
+  <circle cx="256" cy="138" r="76" fill="#F3F4F6"/>
+  <path d="M294 104C276 114 264 132 264 154C264 183 287 206 316 206C326 206 335 204 343 199C334 209 321 215 307 215C275 215 249 189 249 157C249 126 273 100 304 96C307 101 310 104 314 106C308 106 301 106 294 104Z" fill="#111827"/>
+  <path d="M286 128H305V175H286V128Z" fill="white"/>
+  <path d="M305 128H313C321 128 327 134 327 142V151H305V128Z" fill="#9CA3AF"/>
+  <path d="M305 151H327V175H305V151Z" fill="#111827"/>
+  <path d="M226 164L237 152L247 164L237 176L226 164Z" fill="#111827"/>
+  <path d="M230 189H282V198H230V189Z" fill="#111827"/>
+  <text x="256" y="242" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#111827" letter-spacing="3">HALAL</text>
+</svg>

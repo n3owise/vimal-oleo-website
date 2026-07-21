@@ -1,11 +1,13 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, Box, Droplets, Factory, FlaskConical, Leaf, PackageCheck, Sparkles } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import { sectionHeadingClass } from '@/src/lib/section-styles';
 import { Header } from '@/src/components/Header';
 import { Footer } from '@/src/components/Footer';
 import { InteractiveHoverButton } from '@/src/components/ui/interactive-hover-button';
+import { productDetails, type ProductDetail } from '@/src/components/ProductMarqueeCPreview';
+import { useDialogFocus } from '@/src/hooks/useDialogFocus';
 
 const ZigZag = ({ nodes }: { nodes: number }) => (
   <svg viewBox="0 0 64 48" fill="none" style={{ width: '48px', height: '48px' }}>
@@ -71,18 +73,6 @@ const OleicIcon = () => (
   </svg>
 );
 
-const MixedIcon = () => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '48px', height: '48px' }}>
-    {[0, 1, 2, 3].map((i) => (
-      <line key={`a${i}`} x1={4 + i * 7} y1={i % 2 === 0 ? 22 : 30} x2={4 + (i + 1) * 7} y2={i % 2 === 0 ? 30 : 22} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    ))}
-    {[0, 1, 2, 3].map((i) => (
-      <line key={`b${i}`} x1={34 + i * 7} y1={i % 2 === 0 ? 22 : 30} x2={34 + (i + 1) * 7} y2={i % 2 === 0 ? 30 : 22} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
-    ))}
-    <line x1={28} y1={26} x2={34} y2={26} stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" opacity="0.4" />
-  </svg>
-);
-
 const HydIcon = () => (
   <svg viewBox="0 0 64 48" fill="none" style={{ width: '48px', height: '48px' }}>
     {[0, 1, 2, 3, 4, 5].map((i) => (
@@ -112,9 +102,10 @@ const productSignals = [
 const productStory = [
   {
     name: 'Stearic Acid',
-    tag: 'Rubber / Plastics / Candles',
+    tag: 'PVC, Rubber, Speciality & Cosmetics',
+    types: ['Flakes', 'Beads', 'Powder'],
     description:
-      'Applied in rubber, plastics, candles, and cosmetics. It works as a stabilizer and processing aid across various industries.',
+      'Applied in rubber, plastics, candles, and cosmetics. It works as a stabilizer and processing aid across various industries. Types: Flakes, beads & powder.',
   },
   {
     name: 'Glycerine',
@@ -129,16 +120,22 @@ const productStory = [
       'Derived from coconut oil, widely used in soaps, detergents, and personal care for its foaming and cleansing properties.',
   },
   {
-    name: 'Hydrogenated Technical Oil',
-    tag: 'Lubricants / Coatings / Textiles',
+    name: 'GMS 95',
+    tag: 'Food / Cosmetics / Emulsifiers',
     description:
-      'A stable oil used in lubricants, coatings, and textiles. Its oxidative stability makes it ideal for industrial processes.',
+      'Glyceryl monostearate used as an emulsifier and stabilizer in food, cosmetics, and personal care formulations.',
   },
   {
-    name: 'Hydrogenated Palm Stearin',
-    tag: 'Flexible Formulation',
+    name: 'Caprylic-Capric Acid',
+    tag: 'Personal Care / Cosmetics / Surfactants',
     description:
-      'We partner with formulators by offering flexible, reliable ingredients that make product development easier, faster, and more consistent.',
+      'A C8-C10 fatty acid blend used in personal care, cosmetics, and surfactants for light texture and fast spreadability.',
+  },
+  {
+    name: 'Hydrogenated Palm / Hydrogenated Technical Oil',
+    tag: 'Speciality & Lubricant',
+    description:
+      'A stable hydrogenated product used in speciality and lubricant applications, offering reliable performance and oxidative stability for industrial use.',
   },
   {
     name: 'Soya-based Distilled Fatty Acid',
@@ -160,13 +157,13 @@ const productStory = [
   },
   {
     name: 'Lauric Acid',
-    tag: 'Soaps / Shampoos / Surfactants',
+    tag: 'Personal Care, Cosmetics & Surfactants',
     description:
       'Known for strong foaming and cleansing, it is a key ingredient in soaps, shampoos, detergents, and surfactants.',
   },
   {
     name: 'Myristic Acid',
-    tag: 'Cosmetics / Creams / Lotions',
+    tag: 'Personal Care, Cosmetics & Surfactants',
     description:
       'A fatty acid used in cosmetics, creams, lotions, and fragrances. It adds smoothness, mildness, and emollient properties.',
   },
@@ -184,11 +181,137 @@ const productStory = [
   },
   {
     name: 'Palmitic Acid',
-    tag: 'Soaps / Cosmetics / Surfactants',
+    tag: 'Speciality & Cosmetic',
     description:
       'A fatty acid used in soaps, cosmetics, and surfactants. It provides hardness, stability, and texture in personal care and industrial applications.',
   },
+  {
+    name: 'Magnesium hydroxide',
+    tag: 'PVC / Pharma / Flame Retardants',
+    description:
+      'An inorganic mineral used as a flame retardant, pH regulator, and functional additive in PVC, pharma, and industrial applications.',
+  },
+  {
+    name: 'Magnesium oxide',
+    tag: 'Rubber / Pharma / Ceramics',
+    description:
+      'A versatile mineral additive used in rubber compounding, pharmaceuticals, ceramics, and heat-resistant industrial formulations.',
+  },
 ];
+
+type ProductStoryItem = (typeof productStory)[number];
+
+const productDetailAliases: Record<string, string> = {
+  'Soya-based Distilled Fatty Acid': 'Soya Distilled Fatty Acid',
+  'Soap Noodles (All Grades)': 'Soap Noodles',
+};
+
+function getProductDetail(product: ProductStoryItem): ProductDetail | null {
+  return productDetails[productDetailAliases[product.name] ?? product.name] ?? null;
+}
+
+function getTagApplications(tag: string) {
+  return tag
+    .split(/\s*(?:\/|&|,)\s*/)
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .slice(0, 3);
+}
+
+function ProductPageDetailModal({ product, onClose }: { product: ProductStoryItem; onClose: () => void }) {
+  const dialogRef = useRef<HTMLElement | null>(null);
+  const detail = getProductDetail(product);
+  const titleId = `products-page-detail-${product.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+  const descriptionId = `${titleId}-overview`;
+  const overview = detail?.overview ?? product.description;
+  const applications = detail?.applications ?? getTagApplications(product.tag);
+  const forms = detail?.forms ?? [];
+
+  useDialogFocus(true, dialogRef, onClose);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[3000] flex items-center justify-center overflow-y-auto bg-slate-950/62 px-4 py-6 backdrop-blur-sm sm:px-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.22 }}
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <motion.article
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
+        tabIndex={-1}
+        className="relative my-auto max-h-[88svh] w-full max-w-2xl overflow-y-auto rounded-[1.75rem] border border-white/45 bg-white text-slate-950 shadow-2xl shadow-slate-950/28"
+        initial={{ opacity: 0, y: 22, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 16, scale: 0.98 }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <button
+          type="button"
+          aria-label="Close product details"
+          onClick={onClose}
+          className="absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-slate-950 text-xl font-light leading-none text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25 active:scale-95"
+        >
+          ×
+        </button>
+
+        <div className="bg-[#001e38] p-5 pr-14 text-white sm:p-6 sm:pr-16">
+          <p className="font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#8fc2ff]">Product Detail</p>
+          <h3 id={titleId} className="mt-4 font-display text-[clamp(1.55rem,5vw,2.75rem)] font-black uppercase italic leading-[0.9] tracking-tighter">
+            {product.name}
+          </h3>
+        </div>
+
+        <div className="space-y-5 p-5 sm:p-6">
+          <section>
+            <p className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-primary">Overview</p>
+            <p id={descriptionId} className="mt-2 text-sm font-medium leading-relaxed text-text-slate">{overview}</p>
+          </section>
+
+          {forms.length > 0 && (
+            <section>
+              <p className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-primary">Available Forms:</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {forms.map((form) => (
+                  <span key={form} className="rounded-full border border-primary/15 bg-[#eaf3ff] px-3 py-1.5 text-xs font-bold text-primary shadow-sm">
+                    {form}
+                  </span>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <section className="rounded-2xl bg-[#f4f6f9] p-4">
+            <p className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-primary">Common Applications</p>
+            <ul className="mt-3 space-y-2">
+              {applications.map((item) => (
+                <li key={item} className="flex gap-2 text-sm font-semibold leading-relaxed text-slate-700">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </motion.article>
+    </motion.div>
+  );
+}
 
 const productDeckColors = [
   {
@@ -526,7 +649,7 @@ function ProductStoryTimeline() {
             [ PRODUCT ATLAS ]
           </span>
           <h2 className="font-display text-[clamp(2.5rem,7vw,5.4rem)] font-black uppercase italic leading-[0.84] tracking-tighter text-slate-950">
-            13 CORE<br />
+            16 CORE<br />
             <span className="text-primary">MATERIALS.</span>
           </h2>
           <p className="mt-7 max-w-xl text-lg font-medium leading-relaxed text-text-slate">
@@ -535,7 +658,7 @@ function ProductStoryTimeline() {
 
           <div className="mt-9 grid grid-cols-3 overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-xl shadow-[#1d5fb8]/[0.06]">
             <div className="border-r border-slate-100 p-5">
-              <p className="font-display text-3xl font-black leading-none text-primary">13</p>
+              <p className="font-display text-3xl font-black leading-none text-primary">16</p>
               <p className="mt-2 text-[10px] font-black uppercase tracking-[0.18em] text-text-slate">Products</p>
             </div>
             <div className="border-r border-slate-100 p-5">
@@ -616,6 +739,8 @@ function ProductStoryTimeline() {
 }
 
 function ProductStoryDeck3D() {
+  const [selectedProduct, setSelectedProduct] = useState<ProductStoryItem | null>(null);
+
   return (
     <section className="relative overflow-hidden bg-[#f4f6f9] px-6 py-24 sm:px-8 lg:px-14">
       <div className="relative z-10 mx-auto max-w-7xl">
@@ -635,17 +760,21 @@ function ProductStoryDeck3D() {
             const palette = productDeckColors[index % productDeckColors.length];
 
             return (
-              <motion.article
+              <motion.button
                 key={product.name}
+                type="button"
+                aria-label={`View B2B details for ${product.name}`}
+                onClick={() => setSelectedProduct(product)}
                 initial={{ opacity: 0, y: 48 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 whileHover={{ y: -6 }}
+                whileTap={{ scale: 0.98 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
-                  'group relative min-h-[350px] overflow-hidden rounded-[1.75rem] p-7 shadow-xl shadow-[#1d5fb8]/[0.06]'
+                  'group relative min-h-[350px] cursor-pointer overflow-hidden rounded-[1.75rem] p-7 text-left shadow-xl shadow-[#1d5fb8]/[0.06] focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25'
                 )}
-                style={{ background: palette.bg, border: palette.border }}
+                style={{ background: palette.bg, border: palette.border, font: 'inherit' }}
               >
                 <div className="relative z-10 flex h-full flex-col">
                   <div className="mb-8 flex items-center justify-between gap-4">
@@ -669,7 +798,7 @@ function ProductStoryDeck3D() {
                     {product.description}
                   </p>
                 </div>
-              </motion.article>
+              </motion.button>
             );
           })}
           <motion.article
@@ -689,7 +818,7 @@ function ProductStoryDeck3D() {
                   className="h-16 w-auto object-contain sm:h-20"
                 />
                 <h3 className="max-w-3xl font-display text-[clamp(1.55rem,2.7vw,2.45rem)] font-black leading-[0.98] tracking-tight text-slate-950">
-                  We Can Also Provide RSPO Grades For Above Products
+                  We Can Also Provide RSPO and EUDR Grades For Above Products
                 </h3>
               </div>
             </div>
@@ -706,6 +835,15 @@ function ProductStoryDeck3D() {
             </InteractiveHoverButton>
           </motion.div>
         </div>
+
+        <AnimatePresence>
+          {selectedProduct && (
+            <ProductPageDetailModal
+              product={selectedProduct}
+              onClose={() => setSelectedProduct(null)}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
@@ -802,7 +940,7 @@ function ProductStoryPinnedShowcase() {
               <img src="/products-hero.avif" alt="" className="absolute inset-0 h-full w-full object-cover opacity-70 mix-blend-screen" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#001e38]/90 via-[#0d47a1]/54 to-transparent" />
               <div className="absolute bottom-8 left-8 right-8 text-white">
-                <p className="font-display text-6xl font-black uppercase italic leading-none">13</p>
+                <p className="font-display text-6xl font-black uppercase italic leading-none">16</p>
                 <p className="mt-3 max-w-sm text-base font-medium leading-relaxed text-white/78">
                   A guided product catalogue that keeps the image pinned while the materials move through the story.
                 </p>

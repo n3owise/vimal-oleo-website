@@ -86,6 +86,33 @@
   }
 }
 
+.product-marquee-row:hover .product-marquee-track,
+.product-marquee-row:focus-within .product-marquee-track {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-vertical,
+  .product-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .product-marquee-row {
+    overflow-x: auto !important;
+  }
+}
+
+@keyframes product-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.3333%);
+  }
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);

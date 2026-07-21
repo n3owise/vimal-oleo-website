@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
+import { useDialogFocus } from '@/src/hooks/useDialogFocus';
+import { normalizePathname } from '@/src/lib/utils';
 
 type MenuItem = { label: string; href: string };
 
@@ -14,6 +16,11 @@ export default function MobileMenuBottomSheet({
   items: MenuItem[];
 }) {
   const overlayRef = useRef<HTMLDivElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const titleId = 'mobile-bottom-sheet-title';
+  const currentPath = normalizePathname(window.location.pathname);
+
+  useDialogFocus(isOpen, panelRef, onClose);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -51,8 +58,12 @@ export default function MobileMenuBottomSheet({
           }}
         >
           <motion.div
+            id="mobile-navigation-bottom-sheet"
+            ref={panelRef}
             role="dialog"
             aria-modal="true"
+            aria-labelledby={titleId}
+            tabIndex={-1}
             initial="hidden"
             animate="visible"
             exit="exit"
@@ -62,7 +73,7 @@ export default function MobileMenuBottomSheet({
             drag="y"
             dragConstraints={{ top: 0, bottom: 0 }}
             dragElastic={0.2}
-            onDragEnd={(e, info) => {
+            onDragEnd={(_, info) => {
               if (info.offset.y > 100) onClose();
             }}
           >
@@ -72,10 +83,12 @@ export default function MobileMenuBottomSheet({
             </div>
 
             <div className="flex items-center justify-between px-6 pb-4 pt-2">
-              <span className="font-display text-xl font-black text-slate-900">Explore</span>
+              <span id={titleId} className="font-display text-xl font-black text-slate-900">Explore</span>
               <button
+                type="button"
+                aria-label="Close menu"
                 onClick={onClose}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25"
               >
                 <X size={18} strokeWidth={2} />
               </button>
@@ -88,7 +101,7 @@ export default function MobileMenuBottomSheet({
                   href={item.href}
                   onClick={onClose}
                   className={`block rounded-2xl p-4 font-display text-lg font-bold transition-all ${
-                    window.location.pathname === item.href
+                    currentPath === normalizePathname(item.href)
                       ? 'bg-primary text-white shadow-lg shadow-primary/20'
                       : 'bg-slate-50 text-slate-700 active:scale-95'
                   }`}

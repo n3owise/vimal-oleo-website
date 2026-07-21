@@ -1,7 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { InteractiveHoverButton } from '@/src/components/ui/interactive-hover-button';
 
 export function Hero() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section className="relative w-full overflow-hidden bg-surface px-4 pb-14 pt-4 sm:px-8 sm:pb-20 sm:pt-6 lg:px-14">
       <div className="relative isolate min-h-[calc(100svh-2rem)] overflow-hidden rounded-[2rem] bg-primary shadow-2xl [clip-path:inset(0_round_2rem)] [contain:paint] sm:min-h-[calc(100svh-3rem)] sm:rounded-[2.35rem] sm:[clip-path:inset(0_round_2.35rem)] lg:min-h-[calc(100svh-5rem)]">
@@ -12,13 +14,13 @@ export function Hero() {
           className="absolute inset-0 overflow-hidden rounded-[inherit] [backface-visibility:hidden] [transform:translateZ(0)]"
         >
           <video
-            aria-label="Flowing oleo chemical background"
-            autoPlay
+            aria-hidden="true"
+            autoPlay={!shouldReduceMotion}
             muted
             defaultMuted
-            loop
+            loop={!shouldReduceMotion}
             playsInline
-            preload="auto"
+            preload="metadata"
             className="absolute inset-0 h-full w-full object-cover object-[82%_center] [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform] sm:object-center"
           >
             <source src="/hero-flowing-elements.mp4" type="video/mp4" />

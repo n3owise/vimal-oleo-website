@@ -1,6 +1,3 @@
-import { Building2, Mail, MapPin, Phone, Send, User } from 'lucide-react';
-import { sectionHeadingClass } from '@/src/lib/section-styles';
-
 export const contactDetails = {
   intro: 'We are here to support your business with reliable oleochemical solutions tailored to your needs. Whether you are looking for technical information, product samples, pricing details, or partnership opportunities, our team is ready to assist you.',
   company: 'VIMAL OLEO CHEMICALS',
@@ -13,7 +10,7 @@ export const contactDetails = {
   ],
   landline: '+91-022-24010660',
   landlineHref: '+912224010660',
-  email: 'vimaloleochemicals@gmail.com',
+  email: 'globalchemresources.gcr@gmail.com',
   contacts: [
     { name: 'HEMANG SHAH', phone: '+91-9819415552' },
     { name: 'KUNAL SHAH', phone: '+91-9819055155' },

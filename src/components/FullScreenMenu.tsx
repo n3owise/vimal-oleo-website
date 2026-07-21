@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
+import { useDialogFocus } from '@/src/hooks/useDialogFocus';
+import { normalizePathname } from '@/src/lib/utils';
 
 type MenuItem = { label: string; href: string };
 
@@ -14,6 +16,11 @@ export default function FullScreenMenu({
   items: MenuItem[];
 }) {
   const overlayRef = useRef<HTMLDivElement | null>(null);
+  const titleId = 'mobile-navigation-title';
+  const currentPath = normalizePathname(window.location.pathname);
+  const currentHash = window.location.hash;
+
+  useDialogFocus(isOpen, overlayRef, onClose);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -23,15 +30,6 @@ export default function FullScreenMenu({
       document.body.style.overflow = prev;
     };
   }, [isOpen]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose();
-    }
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [isOpen, onClose]);
 
   const overlayVariants = {
     hidden: { opacity: 0, clipPath: 'circle(0% at calc(100% - 40px) 40px)' },
@@ -56,8 +54,13 @@ export default function FullScreenMenu({
     <AnimatePresence>
       {isOpen && (
         <motion.div
+          id="mobile-navigation"
           ref={overlayRef}
           key="fs-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+          tabIndex={-1}
           initial="hidden"
           animate="visible"
           exit="exit"
@@ -65,14 +68,14 @@ export default function FullScreenMenu({
           className="fixed inset-0 z-[2000] flex flex-col bg-white px-6 py-8"
         >
           <div className="flex w-full items-center justify-between">
-            <span className="font-display text-2xl font-black tracking-tighter text-black">
+            <span id={titleId} className="font-display text-2xl font-black tracking-tighter text-black">
               MENU
             </span>
             <button
               type="button"
               aria-label="Close menu"
               onClick={onClose}
-              className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-black text-white hover:scale-105 active:scale-95 transition-transform"
+              className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-black text-white transition-transform hover:scale-105 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25 active:scale-95"
             >
               <X size={24} strokeWidth={2} />
             </button>
@@ -80,11 +83,10 @@ export default function FullScreenMenu({
 
           <nav className="mt-auto mb-auto flex w-full flex-col items-start gap-4 sm:gap-6">
             {items.map((item, i) => {
-              const currentPath = window.location.pathname;
-              const currentHash = window.location.hash;
-              // Check if either path or path+hash matches exactly
-              const isActive = (item.href === '/' && currentPath === '/') || 
-                             (item.href !== '/' && (currentPath === item.href || (currentPath + currentHash) === item.href));
+              const [itemPath, itemHash] = item.href.split('#');
+              const isActive =
+                currentPath === normalizePathname(itemPath || '/') &&
+                (!itemHash || currentHash === `#${itemHash}`);
               
               return (
                 <motion.a

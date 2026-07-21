@@ -1,7 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { contactDetails } from '@/src/lib/contact-data';
 import { sectionHeadingClass } from '@/src/lib/section-styles';
-import { ArrowRight, Check, Mail, MapPin, Phone, Building2 } from 'lucide-react';
+import { ArrowRight, Check, Mail, MapPin, Phone } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const googleMapsUrl = 'https://maps.app.goo.gl/eBGWu1ZG15sSV1Gt6';

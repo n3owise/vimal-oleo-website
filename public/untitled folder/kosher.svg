@@ -1,0 +1,8 @@
+<svg width="512" height="320" viewBox="0 0 512 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="320" rx="28" fill="white"/>
+  <circle cx="256" cy="138" r="76" fill="#F3F4F6"/>
+  <path d="M256 96L296 120V168L256 192L216 168V120L256 96Z" fill="#111827"/>
+  <path d="M256 108L286 126V162L256 180L226 162V126L256 108Z" fill="white"/>
+  <path d="M241 134H267C274 134 280 140 280 147V154C280 161 274 167 267 167H255L278 190H259L241 167V190H227V134H241Z" fill="#111827"/>
+  <text x="256" y="242" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#111827" letter-spacing="3">KOSHER</text>
+</svg>

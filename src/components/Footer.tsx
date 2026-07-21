@@ -9,7 +9,7 @@ const footerDetails = {
   ],
   landline: '+91-022-24010660',
   landlineHref: '+912224010660',
-  email: 'vimaloleochemicals@gmail.com',
+  email: 'globalchemresources.gcr@gmail.com',
   contacts: [
     { name: 'HEMANG SHAH', phone: '+91-9819415552' },
     { name: 'KUNAL SHAH', phone: '+91-9819055155' },

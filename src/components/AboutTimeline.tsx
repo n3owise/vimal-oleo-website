@@ -13,7 +13,7 @@ const timelineData = [
   {
     year: '1990',
     description:
-      'The company began with trading and supplying chemicals and solvents such as Titanium Dioxide, Caustic Soda, Iso Propyl Alcohol, and Toluene. Over time, the portfolio expanded to oleochemicals like Stearic Acid, Refined Glycerine, and Distilled Fatty Acids. In 1990, we strengthened our market presence by becoming an authorized distributor of M/s. Jocil Ltd (now Jayalakshmi Oil & Chemical Industries Ltd)',
+      'The company began with trading and supplying chemicals and solvents such as Titanium Dioxide, Caustic Soda, Iso Propyl Alcohol, and Toluene. Over time, the portfolio expanded to oleochemicals like Stearic Acid, Refined Glycerine, and Distilled Fatty Acids. In 1990, we strengthened our market presence by becoming an authorized distributor of M/s. Jocil Ltd',
   },
   {
     year: '2004',

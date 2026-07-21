@@ -82,7 +82,7 @@ const industries: Industry[] = [
     shortName: 'Cosmetics',
     code: 'CP',
     description: 'High-quality oleo ingredients for skincare, hair care, and personal care products.',
-    image: '/industry-cosmetics.png',
+    image: '/industry-cosmetics.jpg',
     imagePosition: 'center',
     icon: SprayCan,
   },
@@ -96,40 +96,6 @@ const industries: Industry[] = [
     icon: Beaker,
   },
 ];
-
-function MoleculeMark({ className = '' }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 180 110"
-      className={className}
-      fill="none"
-    >
-      <path
-        d="M14 68 L38 42 L68 64 L96 34 L128 58 L164 24"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M68 64 L82 94 M96 34 L110 12 M128 58 L150 86"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      {[14, 38, 68, 96, 128, 164].map((cx, index) => (
-        <circle
-          key={cx}
-          cx={cx}
-          cy={[68, 42, 64, 34, 58, 24][index]}
-          r={index === 3 ? 6 : 4}
-          fill="currentColor"
-        />
-      ))}
-    </svg>
-  );
-}
 
 function IndustryCard({
   industry,
