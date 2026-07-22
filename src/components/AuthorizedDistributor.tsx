@@ -41,7 +41,7 @@ export function AuthorizedDistributor() {
   return (
     <section id="authorised-distributor" className="bg-[#f4f6f9] px-5 pb-24 pt-4 text-slate-950 sm:pt-8">
       <div className="mx-auto grid max-w-7xl gap-10 rounded-[2.5rem] border border-slate-200 bg-white p-6 shadow-xl sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div className="relative min-w-0 rounded-[2rem] bg-surface p-7 sm:p-9">
+        <div className="relative min-w-0 p-7 sm:p-9">
           <h2 className={sectionHeadingClass}>
             AUTHORISED<br />
             <span className="text-primary">DISTRIBUTOR.</span>
