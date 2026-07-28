@@ -17,7 +17,7 @@ const contactActions = [
   },
   {
     label: 'Email',
-    href: 'mailto:globalchemresources.gcr@gmail.com',
+    href: 'mailto:vimaloleochemicals@gmail.com',
     icon: 'email',
   },
   {

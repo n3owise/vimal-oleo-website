@@ -5,8 +5,10 @@ import { ArrowRight, Check, Mail, MapPin, Phone } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const googleMapsUrl = 'https://maps.app.goo.gl/eBGWu1ZG15sSV1Gt6';
+const contactFormAction = `https://formsubmit.co/${contactDetails.email}`;
 
 type ContactFieldName = 'firstName' | 'lastName' | 'companyName' | 'mobileNumber' | 'email' | 'message';
+const contactFormFieldNames: ContactFieldName[] = ['firstName', 'lastName', 'companyName', 'mobileNumber', 'email', 'message'];
 
 const contactInputClass =
   'w-full rounded-2xl border bg-white px-5 py-4 font-medium outline-none transition-all placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/10';
@@ -37,6 +39,12 @@ function FieldError({ message }: { message?: string }) {
       {message}
     </div>
   );
+}
+
+function getContactFormSuccessUrl() {
+  if (typeof window === 'undefined') return '/contact-us?submitted=1#contact-form';
+
+  return `${window.location.origin}/contact-us?submitted=1#contact-form`;
 }
 
 export function Variant06() {
@@ -336,13 +344,20 @@ export function Variant08() {
 }
 
 export function Variant09() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(() => {
+    if (typeof window === 'undefined') return false;
+
+    return new URLSearchParams(window.location.search).get('submitted') === '1';
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState<Partial<Record<ContactFieldName, string>>>({});
   const shortIntro = contactDetails.intro.split(' ').slice(0, 28).join(' ') + '...';
+  const contactFormSuccessUrl = getContactFormSuccessUrl();
   const inputClass = (fieldName: ContactFieldName) =>
     `${contactInputClass} ${formErrors[fieldName] ? 'border-primary bg-[#f9fbfc] ring-2 ring-primary/10' : 'border-slate-200'}`;
   const handleFieldChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setIsSubmitted(false);
+    setIsSubmitting(false);
 
     const fieldName = event.currentTarget.name as ContactFieldName;
     if (!formErrors[fieldName]) return;
@@ -354,10 +369,8 @@ export function Variant09() {
     }));
   };
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
     const formData = new FormData(event.currentTarget);
-    const nextErrors = (['firstName', 'lastName', 'companyName', 'mobileNumber', 'email', 'message'] as ContactFieldName[]).reduce<Partial<Record<ContactFieldName, string>>>(
+    const nextErrors = contactFormFieldNames.reduce<Partial<Record<ContactFieldName, string>>>(
       (errors, fieldName) => {
         const error = getContactFieldError(fieldName, String(formData.get(fieldName) || ''));
         if (error) errors[fieldName] = error;
@@ -367,7 +380,15 @@ export function Variant09() {
     );
 
     setFormErrors(nextErrors);
-    setIsSubmitted(Object.keys(nextErrors).length === 0);
+    setIsSubmitted(false);
+
+    if (Object.keys(nextErrors).length > 0) {
+      event.preventDefault();
+      setIsSubmitting(false);
+      return;
+    }
+
+    setIsSubmitting(true);
   };
 
   return (
@@ -389,48 +410,68 @@ export function Variant09() {
             <div className="md:col-span-3 bg-slate-50 rounded-2xl p-8 sm:p-16 flex flex-col justify-center">
                <h3 className="font-display text-2xl font-black uppercase text-slate-900 mb-10">Send us an email</h3>
                <form
-                 noValidate
-                 className="space-y-6"
-                 onSubmit={handleFormSubmit}
-               >
-                 <div className="grid gap-6 sm:grid-cols-2">
-                    <div>
-                      <input name="firstName" type="text" placeholder="First Name" required onChange={handleFieldChange} className={inputClass('firstName')} />
-                      <FieldError message={formErrors.firstName} />
-                    </div>
-                    <div>
-                      <input name="lastName" type="text" placeholder="Last Name" required onChange={handleFieldChange} className={inputClass('lastName')} />
-                      <FieldError message={formErrors.lastName} />
-                    </div>
-                    <div>
-                      <input name="companyName" type="text" placeholder="Company Name" required onChange={handleFieldChange} className={inputClass('companyName')} />
-                      <FieldError message={formErrors.companyName} />
-                    </div>
-                    <div>
-                      <input name="mobileNumber" type="tel" inputMode="numeric" placeholder="Mobile Number" required onChange={handleFieldChange} className={inputClass('mobileNumber')} />
-                      <FieldError message={formErrors.mobileNumber} />
-                    </div>
-                 </div>
-                 <div>
-                   <input name="email" type="email" placeholder="Email Address" required onChange={handleFieldChange} className={inputClass('email')} />
-                   <FieldError message={formErrors.email} />
-                 </div>
-                 <div>
-                   <textarea name="message" rows={5} placeholder="Your Message" required onChange={handleFieldChange} className={`${inputClass('message')} resize-none`} />
-                   <FieldError message={formErrors.message} />
-                 </div>
-                 <button
-                   type="submit"
-                   className={`group relative inline-flex h-12 min-w-44 cursor-pointer items-center justify-center overflow-hidden rounded-full border px-7 py-2 text-center text-sm font-bold uppercase tracking-[0.08em] transition-all duration-500 ease-out ${
-                     isSubmitted
-                       ? 'border-primary bg-primary text-white shadow-[0_16px_34px_rgba(13,71,161,0.24)]'
-                       : 'border-slate-950 bg-white text-slate-950'
-                   }`}
-                 >
-                   <AnimatePresence mode="wait" initial={false}>
-                     {isSubmitted ? (
-                       <motion.span
-                         key="submitted"
+                  id="contact-form"
+                  noValidate
+                  action={contactFormAction}
+                  method="POST"
+                  className="space-y-6"
+                  onSubmit={handleFormSubmit}
+                >
+                  <input type="hidden" name="_subject" value="New website inquiry - Vimal Oleo Chemicals" />
+                  <input type="hidden" name="_template" value="table" />
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_next" value={contactFormSuccessUrl} />
+                  <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+                  <div className="grid gap-6 sm:grid-cols-2">
+                     <div>
+                       <input name="firstName" type="text" placeholder="First Name" required maxLength={80} autoComplete="given-name" onChange={handleFieldChange} className={inputClass('firstName')} />
+                       <FieldError message={formErrors.firstName} />
+                     </div>
+                     <div>
+                       <input name="lastName" type="text" placeholder="Last Name" required maxLength={80} autoComplete="family-name" onChange={handleFieldChange} className={inputClass('lastName')} />
+                       <FieldError message={formErrors.lastName} />
+                     </div>
+                     <div>
+                       <input name="companyName" type="text" placeholder="Company Name" required maxLength={120} autoComplete="organization" onChange={handleFieldChange} className={inputClass('companyName')} />
+                       <FieldError message={formErrors.companyName} />
+                     </div>
+                     <div>
+                       <input name="mobileNumber" type="tel" inputMode="numeric" placeholder="Mobile Number" required maxLength={10} autoComplete="tel-national" onChange={handleFieldChange} className={inputClass('mobileNumber')} />
+                       <FieldError message={formErrors.mobileNumber} />
+                     </div>
+                  </div>
+                  <div>
+                    <input name="email" type="email" placeholder="Email Address" required maxLength={120} autoComplete="email" onChange={handleFieldChange} className={inputClass('email')} />
+                    <FieldError message={formErrors.email} />
+                  </div>
+                  <div>
+                    <textarea name="message" rows={5} placeholder="Your Message" required maxLength={1500} onChange={handleFieldChange} className={`${inputClass('message')} resize-none`} />
+                    <FieldError message={formErrors.message} />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`group relative inline-flex h-12 min-w-44 cursor-pointer items-center justify-center overflow-hidden rounded-full border px-7 py-2 text-center text-sm font-bold uppercase tracking-[0.08em] transition-all duration-500 ease-out ${
+                      isSubmitted || isSubmitting
+                        ? 'border-primary bg-primary text-white shadow-[0_16px_34px_rgba(13,71,161,0.24)]'
+                        : 'border-slate-950 bg-white text-slate-950'
+                    }`}
+                  >
+                    <AnimatePresence mode="wait" initial={false}>
+                      {isSubmitting ? (
+                        <motion.span
+                          key="submitting"
+                          initial={{ opacity: 0, y: 10, scale: 0.96 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                          transition={{ duration: 0.24 }}
+                          className="relative z-10"
+                        >
+                          Sending...
+                        </motion.span>
+                      ) : isSubmitted ? (
+                        <motion.span
+                          key="submitted"
                          initial={{ opacity: 0, y: 10, scale: 0.96 }}
                          animate={{ opacity: 1, y: 0, scale: 1 }}
                          exit={{ opacity: 0, y: -8, scale: 0.96 }}
@@ -475,11 +516,11 @@ export function Variant09() {
                        animate={{ opacity: 1, y: 0 }}
                        exit={{ opacity: 0, y: -6 }}
                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                       className="font-display text-xs font-black uppercase tracking-[0.18em] text-primary"
-                     >
-                       Your inquiry is ready. Email delivery will be connected next.
-                     </motion.p>
-                   )}
+                        className="font-display text-xs font-black uppercase tracking-[0.18em] text-primary"
+                      >
+                        Thank you. Your inquiry has been sent to our team.
+                      </motion.p>
+                    )}
                  </AnimatePresence>
                </form>
             </div>
