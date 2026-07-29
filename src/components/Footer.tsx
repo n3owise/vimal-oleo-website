@@ -1,21 +1,5 @@
 import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
-
-const footerDetails = {
-  company: 'VIMAL OLEO CHEMICALS',
-  address: [
-    'PLOT NO 203A, SHREE RAMDARSHAN BUILDING,',
-    'OFFICE NO-1, GROUND FLOOR, DR BABASAHEB AMBEDKAR ROAD,',
-    'NEAR UNION BANK OF INDIA, SION EAST, MUMBAI - 400022',
-  ],
-  landline: '+91-022-24010660',
-  landlineHref: '+912224010660',
-  email: 'vimaloleochemicals@gmail.com',
-  contacts: [
-    { name: 'HEMANG SHAH', phone: '+91-9819415552' },
-    { name: 'KUNAL SHAH', phone: '+91-9819055155' },
-    { name: 'MAHESH SHAH', phone: '+91-9820988222' },
-  ],
-};
+import { contactDetails, getPhoneHref } from '@/src/lib/contact-data';
 
 function BrandMark() {
   return (
@@ -33,9 +17,9 @@ function AddressBlock() {
         <p className="font-mono text-[11px] font-black uppercase tracking-[0.24em] text-white/50">Address</p>
       </div>
       <div>
-        <p className="font-display text-xl font-black uppercase italic tracking-tight text-white">{footerDetails.company}</p>
+        <p className="font-display text-xl font-black uppercase italic tracking-tight text-white">{contactDetails.company}</p>
         <p className="mt-3 w-full text-sm font-semibold uppercase leading-relaxed text-white/68 lg:whitespace-nowrap">
-          {footerDetails.address.map((line) => (
+          {contactDetails.address.map((line) => (
             <span key={line} className="block">{line}</span>
           ))}
         </p>
@@ -51,12 +35,12 @@ function ContactBlock() {
         <Phone className="h-5 w-5 text-primary" />
         <p className="font-mono text-[11px] font-black uppercase tracking-[0.24em] text-white/55">Contact Details</p>
       </div>
-      <a href={`tel:${footerDetails.landlineHref}`} className="block text-base font-black text-white transition-colors hover:text-primary">
-        {footerDetails.landline}
+      <a href={`tel:${contactDetails.landlineHref}`} className="flex min-h-11 items-center text-base font-black text-white transition-colors hover:text-primary focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25">
+        {contactDetails.landline}
       </a>
-      <a href={`mailto:${footerDetails.email}`} className="block break-all text-base font-black text-white transition-colors hover:text-primary">
+      <a href={`mailto:${contactDetails.email}`} className="flex min-h-11 items-center break-all text-base font-black text-white transition-colors hover:text-primary focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25">
         <Mail className="mr-2 inline h-4 w-4 text-primary" />
-        {footerDetails.email}
+        {contactDetails.email}
       </a>
     </div>
   );
@@ -65,11 +49,11 @@ function ContactBlock() {
 function PeopleList() {
   return (
     <div className="space-y-3">
-      {footerDetails.contacts.map((person) => (
+      {contactDetails.contacts.map((person) => (
         <a
           key={person.name}
-          href={`tel:${person.phone.replace(/-/g, '')}`}
-          className="flex items-center justify-between gap-4 border-b border-white/10 py-3 text-white transition-colors hover:bg-white/5"
+          href={getPhoneHref(person.phone)}
+          className="flex min-h-11 items-center justify-between gap-4 border-b border-white/10 py-3 text-white transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25"
         >
           <span>
             <span className="block font-mono text-[10px] font-black uppercase tracking-[0.2em] text-white/45">Contact</span>
@@ -84,7 +68,11 @@ function PeopleList() {
 
 export function Footer() {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: shouldReduceMotion ? 'auto' : 'smooth' });
+
+    const logoLink = document.querySelector('a[href="/"]') as HTMLElement | null;
+    logoLink?.focus({ preventScroll: true });
   };
 
   return (
@@ -104,8 +92,9 @@ export function Footer() {
         <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-7 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 Vimal Oleo Chemicals</p>
           <button
+            type="button"
             onClick={scrollToTop}
-            className="group inline-flex items-center gap-3 text-white/45 transition-colors hover:text-white"
+            className="group inline-flex min-h-11 items-center gap-3 text-white/45 transition-colors hover:text-white focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25"
           >
             Go Top
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 transition-colors group-hover:bg-primary">

@@ -1,28 +1,27 @@
 import { Dock, DockIcon } from '@/src/components/ui/dock';
+import { contactDetails } from '@/src/lib/contact-data';
 import { sectionEyebrowClass, sectionHeadingClass } from '@/src/lib/section-styles';
 import { Mail, MapPin } from 'lucide-react';
-
-const googleMapsUrl = 'https://maps.app.goo.gl/eBGWu1ZG15sSV1Gt6';
 
 const contactActions = [
   {
     label: 'Call',
-    href: 'tel:+912224010660',
+    href: `tel:${contactDetails.landlineHref}`,
     icon: 'dialer',
   },
   {
     label: 'WhatsApp',
-    href: 'https://wa.me/919223433662',
+    href: contactDetails.whatsappHref,
     icon: 'whatsapp',
   },
   {
     label: 'Email',
-    href: 'mailto:vimaloleochemicals@gmail.com',
+    href: `mailto:${contactDetails.email}`,
     icon: 'email',
   },
   {
     label: 'Directions',
-    href: googleMapsUrl,
+    href: contactDetails.googleMapsUrl,
     icon: 'map',
   },
 ];
@@ -54,7 +53,8 @@ export function Contact() {
       <div className="absolute inset-0 overflow-hidden bg-slate-950">
         <img
           src="/factory.jpg"
-          alt="Industrial Building and Factory"
+          alt=""
+          aria-hidden="true"
           className="h-full w-full object-cover grayscale opacity-75"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-surface/60 via-primary/20 to-primary/10" />
@@ -83,8 +83,8 @@ export function Contact() {
                       href={action.href}
                       aria-label={action.label}
                       target={action.label === 'Directions' || action.label === 'WhatsApp' ? '_blank' : undefined}
-                      rel={action.label === 'Directions' || action.label === 'WhatsApp' ? 'noreferrer' : undefined}
-                      className="group relative flex h-full w-full items-center justify-center rounded-full outline-none"
+                      rel={action.label === 'Directions' || action.label === 'WhatsApp' ? 'noreferrer noopener' : undefined}
+                      className="group relative flex h-full w-full items-center justify-center rounded-full outline-none focus-visible:ring-4 focus-visible:ring-primary/25"
                     >
                       <span className="pointer-events-none absolute -top-11 left-1/2 z-20 -translate-x-1/2 translate-y-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-text-main opacity-0 shadow-lg shadow-slate-900/10 transition duration-200 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
                         {action.label}

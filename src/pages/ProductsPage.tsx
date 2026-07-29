@@ -10,7 +10,7 @@ import { productDetails, type ProductDetail } from '@/src/components/ProductMarq
 import { useDialogFocus } from '@/src/hooks/useDialogFocus';
 
 const ZigZag = ({ nodes }: { nodes: number }) => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '48px', height: '48px' }}>
+  <svg viewBox="0 0 64 48" fill="none" aria-hidden="true" focusable="false" style={{ width: '48px', height: '48px' }}>
     {Array.from({ length: nodes - 1 }, (_, i) => (
       <line
         key={i}
@@ -32,7 +32,7 @@ const ZigZag = ({ nodes }: { nodes: number }) => (
 );
 
 const GlycerolIcon = () => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '48px', height: '48px' }}>
+  <svg viewBox="0 0 64 48" fill="none" aria-hidden="true" focusable="false" style={{ width: '48px', height: '48px' }}>
     <line x1={16} y1={36} x2={32} y2={24} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     <line x1={32} y1={24} x2={48} y2={36} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     <line x1={16} y1={36} x2={8} y2={28} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -48,7 +48,7 @@ const GlycerolIcon = () => (
 );
 
 const SoapIcon = () => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '48px', height: '48px' }}>
+  <svg viewBox="0 0 64 48" fill="none" aria-hidden="true" focusable="false" style={{ width: '48px', height: '48px' }}>
     <circle cx={32} cy={13} r={8} stroke="currentColor" strokeWidth="1.5" opacity="0.8" />
     <text x={26} y={16} fontSize="7" fill="currentColor" fontFamily="monospace">Na+</text>
     {[0, 1, 2, 3, 4].map((i) => (
@@ -59,7 +59,7 @@ const SoapIcon = () => (
 );
 
 const OleicIcon = () => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '48px', height: '48px' }}>
+  <svg viewBox="0 0 64 48" fill="none" aria-hidden="true" focusable="false" style={{ width: '48px', height: '48px' }}>
     {[0, 1, 2, 3].map((i) => (
       <line key={i} x1={4 + i * 8} y1={i % 2 === 0 ? 30 : 22} x2={4 + (i + 1) * 8} y2={i % 2 === 0 ? 22 : 30} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     ))}
@@ -74,7 +74,7 @@ const OleicIcon = () => (
 );
 
 const HydIcon = () => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '48px', height: '48px' }}>
+  <svg viewBox="0 0 64 48" fill="none" aria-hidden="true" focusable="false" style={{ width: '48px', height: '48px' }}>
     {[0, 1, 2, 3, 4, 5].map((i) => (
       <line key={i} x1={4 + i * 9} y1={i % 2 === 0 ? 30 : 22} x2={4 + (i + 1) * 9} y2={i % 2 === 0 ? 22 : 30} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     ))}
@@ -265,7 +265,7 @@ function ProductPageDetailModal({ product, onClose }: { product: ProductStoryIte
           type="button"
           aria-label="Close product details"
           onClick={onClose}
-          className="absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-slate-950 text-xl font-light leading-none text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25 active:scale-95"
+          className="absolute right-4 top-4 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-slate-950 text-xl font-light leading-none text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25 active:scale-95"
         >
           ×
         </button>
@@ -764,6 +764,7 @@ function ProductStoryDeck3D() {
                 key={product.name}
                 type="button"
                 aria-label={`View B2B details for ${product.name}`}
+                aria-haspopup="dialog"
                 onClick={() => setSelectedProduct(product)}
                 initial={{ opacity: 0, y: 48 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -789,7 +790,7 @@ function ProductStoryDeck3D() {
                     {product.name}
                   </h3>
                   <span
-                    className="mt-3 inline-flex w-fit rounded-full px-3 py-1.5 font-display text-[10px] font-black uppercase tracking-[0.14em]"
+                    className="mt-3 inline-flex max-w-full whitespace-normal rounded-full px-3 py-1.5 font-display text-[10px] font-black uppercase tracking-[0.14em]"
                     style={{ background: palette.tagBg, color: palette.tagTxt }}
                   >
                     {product.tag}

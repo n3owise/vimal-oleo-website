@@ -8,6 +8,10 @@
   --color-text-slate: #475569;
   --color-border-light: #E2E8F0;
   --color-navy-dark: #0D1B2A;
+  --color-brand-ink: #001e38;
+  --color-brand-blue: #1d5fb8;
+  --color-brand-soft: #eaf3ff;
+  --color-brand-panel: #f4f6f9;
   
   --font-display: "Nexa", "Sora", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
@@ -82,11 +86,12 @@
     padding: 5px 10px !important;
     font-size: 7px !important;
     letter-spacing: 0.08em !important;
-    white-space: nowrap !important;
+    white-space: normal !important;
   }
 }
 
-.product-marquee-row:hover .product-marquee-track {
+.product-marquee-row:hover .product-marquee-track,
+.product-marquee-row:focus-within .product-marquee-track {
   animation-play-state: paused !important;
 }
 

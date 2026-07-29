@@ -77,7 +77,7 @@ export function Header() {
         className="absolute left-4 right-4 top-4 z-[1000] pointer-events-none sm:left-8 sm:right-8 sm:top-6 lg:left-14 lg:right-14"
       >
         <div className="relative z-10 flex min-h-[76px] w-full items-center justify-between px-5 py-3 sm:min-h-[88px] sm:px-8 lg:min-h-[104px] lg:px-10">
-          <a href="/" className="pointer-events-auto flex w-[154px] max-w-[52vw] items-center sm:w-[190px] lg:w-[215px]">
+          <a href="/" className="pointer-events-auto flex w-[154px] max-w-[52vw] items-center rounded-xl focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25 sm:w-[190px] lg:w-[215px]">
             <img
               src={logoSrc}
               alt="Vimal Oleo Chemicals"
@@ -101,11 +101,12 @@ export function Header() {
             key={item.label}
             href={item.href}
             className={cn(
-              'rounded-full px-5 py-2.5 font-display text-sm font-bold transition-colors',
+              'rounded-full px-5 py-2.5 font-display text-sm font-bold transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25',
               currentPath === normalizePathname(item.href)
                 ? 'bg-primary text-white shadow-md'
                 : 'text-primary hover:bg-white/50'
             )}
+            aria-current={currentPath === normalizePathname(item.href) ? 'page' : undefined}
           >
             {item.label}
           </a>

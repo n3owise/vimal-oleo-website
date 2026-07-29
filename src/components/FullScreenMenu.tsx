@@ -65,7 +65,7 @@ export default function FullScreenMenu({
           animate="visible"
           exit="exit"
           variants={overlayVariants}
-          className="fixed inset-0 z-[2000] flex flex-col bg-white px-6 py-8"
+          className="fixed inset-0 z-[2000] flex flex-col overflow-y-auto overscroll-contain bg-white px-6 py-8 [padding-bottom:max(2rem,env(safe-area-inset-bottom))] [padding-top:max(2rem,env(safe-area-inset-top))]"
         >
           <div className="flex w-full items-center justify-between">
             <span id={titleId} className="font-display text-2xl font-black tracking-tighter text-black">
@@ -94,6 +94,7 @@ export default function FullScreenMenu({
                   href={item.href}
                   onClick={onClose}
                   variants={itemVariants}
+                  aria-current={isActive ? 'page' : undefined}
                   className={`group relative font-display text-5xl sm:text-7xl font-black uppercase tracking-tighter overflow-hidden transition-colors duration-300 ${
                     isActive ? 'text-[#0D47A2]' : 'text-black hover:text-[#0D47A2]'
                   }`}

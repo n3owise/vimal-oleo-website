@@ -46,6 +46,8 @@ export function AboutTimeline() {
   const dotRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useLayoutEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const ctx = gsap.context(() => {
       if (leftContentRef.current) {
         gsap.from(leftContentRef.current.children, {

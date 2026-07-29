@@ -19,7 +19,7 @@ export type ProductDetail = {
 };
 
 const ZigZag = ({ nodes }: { nodes: number }) => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '100%', height: '100%' }}>
+  <svg viewBox="0 0 64 48" fill="none" aria-hidden="true" focusable="false" style={{ width: '100%', height: '100%' }}>
     {Array.from({ length: nodes - 1 }, (_, i) => (
       <line
         key={i}
@@ -41,7 +41,7 @@ const ZigZag = ({ nodes }: { nodes: number }) => (
 );
 
 const GlycerolIcon = () => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '100%', height: '100%' }}>
+  <svg viewBox="0 0 64 48" fill="none" aria-hidden="true" focusable="false" style={{ width: '100%', height: '100%' }}>
     <line x1={16} y1={36} x2={32} y2={24} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     <line x1={32} y1={24} x2={48} y2={36} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     <line x1={16} y1={36} x2={8} y2={28} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -57,7 +57,7 @@ const GlycerolIcon = () => (
 );
 
 const SoapIcon = () => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '100%', height: '100%' }}>
+  <svg viewBox="0 0 64 48" fill="none" aria-hidden="true" focusable="false" style={{ width: '100%', height: '100%' }}>
     <circle cx={32} cy={13} r={8} stroke="currentColor" strokeWidth="1.5" opacity="0.8" />
     <text x={26} y={16} fontSize="7" fill="currentColor" fontFamily="monospace">Na+</text>
     {[0, 1, 2, 3, 4].map((i) => (
@@ -68,7 +68,7 @@ const SoapIcon = () => (
 );
 
 const OleicIcon = () => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '100%', height: '100%' }}>
+  <svg viewBox="0 0 64 48" fill="none" aria-hidden="true" focusable="false" style={{ width: '100%', height: '100%' }}>
     {[0, 1, 2, 3].map((i) => (
       <line key={i} x1={4 + i * 8} y1={i % 2 === 0 ? 30 : 22} x2={4 + (i + 1) * 8} y2={i % 2 === 0 ? 22 : 30} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     ))}
@@ -83,7 +83,7 @@ const OleicIcon = () => (
 );
 
 const MixedIcon = () => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '100%', height: '100%' }}>
+  <svg viewBox="0 0 64 48" fill="none" aria-hidden="true" focusable="false" style={{ width: '100%', height: '100%' }}>
     {[0, 1, 2, 3].map((i) => (
       <line key={`a${i}`} x1={4 + i * 7} y1={i % 2 === 0 ? 22 : 30} x2={4 + (i + 1) * 7} y2={i % 2 === 0 ? 30 : 22} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     ))}
@@ -95,7 +95,7 @@ const MixedIcon = () => (
 );
 
 const HydIcon = () => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '100%', height: '100%' }}>
+  <svg viewBox="0 0 64 48" fill="none" aria-hidden="true" focusable="false" style={{ width: '100%', height: '100%' }}>
     {[0, 1, 2, 3, 4, 5].map((i) => (
       <line key={i} x1={4 + i * 9} y1={i % 2 === 0 ? 30 : 22} x2={4 + (i + 1) * 9} y2={i % 2 === 0 ? 22 : 30} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     ))}
@@ -108,7 +108,7 @@ const HydIcon = () => (
 );
 
 const CocoIcon = () => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '100%', height: '100%' }}>
+  <svg viewBox="0 0 64 48" fill="none" aria-hidden="true" focusable="false" style={{ width: '100%', height: '100%' }}>
     {[0, 1, 2, 3, 4].map((i) => (
       <line key={i} x1={6 + i * 9} y1={i % 2 === 0 ? 30 : 21} x2={6 + (i + 1) * 9} y2={i % 2 === 0 ? 21 : 30} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     ))}
@@ -121,7 +121,7 @@ const CocoIcon = () => (
 );
 
 const SoyaIcon = () => (
-  <svg viewBox="0 0 64 48" fill="none" style={{ width: '100%', height: '100%' }}>
+  <svg viewBox="0 0 64 48" fill="none" aria-hidden="true" focusable="false" style={{ width: '100%', height: '100%' }}>
     {[0, 1, 2].map((i) => (
       <line key={i} x1={4 + i * 8} y1={i % 2 === 0 ? 30 : 22} x2={4 + (i + 1) * 8} y2={i % 2 === 0 ? 22 : 30} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     ))}
@@ -259,11 +259,15 @@ function Row({
       >
         {repeatedCards.map((p, i) => {
           const c = colors[(i + offset) % colors.length];
+          const isClone = !shouldReduceMotion && i >= cards.length;
           return (
             <motion.button
               key={`${p.name}-${i}`}
               type="button"
               aria-label={`View B2B details for ${p.name}`}
+              aria-hidden={isClone ? true : undefined}
+              aria-haspopup="dialog"
+              tabIndex={isClone ? -1 : undefined}
               title={`View B2B details for ${p.name}`}
               onClick={() => onProductClick(p)}
               whileHover={{ y: -6, scale: 1.035 }}
@@ -356,7 +360,7 @@ function ProductDetailModal({ product, onClose }: { product: Product; onClose: (
           type="button"
           aria-label="Close product details"
           onClick={onClose}
-          className="absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-slate-950 text-xl font-light leading-none text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25 active:scale-95"
+          className="absolute right-4 top-4 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-slate-950 text-xl font-light leading-none text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/25 active:scale-95"
         >
           ×
         </button>
@@ -364,11 +368,11 @@ function ProductDetailModal({ product, onClose }: { product: Product; onClose: (
         <div className="bg-[#001e38] p-5 pr-14 text-white sm:p-6 sm:pr-16">
           <p className="font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#8fc2ff]">Product Detail</p>
           <div className="mt-4 flex items-center gap-4">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-[#8fc2ff]">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-[#8fc2ff] sm:h-16 sm:w-16">
               {product.icon}
             </div>
             <div className="min-w-0">
-              <h3 id={titleId} className="font-display text-[clamp(1.55rem,5vw,2.75rem)] font-black uppercase italic leading-[0.9] tracking-tighter">
+              <h3 id={titleId} className="break-words hyphens-auto font-display text-[clamp(1.55rem,5vw,2.75rem)] font-black uppercase italic leading-[0.9] tracking-tighter">
                 {product.name}
               </h3>
             </div>
